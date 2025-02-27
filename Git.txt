@@ -28,13 +28,13 @@ git push origin branche-secondaire
 ###########################################
     Fix             : pour des corrections de bugs.
     Feat            : pour les nouvelles fonctionnalites.
-    Chore           : pour les taches techniques non visibles pour l’utilisateur (comme la mise à jour des dépendances).
+    Chore           : pour les taches techniques non visibles pour l’utilisateur (comme la mise à jour des dependances).
     Docs            : pour les modifications liees a la documentation.
     Refactor        : pour les refontes de code sans ajout de nouvelles fonctionnalites.
     Style           : pour les corrections de style (formatage, indentation).
     
 Exemple :
-    git commit -m "Feat: Ajoute une fonctionnalité de recherche par categorie
+    git commit -m "Feat: Ajoute une fonctionnalite de recherche par categorie
     Permet à l'utilisateur de filtrer les résultats par catégorie. La recherche est effectuee sur la base de donnees en temps reel."
 
 
@@ -44,7 +44,6 @@ Exemple :
     feature/        : Pour ajouter une nouvelle fonctionnalite
     bugfix/         : Pour corriger un bug detecte en developpement
     hotfix/         : Pour une correction urgente en production
-    release/        : Pour preparer une nouvelle version stable
     refactor/       : Pour reorganiser ou ameliorer du code sans ajouter de nouvelles fonctionnalites
     docs/           : Pour modifier ou ajouter de la documentation
 
