@@ -17,12 +17,12 @@ const Prescription = database.define(
     medicament: { type: DataTypes.STRING, allowNull: false },
     dosage: { type: DataTypes.STRING, allowNull: false },
     quantite: { type: DataTypes.INTEGER, allowNull: false },
-    note: { type: DataTypes.TEXT, allowNull: false },
+    note_medecin: { type: DataTypes.TEXT, allowNull: true },
     renouvellement: { type: DataTypes.BOOLEAN, defaultValue: false },
   },
   {
-    timestamps: true,
     tableName: "prescriptions",
+    timestamps: true,
   }
 );
 

@@ -1,4 +1,4 @@
-// 1. Importer l'entite/model "Prescription" avec ses relations
+// 1. Importer l'entite/model avec ses relations
 import { Prescription } from "../models/relations.js";
 
 // 2. Importer le middleware de validation
@@ -7,12 +7,12 @@ import { validationResult } from "express-validator";
 // 3. Lister toutes les prescriptions
 export const getAllPrescriptions = async (req, res) => {
   try {
-    const prescriptions = await Prescription.findAll();
+    const prescriptionListe = await Prescription.findAll();
     // 3.1 Afficher la liste des prescriptions, sinon -> Message erreur
-    return res.status(200).json({ data: prescriptions });
+    return res.status(200).json({ data: prescriptionListe });
   } catch (error) {
     return res.status(500).json({
-      message: `Erreur lors de la recuperation des prescriptions - ${error.message}`,
+      message: `Erreur serveur lors de la recuperation des prescriptions - ${error.message}`,
     });
   }
 };
@@ -67,7 +67,7 @@ export const delPrescription = async (req, res) => {
       .json({ message: "Prescription supprimee avec succes." });
   } catch (error) {
     return res.status(500).json({
-      message: `Erreur lors de la suppression de la prescription - ${error.message}`,
+      message: `Erreur serveur lors de la suppression de la prescription - ${error.message}`,
     });
   }
 };
@@ -92,11 +92,11 @@ export const updatePrescription = async (req, res) => {
         .json({ message: "La prescription demandee n'existe pas." });
     }
 
-    if (Object.keys(req.body).length === 0) {
-      return res
-        .status(400)
-        .json({ message: "Aucune donnee fournie pour la mise a jour." });
-    }
+    // if (Object.keys(req.body).length === 0) {
+    //   return res
+    //     .status(400)
+    //     .json({ message: "Aucune donnee fournie pour la mise a jour." });
+    // }
 
     // 6.5 Mettre a jour la prescription, sinon -> Message d'erreur
     const updatedPrescription = await prescriptionFound.update(req.body);
@@ -106,7 +106,7 @@ export const updatePrescription = async (req, res) => {
     });
   } catch (error) {
     return res.status(500).json({
-      message: `Erreur lors de la mise a jour de la prescription - ${error.message}`,
+      message: `Erreur serveur lors de la mise a jour de la prescription - ${error.message}`,
     });
   }
 };
@@ -134,7 +134,7 @@ export const displayPrescription = async (req, res) => {
     return res.status(200).json({ data: prescriptionFound });
   } catch (error) {
     return res.status(500).json({
-      message: `Erreur lors de la recuperation de la prescription - ${error.message}`,
+      message: `Erreur serveur lors de la recuperation de la prescription - ${error.message}`,
     });
   }
 };
