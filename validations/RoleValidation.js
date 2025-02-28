@@ -3,14 +3,14 @@ import { body, param } from "express-validator";
 
 const routeRules = [
   // Valider le titre
-  body("Titre")
+  body("titre")
     .isIn(["Administrateur", "Medecin", "sudo"])
     .withMessage(
       "Le type du rôle doit être soit 'administrateur', 'medecin' ou ''sudo"
     ),
 
   // Valider la specialite
-  body("Specialite").notEmpty().withMessage("La spécialité est obligatoire"),
+  body("specialite").notEmpty().withMessage("La spécialité est obligatoire"),
 
   // Validation de l'ID
   param("id") //  Verifie et valide les champs envoyes dans les parametres d'URL (req.params).
