@@ -49,11 +49,20 @@ const DossierMedical = database.define(
       type: DataTypes.STRING(250),
       allowNull: true,
     },
+    ID_Patient: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "Patient",
+        key: "ID_Patient",
+      },
+    },
   },
   {
     tableName: "DossierMedical",
     timestamps: true,
   }
+  
 );
 
 // 4. Exporter la table/modele pour creer des relations entre les autres tables

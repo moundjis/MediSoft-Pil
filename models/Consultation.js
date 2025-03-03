@@ -29,6 +29,7 @@ const Consultation = database.define(
       type: DataTypes.STRING(250),
       allowNull: true,
     },
+
     ID_Patient: {
       type: DataTypes.INTEGER,
       allowNull: false,
