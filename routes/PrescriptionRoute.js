@@ -2,10 +2,10 @@
 import { Router } from "express";
 
 // 2. Importer les regles de validation
-import prescriptionRules from "../validations/prescriptionRules.js";
+import prescriptionRules from "../validations/PrescriptionValidation.js";
 import { validationResult } from "express-validator";
 
-// 3. Importer les regles de verification et autorisation
+// // 3. Importer les regles de verification et autorisation
 import { verifierToken } from "../authentification/verifierToken.js";
 import autoriser from "../authentification/autorisation.js";
 

@@ -1,5 +1,5 @@
 // 1. Importer l'entite/model avec ses relations
-import RendezVous from "../models/relations.js";
+import { RendezVous } from "../models/relations.js";
 
 // 2. Importer le middleware de validation
 import { validationResult } from "express-validator";

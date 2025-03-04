@@ -23,12 +23,12 @@ const prescriptionRules = [
     .isInt({ min: 1 })
     .withMessage("La quantité doit être un entier positif"),
 
-  // Validation de la note
-  body("note_medecin")
-    .optional()
-    .withMessage("La note est obligatoire")
-    .isString()
-    .withMessage("La note doit être une chaîne de caractères"),
+  // // Validation de la note
+  // body("note_medecin")
+  //   .optional()
+  //   .withMessage("La note est obligatoire")
+  //   .isString()
+  //   .withMessage("La note doit être une chaîne de caractères"),
 
   // Validation du renouvellement
   body("renouvellement")

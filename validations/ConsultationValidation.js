@@ -1,6 +1,7 @@
 // 1. Importer le middleware de validation avec les 2 méthodes body() et param() pour valider les entrées
 import { body, param } from "express-validator";
 
+
 const consultationRules = [
   // Validation de la date de la consultation
   body("date")

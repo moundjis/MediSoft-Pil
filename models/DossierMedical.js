@@ -59,7 +59,7 @@ const DossierMedical = database.define(
     },
   },
   {
-    tableName: "DossierMedical",
+    tableName: "dossiers_medicaux",
     timestamps: true,
   }
   

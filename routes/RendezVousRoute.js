@@ -5,7 +5,7 @@ import { Router } from "express";
 import RendezVousRules from "../validations/RendezVousValidation.js";
 import { validationResult } from "express-validator";
 
-// 3. Importer les regles de verification et autorisation
+// // 3. Importer les regles de verification et autorisation
 import { verifierToken } from "../authentification/verifierToken.js";
 import autoriser from "../authentification/autorisation.js";
 
