@@ -8,6 +8,7 @@ import rendezvousRoute from "./routes/RendezVousRoute.js";
 import roleRoute from "./routes/RoleRoute.js";
 import patientRoute from "./routes/PatientRoute.js";
 import pharmacieRoute from "./routes/PharmacieRoute.js";
+
 // Middleware
 const app = express();
 
@@ -33,6 +34,8 @@ app.use("/api/pharmacie", pharmacieRoute);
 app.use("/api/prescription", prescriptionRoute);
 app.use("/api/rendezvous", rendezvousRoute);
 app.use("/api/role", roleRoute);
+
+
 
 
 const PORT = dotenv.config().parsed.PORT;
