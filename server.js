@@ -1,43 +1,44 @@
-import dotenv from "dotenv";
-import express from "express";
-import consultationRoute from "./routes/ConsultationRoute.js";
-import dossierMedicalRoute from "./routes/DossierMedicalRoute.js";
-import employeRoute from "./routes/EmployeRoute.js";
-import prescriptionRoute from "./routes/PrescriptionRoute.js";
-import rendezvousRoute from "./routes/RendezVousRoute.js";
-import roleRoute from "./routes/RoleRoute.js";
-import patientRoute from "./routes/PatientRoute.js";
-import pharmacieRoute from "./routes/PharmacieRoute.js";
-// Middleware
+//Doit etre en debut de fichier pour charger les variables d'environnement
+import "dotenv/config";
+
+//importer les routes
+// import routerExterne from "./routes.js";
+
+// Importation des fichiers et librairies
+import express, { json } from "express";
+import helmet from "helmet";
+import compression from "compression";
+import cors from "cors";
+import cspOption from "./csp-options.js";
+
+// Crréation du serveur express
 const app = express();
 
+// Ajout de middlewares
+app.use(helmet(cspOption));
+app.use(compression());
+app.use(cors());
+app.use(json());
 
-// Connexion à MySQL
-// const connection = mysql.createConnection({
-//   host: process.env.DB_HOST,
-//   user: process.env.DB_USER,
-//   password: process.env.DB_PASSWORD,
-//   database: process.env.DB_NAME,
-// });
+//Middeleware integre a express pour gerer la partie static du serveur
+//le dossier 'public' est la partie statique de notre serveur
+app.use(express.static("public"));
 
+// Ajout des routes
+// app.use(routerExterne);
+
+// 6. Route racine pour un message de bienvenue
 app.get("/", (req, res) => {
-  res.send("Bienvenue sur le serveur Medisoft !");
+  res.json({ message: "Bienvenue sur l'API MediSoft-Prisma" });
 });
 
-// Routes
-app.use("/api/consultation", consultationRoute);
-app.use("/api/dossiermedical", dossierMedicalRoute);
-app.use("/api/employe", employeRoute);
-app.use("/api/patient", patientRoute);
-app.use("/api/pharmacie", pharmacieRoute);
-app.use("/api/prescription", prescriptionRoute);
-app.use("/api/rendezvous", rendezvousRoute);
-app.use("/api/role", roleRoute);
-
-
-const PORT = dotenv.config().parsed.PORT;
-
-// Démarrage du serveur
-app.listen(PORT, () => {
-  console.info(`Serveur lance sur l'URL : http://localhost:${PORT}`);
+// Renvoyer une erreur 404 pour les routes non définies
+app.use((req, res) => {
+  // Renvoyer simplement une chaîne de caractère indiquant que la page n'existe pas
+  response.status(404).send(`${request.originalUrl} Route introuvable.`);
 });
+
+//Démarrage du serveur
+app.listen(process.env.PORT);
+console.info("Serveur démarré :");
+console.info(`http://localhost:${process.env.PORT}`);
