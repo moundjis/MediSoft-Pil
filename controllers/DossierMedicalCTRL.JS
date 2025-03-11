@@ -85,7 +85,9 @@ export const updateDossierMedical = async (req, res) => {
       return res.status(404).json({ message: "Dossiermedical introuvable" });
     }
     await dossiermedicalFound.update(req.body);
-    return res.status(200).json({ message: "Dossiermedical modifie avec succes." });
+    return res
+      .status(200)
+      .json({ message: "Dossiermedical modifie avec succes." });
   } catch (error) {
     return res.status(500).json({
       message: `Erreur serveur lors de la modification du dossier medical - ${error.message}`,
@@ -108,7 +110,9 @@ export const delDossierMedical = async (req, res) => {
       return res.status(404).json({ message: "dossier medical introuvable" });
     }
     await dossiermedicalFound.destroy();
-    return res.status(200).json({ message: "dossier medical supprime avec succes." });
+    return res
+      .status(200)
+      .json({ message: "dossier medical supprime avec succes." });
   } catch (error) {
     return res.status(500).json({
       message: `Erreur serveur lors de la suppression de l'dossiermedical - ${error.message}`,
