@@ -1,0 +1,133 @@
+{
+    "clientName": "Thunder Client",
+    "collectionName": "Employe",
+    "collectionId": "19536c64-82e5-4726-a277-d573e07d1cf1",
+    "dateExported": "2025-03-11T17:22:07.317Z",
+    "version": "1.2",
+    "folders": [],
+    "requests": [
+        {
+            "_id": "f4f12132-6257-4024-bef6-dbf3345d716a",
+            "colId": "19536c64-82e5-4726-a277-d573e07d1cf1",
+            "containerId": "",
+            "name": "Liste des employes",
+            "url": "http://localhost:5000/api/employe",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2025-03-07T01:40:08.725Z",
+            "modified": "2025-03-07T01:44:05.185Z",
+            "headers": []
+        },
+        {
+            "_id": "729da2d8-786a-4bc2-9d9f-895969c35ceb",
+            "colId": "19536c64-82e5-4726-a277-d573e07d1cf1",
+            "containerId": "",
+            "name": "Recine /",
+            "url": "http://localhost:5000/",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2025-03-07T02:06:31.359Z",
+            "modified": "2025-03-07T02:30:15.962Z",
+            "headers": []
+        },
+        {
+            "_id": "5329a331-f09d-4061-873f-2fe02de0d888",
+            "colId": "19536c64-82e5-4726-a277-d573e07d1cf1",
+            "containerId": "",
+            "name": "login  one",
+            "url": "http://localhost:5001/api/auth/login",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2025-03-07T02:29:39.526Z",
+            "modified": "2025-03-11T02:25:06.581Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"courriel\": \"michelle@gmail.com\",\n  \"password\": \"111\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "7cf9ee02-d245-4662-b9ea-188f2a81132a",
+            "colId": "19536c64-82e5-4726-a277-d573e07d1cf1",
+            "containerId": "",
+            "name": "enregistrer one",
+            "url": "http://localhost:5003/api/auth/register",
+            "method": "POST",
+            "sortNum": 75000,
+            "created": "2025-03-07T03:13:38.936Z",
+            "modified": "2025-03-11T02:25:22.505Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nom\": \"Michelle\",\n  \"prenom\": \"Franc\",\n  \"date_de_naissance\": \"1985-05-15\",\n  \"nas\": \"087654321\",\n  \"courriel\": \"michelle@gmail.com\",\n  \"password\": \"111\",\n  \"telephone\": \"9876543210\",\n  \"adresse\": \"456 avenue Exemple\",\n  \"id_role\": 1\n}\n",
+                "form": []
+            }
+        },
+        {
+            "_id": "8402896b-3f6c-4aff-bf09-556095f58a5e",
+            "colId": "19536c64-82e5-4726-a277-d573e07d1cf1",
+            "containerId": "",
+            "name": "login  two",
+            "url": "http://localhost:5001/api/auth/login",
+            "method": "POST",
+            "sortNum": 80000,
+            "created": "2025-03-07T03:35:02.114Z",
+            "modified": "2025-03-11T02:30:28.033Z",
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "Accept",
+                    "value": "*/*",
+                    "isDisabled": true
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "Thunder Client (https://www.thunderclient.com)",
+                    "isDisabled": true
+                }
+            ],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"courriel\": \"jean.dupont@gmail.com\",\n  \"password\": \"111\"\n}",
+                "form": []
+            }
+        },
+        {
+            "_id": "a5d72f75-cf80-4c29-8620-a6c00cbc6d07",
+            "colId": "19536c64-82e5-4726-a277-d573e07d1cf1",
+            "containerId": "",
+            "name": "enregistrer two",
+            "url": "http://localhost:5001/api/auth/register",
+            "method": "POST",
+            "sortNum": 90000,
+            "created": "2025-03-07T03:15:29.966Z",
+            "modified": "2025-03-11T02:21:27.882Z",
+            "headers": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"nom\": \"Jean\",\n  \"prenom\": \"Dupont\",\n  \"date_de_naissance\": \"1985-05-15\",\n  \"nas\": \"987654321\",\n  \"courriel\": \"jean.dupont@gmail.com\",\n  \"password\": \"111\",\n  \"telephone\": \"9876543210\",\n  \"adresse\": \"456 avenue Exemple\",\n  \"id_role\": 1\n}\n",
+                "form": []
+            }
+        }
+    ],
+    "ref": "pdyGtCJH_s54Yz2KW8TDZyG-d-UfmhsEVkbVmJv_u8BCnh05OZ9xMsdWmED0gLBCNLU5ycp9Co6WpNVnAITQuA"
+}
