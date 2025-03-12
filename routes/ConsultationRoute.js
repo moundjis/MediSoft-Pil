@@ -34,13 +34,13 @@ const validateRequest = (req, res, next) => {
 const ConsultationRoute = Router();
 
 // 7. Definir les routes pour les controleurs de "Consultation"
-ConsultationRoute.all("*", verifierToken) // Proteger toutes les routes ci-dessous
+ConsultationRoute.all("*", verifierToken) 
   .all("*", autoriser(["Administrateur", "sudo"]))
-  .get("/", getAllConsultations) // Afficher tous les employes
-  .post("/", ConsultationRules, validateRequest, addConsultation) // Ajouter un nouvel employe
-  .delete("/:id", delConsultation) // Supprimer un employe
-  .put("/:id", ConsultationRules, validateRequest, updateConsultation) // Mettre a jour un employe
-  .get("/:id", displayConsultation); // Afficher un seul employe
+  .get("/", getAllConsultations) 
+  .post("/", ConsultationRules, validateRequest, addConsultation) 
+  .delete("/:id", delConsultation) 
+  .put("/:id", ConsultationRules, validateRequest, updateConsultation) 
+  .get("/:id", displayConsultation); 
   
 
 // 8. Exporter la route "PrescriptionRoute" vers server.js

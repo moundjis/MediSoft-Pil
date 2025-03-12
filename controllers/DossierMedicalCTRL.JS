@@ -52,7 +52,7 @@ export const displayDossierMedical = async (req, res) => {
 };
 
 // 5. Lister tous les Dossier Medicaux
-export const getallDossierMedical = async (req, res) => {
+export const getAllDossierMedical = async (req, res) => {
   try {
     const dossiermedicalListe = await DossierMedical.findAll();
     // 5.1 Afficher la liste des Dossiers Medicaux, sinon -> Message erreur

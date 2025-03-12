@@ -35,7 +35,7 @@ const Role = database.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "Employe",
+        model: "employes",
         key: "id",
       },
     },

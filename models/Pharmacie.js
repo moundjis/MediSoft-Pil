@@ -40,7 +40,7 @@ const Pharmacie = database.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "Employe", // Référence à la table Employe
+        model: "employes", // Référence à la table Employe
         key: "id",
       },
     },

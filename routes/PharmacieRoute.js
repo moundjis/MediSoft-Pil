@@ -2,7 +2,7 @@
 import { Router } from "express";
 
 // 2. Importer les règles de validation
-import pharmacieRules from "../validations/PharmacieValidations.js";
+import PharmacieRules from "../validations/PharmacieValidation.js";
 import { validationResult } from "express-validator";
 
 // 3. Importer les règles de vérification et autorisation
@@ -37,9 +37,9 @@ const PharmacieRoute = Router();
 PharmacieRoute.all("*", verifierToken) // Protéger toutes les routes
   .all("*", autoriser(["Administrateur", "sudo"])) // Autoriser uniquement les rôles spécifiés
   .get("/", getAllPharmacies) // Afficher toutes les pharmacies
-  .post("/", pharmacieRules, validateRequest, addPharmacie) // Ajouter une nouvelle pharmacie
+  .post("/", PharmacieRules, validateRequest, addPharmacie) // Ajouter une nouvelle pharmacie
   .delete("/:id", delPharmacie) // Supprimer une pharmacie
-  .put("/:id", pharmacieRules, validateRequest, updatePharmacie) // Mettre à jour une pharmacie
+  .put("/:id", PharmacieRules, validateRequest, updatePharmacie) // Mettre à jour une pharmacie
   .get("/:id", displayPharmacie); // Afficher une seule pharmacie
 
 // 8. Exporter la route

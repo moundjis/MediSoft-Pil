@@ -34,7 +34,7 @@ const Consultation = database.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "Patient",
+        model: "patients",
         key: "id",
       },
     },
@@ -42,7 +42,7 @@ const Consultation = database.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "Employee",
+        model: "employes",
         key: "id",
       },
     },

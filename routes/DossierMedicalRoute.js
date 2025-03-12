@@ -13,14 +13,14 @@ import autoriser from "../authentification/autorisation.js";
 import {
   addDossierMedical,
   displayDossierMedical,
-  getallDossierMedical,
+  getAllDossierMedical,
   updateDossierMedical,
   delDossierMedical,
-} from "../controllers/EmployeCTRL.js";
+} from "../controllers/DossierMedicalCTRL.js";
 
 // 5. creer une function pour valider la requete
 const validateRequest = (req, res, next) => {
-  const errors = validationResult(req);
+  const errors = validationResult(req); 
   if (!errors.isEmpty()) {
     return res.status(400).json({
       message: "Donnees invalides",
@@ -33,14 +33,14 @@ const validateRequest = (req, res, next) => {
 // 6. Creer la route EmployeRoute
 const DossierMedicalRoute = Router();
 
-// 7. Definir les routes pour les controleurs de "Employe"
-DossierMedicalRoute.all("*", verifierToken) // Proteger toutes les routes ci-dessous
+// 7. Definir les routes pour les controleurs de Dossier Medical
+DossierMedicalRoute.all("*", verifierToken) 
   .all("*", autoriser(["Administrateur", "sudo"]))
-  .get("/", getallDossierMedical) // Afficher tous les employes
-  .post("/", DossierMedicalRoute, validateRequest, addDossierMedical) // Ajouter un nouvel employe
-  .delete("/:id", delDossierMedical) // Supprimer un employe
-  .put("/:id", DossierMedicalRoute, validateRequest, updateDossierMedical) // Mettre a jour un employe
-  .get("/:id", displayDossierMedical); // Afficher un seul employe
+  .get("/", getAllDossierMedical) 
+  .post("/", DossierMedicalRules, validateRequest, addDossierMedical) 
+  .delete("/:id", delDossierMedical)
+  .put("/:id", DossierMedicalRules, validateRequest, updateDossierMedical) 
+  .get("/:id", displayDossierMedical); 
 
 // 8. Exporter la route "EmployeRoute" vers server.js
 export default DossierMedicalRoute;
