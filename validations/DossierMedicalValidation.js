@@ -6,17 +6,25 @@ const dossierMedicalRules = [
   body("prenom_nom_mere")
     .optional()
     .isString()
-    .withMessage("Le prénom et nom de la mère doivent être une chaîne de caractères")
+    .withMessage(
+      "Le prénom et nom de la mère doivent être une chaîne de caractères"
+    )
     .isLength({ max: 50 })
-    .withMessage("Le prénom et nom de la mère ne doivent pas dépasser 50 caractères"),
+    .withMessage(
+      "Le prénom et nom de la mère ne doivent pas dépasser 50 caractères"
+    ),
 
   // Validation du prénom et nom du père
   body("prenom_nom_pere")
     .optional()
     .isString()
-    .withMessage("Le prénom et nom du père doivent être une chaîne de caractères")
+    .withMessage(
+      "Le prénom et nom du père doivent être une chaîne de caractères"
+    )
     .isLength({ max: 50 })
-    .withMessage("Le prénom et nom du père ne doivent pas dépasser 50 caractères"),
+    .withMessage(
+      "Le prénom et nom du père ne doivent pas dépasser 50 caractères"
+    ),
 
   // Validation du numéro d'assurance
   body("no_assurance")
@@ -30,17 +38,25 @@ const dossierMedicalRules = [
   body("antecedant_fam")
     .optional()
     .isString()
-    .withMessage("Les antécédents familiaux doivent être une chaîne de caractères")
+    .withMessage(
+      "Les antécédents familiaux doivent être une chaîne de caractères"
+    )
     .isLength({ max: 250 })
-    .withMessage("Les antécédents familiaux ne doivent pas dépasser 250 caractères"),
+    .withMessage(
+      "Les antécédents familiaux ne doivent pas dépasser 250 caractères"
+    ),
 
   // Validation des maladies chroniques
   body("maladies_chronique")
     .optional()
     .isString()
-    .withMessage("Les maladies chroniques doivent être une chaîne de caractères")
+    .withMessage(
+      "Les maladies chroniques doivent être une chaîne de caractères"
+    )
     .isLength({ max: 250 })
-    .withMessage("Les maladies chroniques ne doivent pas dépasser 250 caractères"),
+    .withMessage(
+      "Les maladies chroniques ne doivent pas dépasser 250 caractères"
+    ),
 
   // Validation des allergies
   body("allergies")
@@ -58,14 +74,6 @@ const dossierMedicalRules = [
     .withMessage("La date de création doit être au format YYYY-MM-DD")
     .matches(/^\d{4}-\d{2}-\d{2}$/)
     .withMessage("La date de création doit être au format YYYY-MM-DD"),
-
-  // Validation du médecin traitant
-  body("medecin_traitant")
-    .optional()
-    .isString()
-    .withMessage("Le médecin traitant doit être une chaîne de caractères")
-    .isLength({ max: 50 })
-    .withMessage("Le médecin traitant ne doit pas dépasser 50 caractères"),
 
   // Validation des traitements
   body("traitements")

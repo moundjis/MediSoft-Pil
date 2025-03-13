@@ -41,10 +41,7 @@ const DossierMedical = database.define(
       type: DataTypes.DATE,
       allowNull: false,
     },
-    medecin_traitant: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
-    },
+
     traitements: {
       type: DataTypes.STRING(250),
       allowNull: true,
@@ -54,6 +51,14 @@ const DossierMedical = database.define(
       allowNull: false,
       references: {
         model: "patients",
+        key: "id",
+      },
+    },
+    id_employe: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "employes",
         key: "id",
       },
     },

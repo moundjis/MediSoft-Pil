@@ -15,14 +15,14 @@ export const addConsultation = async (req, res) => {
   try {
     // 1.2 Recuperer et verifier si le id existe deja
     const { id } = req.body;
-    const idelExists = await Consultation.findOne({ where: { id } });
+    const idExists = await Consultation.findOne({ where: { id } });
 
-    if (idelExists) {
-      return res.status(400).json({ message: "Cette id existe deja" });
+    if (idExists) {
+      return res.status(400).json({ message: "Cet id existe deja" });
     }
     const newConsultation = await Consultation.create(req.body);
     return res.status(201).json({
-      message: "Id cree avec succes.",
+      message: "Consultation cree avec succes.",
       data: newConsultation,
     });
   } catch (error) {
@@ -85,7 +85,9 @@ export const updateConsultation = async (req, res) => {
       return res.status(404).json({ message: "Consultation introuvable" });
     }
     await consultationFound.update(req.body);
-    return res.status(200).json({ message: "Consultation modifie avec succes." });
+    return res
+      .status(200)
+      .json({ message: "Consultation modifie avec succes." });
   } catch (error) {
     return res.status(500).json({
       message: `Erreur serveur lors de la modification de la consultation - ${error.message}`,
@@ -108,7 +110,9 @@ export const delConsultation = async (req, res) => {
       return res.status(404).json({ message: "Consultation introuvable" });
     }
     await consultationFound.destroy();
-    return res.status(200).json({ message: "Consultation supprime avec succes." });
+    return res
+      .status(200)
+      .json({ message: "Consultation supprime avec succes." });
   } catch (error) {
     return res.status(500).json({
       message: `Erreur serveur lors de la suppression de la consultation - ${error.message}`,

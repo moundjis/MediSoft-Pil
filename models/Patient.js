@@ -64,6 +64,24 @@ const Patient = database.define(
       type: DataTypes.STRING(50),
       allowNull: false,
     },
+
+    id_dossier_medical: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "dossiers_medicaux",
+        key: "id",
+      },
+    },
+
+    id_employe: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "employes",
+        key: "id",
+      },
+    },
   },
   {
     tableName: "patients",

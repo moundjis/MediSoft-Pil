@@ -1,63 +1,55 @@
-// 1. Importer les tables/modeles sans relations
-import Role from "./Role.js";
-import Employe from "./Employe.js";
+// 1. Importer les modèles
 import Patient from "./Patient.js";
-import DossierMedical from "./DossierMedical.js";
-import Pharmacie from "./Pharmacie.js";
+import Consultation from "./Consultation.js";
 import Prescription from "./Prescription.js";
+import Ordonnance from "./Ordonnance.js";
+import Pharmacie from "./Pharmacie.js";
+import Employe from "./Employe.js";
+import Role from "./Role.js";
 import RendezVous from "./RendezVous.js";
-import Consultation from "./Consultation.js"; // Importer le modèle Consultation
+import DossierMedical from "./DossierMedical.js";
 
-// 2. Créer les relations entre les tables/modeles
+// 2. Relation Consultation - Patient
+Consultation.belongsTo(Patient, { foreignKey: "id_patient" }); // Une consultation appartient à un patient
+Patient.hasMany(Consultation, { foreignKey: "id_patient" }); // Un patient peut avoir plusieurs consultations
 
-// Relation Role - Employe //////////////////////////////////////////////////
-Role.hasMany(Employe, { foreignKey: "id_role", as: "employes" });
-Employe.belongsTo(Role, { foreignKey: "id_role", as: "role" });
+// 3. Relation Consultation - Prescription
+Consultation.hasMany(Prescription, { foreignKey: "id_consultation" }); // Une consultation peut avoir plusieurs prescriptions
+Prescription.belongsTo(Consultation, { foreignKey: "id_consultation" }); // Une prescription appartient à une consultation
 
-// Relation Patient - Prescription ///////////////////////////////////////////
-Patient.hasMany(Prescription, { foreignKey: "id_patient", as: "prescriptions" });
-Prescription.belongsTo(Patient, { foreignKey: "id_patient", as: "patient" });
+// 4. Relation Patient - Dossier Médical
+Patient.hasOne(DossierMedical, { foreignKey: "id_patient" }); // Un patient peut avoir un seul dossier médical
+DossierMedical.belongsTo(Patient, { foreignKey: "id_patient" }); // Un dossier médical appartient à un patient
 
-// Relation Employe - Prescription ///////////////////////////////////////////
-Employe.hasMany(Prescription, { foreignKey: "id_employe", as: "prescriptions" });
-Prescription.belongsTo(Employe, { foreignKey: "id_employe", as: "employe" });
+// 5. Relation Employé - Role
+Role.hasMany(Employe, { foreignKey: "id_role" }); // Un rôle peut être attribué à plusieurs employés
+Employe.belongsTo(Role, { foreignKey: "id_role" }); // Un employé peut avoir un seul rôle
 
-// Relation DossierMedical - Prescription ///////////////////////////////////
-DossierMedical.hasMany(Prescription, { foreignKey: "id_dossier_medical", as: "prescriptions" });
-Prescription.belongsTo(DossierMedical, { foreignKey: "id_dossier_medical", as: "dossier_medical" });
+// 6. Relation Employé - Consultation
+Employe.hasMany(Consultation, { foreignKey: "id_employe" }); // Un employé peut effectuer plusieurs consultations
+Consultation.belongsTo(Employe, { foreignKey: "id_employe" }); // Une consultation est effectuée par un seul employé
 
-// Relation entre RendezVous et Patient //////////////////////////////////////
-Patient.hasMany(RendezVous, { foreignKey: "id_patient", as: "rendezvous" });
-RendezVous.belongsTo(Patient, { foreignKey: "id_patient", as: "patient" });
+// 7. Relation Patient - Rendez-vous
+Patient.hasMany(RendezVous, { foreignKey: "id_patient" }); // Un patient peut avoir plusieurs rendez-vous
+RendezVous.belongsTo(Patient, { foreignKey: "id_patient" }); // Un rendez-vous appartient à un seul patient
 
-// Relation entre RendezVous et Employe //////////////////////////////////////
-Employe.hasMany(RendezVous, { foreignKey: "id_employe", as: "rendezvous" });
-RendezVous.belongsTo(Employe, { foreignKey: "id_employe", as: "employe" });
+// 8. Relation Prescription - Ordonnance
+Prescription.belongsTo(Ordonnance, { foreignKey: "id_ordonnance" }); // Une prescription existe dans une ordonnance
+Ordonnance.hasMany(Prescription, { foreignKey: "id_ordonnance" }); // Une ordonnance peut contenir plusieurs prescriptions
 
-// Relation Pharmacie - Prescription /////////////////////////////////////////
-Pharmacie.hasMany(Prescription, { foreignKey: "id_pharmacie", as: "prescriptions" });
-Prescription.belongsTo(Pharmacie, { foreignKey: "id_pharmacie", as: "pharmacie" });
+// 9. Relation Ordonnance - Pharmacie
+Ordonnance.belongsTo(Pharmacie, { foreignKey: "id_pharmacie" }); // Une ordonnance peut être envoyée à une seule pharmacie
+Pharmacie.hasMany(Ordonnance, { foreignKey: "id_pharmacie" }); // Une pharmacie peut recevoir plusieurs ordonnances
 
-// Relation Consultation - Patient ///////////////////////////////////////////
-Patient.hasMany(Consultation, { foreignKey: "id_patient", as: "consultations" });
-Consultation.belongsTo(Patient, { foreignKey: "id_patient", as: "patient" });
-
-// Relation Consultation - Employe //////////////////////////////////////////
-Employe.hasMany(Consultation, { foreignKey: "id_employe", as: "consultations" });
-Consultation.belongsTo(Employe, { foreignKey: "id_employe", as: "employe" });
-
-// Relation Consultation - DossierMedical ///////////////////////////////////
-DossierMedical.hasMany(Consultation, { foreignKey: "id_dossier_medical", as: "consultations" });
-Consultation.belongsTo(DossierMedical, { foreignKey: "id_dossier_medical", as: "dossier_medical" });
-
-// 3. Exporter les tables/modeles avec relations vers les controllers
+// Export des modèles pour leur utilisation dans d'autres fichiers
 export {
-  Role,
-  Employe,
   Patient,
-  Prescription,
-  DossierMedical,
-  RendezVous,
-  Pharmacie,
   Consultation,
+  Prescription,
+  Ordonnance,
+  Pharmacie,
+  Employe,
+  Role,
+  RendezVous,
+  DossierMedical,
 };

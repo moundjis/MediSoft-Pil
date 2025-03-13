@@ -38,7 +38,7 @@ app.use((err, req, res, next) => {
 });
 
 // 9. Initialisation des tables dans la base de donnees
-connection.sync({ alter: false }).then(() => {
+connection.sync({ alter: true }).then(() => {
   console.log("Tables synchronisées");
 });
 

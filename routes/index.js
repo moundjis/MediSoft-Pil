@@ -5,8 +5,10 @@ import AuthRoute from "./AuthRoute.js";
 
 const router = Router();
 
+
+router.use("/auth", AuthRoute);
 router.use("/employe", EmployeRoute);
 router.use("/role", RoleRoute);
-router.use("/auth", AuthRoute);
+
 
 export default router;

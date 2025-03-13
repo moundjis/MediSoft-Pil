@@ -5,53 +5,33 @@ import database from "../config/connection.js";
 import { DataTypes } from "sequelize";
 
 // 3. Creer la table/modele "Consultation" qui sera synchronisee avec la base de donnees
-const Consultation = database.define(
-  "Consultation",
+const Ordonnance = database.define(
+  "Ordonnance",
   {
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
     },
-    date_consultation: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
-    diagnostic: {
-      type: DataTypes.STRING(250),
-      allowNull: true,
-    },
-    note: {
-      type: DataTypes.STRING(250),
-      allowNull: true,
-    },
-    recommendations: {
-      type: DataTypes.STRING(250),
-      allowNull: true,
-    },
-
-    id_patient: {
+    id_prescription: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "patients",
+        model: "prescriptions",
         key: "id",
       },
     },
-    id_employe: {
+    id_pharmacie: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "employes",
+        model: "pharmacies",
         key: "id",
       },
     },
   },
-  {
-    tableName: "consultations",
-    timestamps: true,
-  }
+  { timestamps: false }
 );
 
-// 4. Exporter la table/modele pour creer des relations entre les autres tables
-export default Consultation;
+// 3. On exporte le model "Ordonnance" pour lui creer un controller
+export default Ordonnance;
