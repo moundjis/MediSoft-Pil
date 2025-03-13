@@ -31,14 +31,6 @@ const Role = database.define(
         },
       },
     },
-    id_employe: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "employes",
-        key: "id",
-      },
-    },
   },
   {
     tableName: "roles",

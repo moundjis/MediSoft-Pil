@@ -2,6 +2,11 @@
 import { body, param } from "express-validator";
 
 const pharmacieRules = [
+  // Validation de l'ID de la pharmacie (pour les routes avec paramètre)
+  param("id")
+    .isInt({ min: 1 })
+    .withMessage("L'ID de la pharmacie doit être un entier positif"),
+
   // Validation du nom
   body("nom")
     .exists()
@@ -31,16 +36,11 @@ const pharmacieRules = [
     .withMessage("L'email doit être une adresse email valide"),
 
   // Validation de l'ID de l'employé
-  body("id_employe")
+  body("id_ordonnance")
     .exists()
-    .withMessage("L'ID de l'employé est obligatoire")
+    .withMessage("L'ID de l'ordonance est obligatoire")
     .isInt({ min: 1 })
-    .withMessage("L'ID de l'employé doit être un entier positif"),
-
-  // Validation de l'ID de la pharmacie (pour les routes avec paramètre)
-  param("id")
-    .isInt({ min: 1 })
-    .withMessage("L'ID de la pharmacie doit être un entier positif"),
+    .withMessage("L'ID de l'ordonnance doit être un entier positif"),
 ];
 
 // 2. Exporter les règles de validation

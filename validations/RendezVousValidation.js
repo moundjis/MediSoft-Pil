@@ -8,16 +8,14 @@ const rendezVousRules = [
     .withMessage("L'ID doit être un entier positif"),
 
   // Validation de la date
-  body("date")
+  body("date_rdv")
     .exists()
     .withMessage("La date est obligatoire")
     .isISO8601()
-    .withMessage("La date doit être au format YYYY-MM-DD")
-    .matches(/^\d{4}-\d{2}-\d{2}$/)
     .withMessage("La date doit être au format YYYY-MM-DD"),
 
   // Validation de l'heure
-  body("heure")
+  body("heure_rdv")
     .exists()
     .withMessage("L'heure est obligatoire")
     .matches(/^([01]\d|2[0-3]):([0-5]\d)$/)
@@ -31,8 +29,7 @@ const rendezVousRules = [
 
   // Validation du type de rendez-vous
   body("type_rdv")
-    .exists()
-    .withMessage("Le type de rendez-vous est obligatoire")
+    .optional()
     .isIn(["consultation", "suivi", "urgence"])
     .withMessage(
       "Le type de rendez-vous doit être 'consultation', 'suivi', ou 'urgence'"
@@ -40,8 +37,7 @@ const rendezVousRules = [
 
   // Validation du statut du rendez-vous
   body("status_rdv")
-    .exists()
-    .withMessage("Le statut du rendez-vous est obligatoire")
+    .optional()
     .isIn(["en attente", "confirmé", "annulé", "terminé"])
     .withMessage(
       "Le statut du rendez-vous doit être 'en attente', 'confirmé', 'annulé', ou 'terminé'"
@@ -53,13 +49,6 @@ const rendezVousRules = [
     .withMessage("L'ID du patient est obligatoire")
     .isInt({ min: 1 })
     .withMessage("L'ID du patient doit être un entier positif"),
-
-  // Validation de l'ID du employe
-  body("id_employe")
-    .exists()
-    .withMessage("L'ID de l'employe est obligatoire")
-    .isInt({ min: 1 })
-    .withMessage("L'ID de l'employe doit être un entier positif"),
 ];
 
 // 2. Exporter les roules de validation du rendez-vous

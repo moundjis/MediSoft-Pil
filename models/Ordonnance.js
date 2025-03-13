@@ -13,6 +13,7 @@ const Ordonnance = database.define(
       primaryKey: true,
       autoIncrement: true,
     },
+
     id_prescription: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -21,6 +22,7 @@ const Ordonnance = database.define(
         key: "id",
       },
     },
+
     id_pharmacie: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -30,7 +32,7 @@ const Ordonnance = database.define(
       },
     },
   },
-  { timestamps: false }
+  { timestamps: true }
 );
 
 // 3. On exporte le model "Ordonnance" pour lui creer un controller

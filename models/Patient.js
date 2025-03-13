@@ -27,14 +27,8 @@ const Patient = database.define(
     date_de_naissance: {
       type: DataTypes.DATE,
       allowNull: false,
-    },
-
-    nas: {
-      type: DataTypes.STRING(9),
-      allowNull: false,
-      unique: true,
       validate: {
-        isNumeric: true,
+        isDate: true,
       },
     },
 
@@ -47,17 +41,13 @@ const Patient = database.define(
       },
     },
 
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        len: [3, 100],
-      },
-    },
-
     telephone: {
       type: DataTypes.STRING(10),
       allowNull: false,
+      validate: {
+        isNumeric: true,
+        len: [10, 10],
+      },
     },
 
     adresse: {
@@ -74,11 +64,20 @@ const Patient = database.define(
       },
     },
 
-    id_employe: {
+    id_consultation: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "employes",
+        model: "consultations",
+        key: "id",
+      },
+    },
+
+    id_rendez_vous: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "rendez_vous",
         key: "id",
       },
     },

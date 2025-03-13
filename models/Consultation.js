@@ -13,10 +13,7 @@ const Consultation = database.define(
       primaryKey: true,
       autoIncrement: true,
     },
-    date_consultation: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
+
     diagnostic: {
       type: DataTypes.STRING(250),
       allowNull: true,

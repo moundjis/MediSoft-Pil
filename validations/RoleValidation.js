@@ -1,6 +1,9 @@
 import { body, param } from "express-validator";
 
 const routeRules = [
+  // Validation de l'ID
+  param("id").isInt({ min: 1 }).withMessage("L'id doit être un entier positif"),
+
   // Valider le titre
   body("titre")
     .isIn(["Medecin", "Administrateur", "sudo"])
@@ -15,9 +18,6 @@ const routeRules = [
     .withMessage(
       "La spécialité doit être 'Cardiologue', 'Ophtalmologue', 'Dermatologue' ou 'Dentiste'."
     ),
-
-  // Validation de l'ID
-  param("id").isInt({ min: 1 }).withMessage("L'id doit être un entier positif"),
 ];
 
 export default routeRules;

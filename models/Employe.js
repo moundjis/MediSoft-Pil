@@ -27,6 +27,9 @@ const Employe = database.define(
     date_de_naissance: {
       type: DataTypes.DATE,
       allowNull: false,
+      validate: {
+        isDate: true,
+      },
     },
 
     nas: {
@@ -58,6 +61,10 @@ const Employe = database.define(
     telephone: {
       type: DataTypes.STRING(10),
       allowNull: false,
+      validate: {
+        isNumeric: true,
+        len: [10, 10],
+      },
     },
 
     adresse: {
@@ -70,6 +77,15 @@ const Employe = database.define(
       allowNull: false,
       references: {
         model: "roles", // il faut verifier le nom de la table
+        key: "id",
+      },
+    },
+
+    id_consultation: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: "consultations",
         key: "id",
       },
     },

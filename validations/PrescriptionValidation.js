@@ -29,44 +29,33 @@ const prescriptionRules = [
 
   // Validation de la note
   body("note_medecin")
-    .optional()
+    .exists()
     .withMessage("La note est obligatoire")
     .isString()
-    .withMessage("La note doit être une chaîne de caractères"),
+    .withMessage("La note doit être une chaîne de caractères")
+    .isLength({ max: 250 })
+    .withMessage("La note ne peut pas dépasser 250 caractères"),
 
   // Validation du renouvellement
   body("renouvellement")
     .optional()
     .isBoolean()
-    .withMessage("Le renouvellement doit être un booléen"),
+    .withMessage("Le renouvellement doit être un oui ou non")
+    .toBoolean(), // Convertir la valeur en booléen
 
   // Validation de l'ID du patient
-  body("id_patient")
+  body("id_ordonnance")
     .exists()
-    .withMessage("L'ID du patient est obligatoire")
+    .withMessage("L'ID de l'ordonnance est obligatoire")
     .isInt({ min: 1 })
-    .withMessage("L'ID du patient doit être un entier positif"),
+    .withMessage("L'ID de l'ordonnance doit être un entier positif"),
 
   // Validation de l'ID du employe
-  body("id_employe")
+  body("id_consultation")
     .exists()
-    .withMessage("L'ID de l'employe est obligatoire")
+    .withMessage("L'ID de la consultation est obligatoire")
     .isInt({ min: 1 })
-    .withMessage("L'ID de l'employe doit être un entier positif"),
-
-  // Validation de l'ID du dossier medical
-  body("id_dossier_medical")
-    .exists()
-    .withMessage("L'ID du dossier medical est obligatoire")
-    .isInt({ min: 1 })
-    .withMessage("L'ID du dossier medical doit être un entier positif"),
-
-  // Validation de l'ID de la pharmacie
-  body("id_pharmacie")
-    .optional()
-    .withMessage("L'ID de la pharmacie est obligatoire")
-    .isInt({ min: 1 })
-    .withMessage("L'ID de la pharmacie doit être un entier positif"),
+    .withMessage("L'ID de la consultation doit être un entier positif"),
 ];
 
 // 2. Exporter les roules de validation de la prescription

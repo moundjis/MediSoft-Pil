@@ -31,7 +31,7 @@ const RendezVous = database.define(
 
     type_rdv: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       defaultValue: "consultation",
       validate: {
         isIn: {
@@ -43,12 +43,12 @@ const RendezVous = database.define(
 
     status_rdv: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       defaultValue: "en attente",
       validate: {
         isIn: {
           args: [["en attente", "confirmé", "annulé", "terminé"]],
-          msg: "Le statut du rendez-vous doit etre 'en attente', 'confirme', 'annule', ou 'termine'",
+          msg: "Le statut du rendez-vous doit etre 'en attente', 'confirmé', 'annulé', ou 'terminé'",
         },
       },
     },
@@ -58,15 +58,6 @@ const RendezVous = database.define(
       allowNull: false,
       references: {
         model: "patients",
-        key: "id",
-      },
-    },
-
-    id_employe: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "employes",
         key: "id",
       },
     },

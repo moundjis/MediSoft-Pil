@@ -33,21 +33,21 @@ const Pharmacie = database.define(
       allowNull: false,
       unique: true,
       validate: {
-        isEmail: true, // Doit être une adresse email valide
+        isEmail: true,
       },
     },
-    id_employe: {
+    id_ordonnance: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "employes", // Référence à la table Employe
+        model: "ordonnances",
         key: "id",
       },
     },
   },
   {
-    tableName: "pharmacies", // Nom de la table dans la base de données
-    timestamps: true, // Ajoute les champs createdAt et updatedAt
+    tableName: "pharmacies",
+    timestamps: true,
   }
 );
 

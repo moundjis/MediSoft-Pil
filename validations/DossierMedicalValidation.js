@@ -2,6 +2,11 @@
 import { body, param } from "express-validator";
 
 const dossierMedicalRules = [
+  // Validation de l'ID du dossier médical (pour les routes qui utilisent un paramètre ID)
+  param("id")
+    .isInt({ min: 1 })
+    .withMessage("L'ID du dossier médical doit être un entier positif"),
+
   // Validation du prénom et nom de la mère
   body("prenom_nom_mere")
     .optional()
@@ -26,14 +31,6 @@ const dossierMedicalRules = [
       "Le prénom et nom du père ne doivent pas dépasser 50 caractères"
     ),
 
-  // Validation du numéro d'assurance
-  body("no_assurance")
-    .optional()
-    .isString()
-    .withMessage("Le numéro d'assurance doit être une chaîne de caractères")
-    .isLength({ max: 50 })
-    .withMessage("Le numéro d'assurance ne doit pas dépasser 50 caractères"),
-
   // Validation des antécédents familiaux
   body("antecedant_fam")
     .optional()
@@ -47,7 +44,7 @@ const dossierMedicalRules = [
     ),
 
   // Validation des maladies chroniques
-  body("maladies_chronique")
+  body("maladies_chroniques")
     .optional()
     .isString()
     .withMessage(
@@ -66,15 +63,6 @@ const dossierMedicalRules = [
     .isLength({ max: 250 })
     .withMessage("Les allergies ne doivent pas dépasser 250 caractères"),
 
-  // Validation de la date de création
-  body("date_de_creation")
-    .exists()
-    .withMessage("La date de création est obligatoire")
-    .isISO8601()
-    .withMessage("La date de création doit être au format YYYY-MM-DD")
-    .matches(/^\d{4}-\d{2}-\d{2}$/)
-    .withMessage("La date de création doit être au format YYYY-MM-DD"),
-
   // Validation des traitements
   body("traitements")
     .optional()
@@ -90,10 +78,12 @@ const dossierMedicalRules = [
     .isInt({ min: 1 })
     .withMessage("L'ID du patient doit être un entier positif"),
 
-  // Validation de l'ID du dossier médical (pour les routes qui utilisent un paramètre ID)
-  param("id")
+  // Validation de l'ID du patient
+  body("id_employe")
+    .exists()
+    .withMessage("L'ID de l'employe est obligatoire")
     .isInt({ min: 1 })
-    .withMessage("L'ID du dossier médical doit être un entier positif"),
+    .withMessage("L'ID de l'employe doit être un entier positif"),
 ];
 
 // 2. Exporter les règles de validation du dossier médical

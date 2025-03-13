@@ -13,52 +13,42 @@ const DossierMedical = database.define(
       primaryKey: true,
       autoIncrement: true,
     },
+
     prenom_nom_mere: {
       type: DataTypes.STRING(50),
       allowNull: true,
     },
+
     prenom_nom_pere: {
       type: DataTypes.STRING(50),
       allowNull: true,
     },
-    no_assurance: {
-      type: DataTypes.STRING(50),
-      allowNull: true,
-    },
+
     antecedant_fam: {
       type: DataTypes.STRING(250),
       allowNull: true,
     },
-    maladies_chronique: {
+
+    maladies_chroniques: {
       type: DataTypes.STRING(250),
       allowNull: true,
     },
+
     allergies: {
       type: DataTypes.STRING(250),
       allowNull: true,
-    },
-    date_de_creation: {
-      type: DataTypes.DATE,
-      allowNull: false,
     },
 
     traitements: {
       type: DataTypes.STRING(250),
       allowNull: true,
     },
+
     id_patient: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
         model: "patients",
-        key: "id",
-      },
-    },
-    id_employe: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "employes",
         key: "id",
       },
     },

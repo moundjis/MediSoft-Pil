@@ -12,12 +12,11 @@ const Prescription = database.define(
     },
 
     medicament: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(100),
       allowNull: false,
     },
-
     dosage: {
-      type: DataTypes.STRING,
+      type: DataTypes.STRING(50),
       allowNull: false,
     },
 
@@ -28,7 +27,7 @@ const Prescription = database.define(
 
     note_medecin: {
       type: DataTypes.TEXT,
-      allowNull: true,
+      allowNull: false,
     },
 
     renouvellement: {
@@ -36,38 +35,20 @@ const Prescription = database.define(
       defaultValue: false,
     },
 
-    id_patient: {
+    id_ordonnance: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "patients",
+        model: "ordonnances",
         key: "id",
       },
     },
 
-    id_employe: {
+    id_consultation: {
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "employes",
-        key: "id",
-      },
-    },
-
-    id_dossier_medical: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "dossiers_medicaux",
-        key: "id",
-      },
-    },
-
-    id_pharmacie: {
-      type: DataTypes.INTEGER,
-      allowNull: true, // Une prescription peut ne pas être envoyée à une pharmacie
-      references: {
-        model: "pharmacies",
+        model: "consultations",
         key: "id",
       },
     },

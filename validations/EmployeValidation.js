@@ -2,6 +2,11 @@
 import { body, param } from "express-validator";
 
 const employeRules = [
+  // Validation de l'ID de l'employé (pour les routes qui utilisent un paramètre ID)
+  param("id")
+    .isInt({ min: 1 })
+    .withMessage("L'ID de l'employé doit être un entier positif"),
+
   // Validation du nom
   body("nom")
     .exists()
@@ -21,13 +26,11 @@ const employeRules = [
     .exists()
     .withMessage("La date de maissance est obligatoire")
     .isISO8601()
-    .withMessage("La date de naissance doit être au format YYYY-MM-DD")
-    .matches(/^\d{4}-\d{2}-\d{2}$/)
     .withMessage("La date de naissance doit être au format YYYY-MM-DD"),
 
   // Validation du NAS
   body("nas")
-    .notEmpty()
+    .exists()
     .withMessage("Le NAS est requis.")
     .isLength({ min: 9, max: 9 })
     .withMessage("Le NAS doit contenir exactement 9 chiffres.")
@@ -69,10 +72,12 @@ const employeRules = [
     .isInt({ min: 1 })
     .withMessage("L'ID du rôle doit être un entier positif"),
 
-  // Validation de l'ID de l'employé (pour les routes qui utilisent un paramètre ID)
-  param("id")
+  // Validation de l'ID de consultation
+  body("id_consultation")
+    .exists()
+    .withMessage("L'ID de la consultation est obligatoire")
     .isInt({ min: 1 })
-    .withMessage("L'ID de l'employé doit être un entier positif"),
+    .withMessage("L'ID la consultation doit être un entier positif"),
 ];
 
 // 2. Exporter les règles de validation de l'employé

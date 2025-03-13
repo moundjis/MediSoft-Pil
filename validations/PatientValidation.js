@@ -2,6 +2,11 @@
 import { body, param } from "express-validator";
 
 const patientRules = [
+  // Validation de l'ID du patient (pour les routes qui utilisent un paramètre ID)
+  param("id")
+    .isInt({ min: 1 })
+    .withMessage("L'ID du patient doit être un entier positif"),
+
   // Validation du nom
   body("nom")
     .exists()
@@ -21,18 +26,7 @@ const patientRules = [
     .exists()
     .withMessage("La date de naissance est obligatoire")
     .isISO8601()
-    .withMessage("La date de naissance doit être au format YYYY-MM-DD")
-    .matches(/^\d{4}-\d{2}-\d{2}$/)
     .withMessage("La date de naissance doit être au format YYYY-MM-DD"),
-
-  // Validation du NAS
-  body("nas")
-    .notEmpty()
-    .withMessage("Le NAS est requis.")
-    .isLength({ min: 9, max: 9 })
-    .withMessage("Le NAS doit contenir exactement 9 chiffres.")
-    .isNumeric()
-    .withMessage("Le NAS ne doit contenir que des chiffres."),
 
   // Validation du courriel
   body("courriel")
@@ -40,13 +34,6 @@ const patientRules = [
     .withMessage("Le courriel est obligatoire")
     .isEmail()
     .withMessage("Le courriel doit être une adresse email valide"),
-
-  // Validation du mot de passe
-  body("password")
-    .exists()
-    .withMessage("Le mot de passe est obligatoire")
-    .isLength({ min: 3, max: 100 })
-    .withMessage("Le mot de passe doit contenir entre 3 et 100 caractères"),
 
   // Validation du téléphone
   body("telephone")
@@ -62,10 +49,26 @@ const patientRules = [
     .isString()
     .withMessage("L'adresse doit être une chaîne de caractères"),
 
-  // Validation de l'ID du patient (pour les routes qui utilisent un paramètre ID)
-  param("id")
+  // Validation de l'ID du Dossier medical
+  body("id_dossier_medical")
+    .exists()
+    .withMessage("L'ID du dossier medical est obligatoire")
     .isInt({ min: 1 })
-    .withMessage("L'ID du patient doit être un entier positif"),
+    .withMessage("L'ID du dossier medical  doit être un entier positif"),
+
+  // Validation de l'ID de la consultation
+  body("id_consultation")
+    .exists()
+    .withMessage("L'ID de la consultation est obligatoire")
+    .isInt({ min: 1 })
+    .withMessage("L'ID de la consultation doit être un entier positif"),
+
+  // Validation de l'ID du rendez-vous
+  body("id_rendez_vous")
+    .exists()
+    .withMessage("L'ID du rendez-vous est obligatoire")
+    .isInt({ min: 1 })
+    .withMessage("L'ID du rendez-vous doit être un entier positif"),
 ];
 
 // 2. Exporter les règles de validation du patient

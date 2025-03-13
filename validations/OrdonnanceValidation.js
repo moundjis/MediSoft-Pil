@@ -4,7 +4,7 @@ import { body, param } from "express-validator";
 const ordonnanceRules = [
   // Validation de l'ID de l'ordonnance
   param("id")
-    .optional()
+    .exists()
     .isInt({ min: 1 })
     .withMessage("L'ID de l'ordonnance doit être un entier positif"),
 
