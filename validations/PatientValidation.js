@@ -63,12 +63,12 @@ const patientRules = [
     .isInt({ min: 1 })
     .withMessage("L'ID de la consultation doit être un entier positif"),
 
-  // Validation de l'ID du rendez-vous
-  body("id_rendez_vous")
+  // Validation de l'ID du dossier medical
+  body("id_dossier_medical")
     .exists()
-    .withMessage("L'ID du rendez-vous est obligatoire")
+    .withMessage("L'ID du dossier medical est obligatoire")
     .isInt({ min: 1 })
-    .withMessage("L'ID du rendez-vous doit être un entier positif"),
+    .withMessage("L'ID du dossier medical doit être un entier positif"),
 ];
 
 // 2. Exporter les règles de validation du patient

@@ -1,4 +1,5 @@
 // 1. Importer le middleware de validation avec les 2 méthodes body() et param() pour valider les entrées
+
 import { body, param } from "express-validator";
 
 const ordonnanceRules = [
@@ -8,12 +9,19 @@ const ordonnanceRules = [
     .isInt({ min: 1 })
     .withMessage("L'ID de l'ordonnance doit être un entier positif"),
 
-  // Validation de l'ID de la prescription
-  body("id_prescription")
-    .exists()
-    .withMessage("L'ID de la prescription est obligatoire")
-    .isInt({ min: 1 })
-    .withMessage("L'ID de la prescription doit être un entier positif"),
+  // Validation de la date d'ordonnance (format ISO 8601)
+  body("date_ordonnance")
+    .optional()
+    .isISO8601()
+    .withMessage(
+      "La date de l'ordonnance doit être au format ISO 8601 (YYYY-MM-DD HH:MM:SS)"
+    ),
+
+  // Validation de la note (optionnelle et max 500 caractères)
+  body("note")
+    .optional()
+    .isLength({ max: 500 })
+    .withMessage("La note ne doit pas dépasser 500 caractères"),
 
   // Validation de l'ID de la pharmacie
   body("id_pharmacie")
@@ -23,5 +31,4 @@ const ordonnanceRules = [
     .withMessage("L'ID de la pharmacie doit être un entier positif"),
 ];
 
-// 2. Exporter les règles de validation des ordonnances
 export default ordonnanceRules;

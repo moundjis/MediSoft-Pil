@@ -70,20 +70,6 @@ const dossierMedicalRules = [
     .withMessage("Les traitements doivent être une chaîne de caractères")
     .isLength({ max: 250 })
     .withMessage("Les traitements ne doivent pas dépasser 250 caractères"),
-
-  // Validation de l'ID du patient
-  body("id_patient")
-    .exists()
-    .withMessage("L'ID du patient est obligatoire")
-    .isInt({ min: 1 })
-    .withMessage("L'ID du patient doit être un entier positif"),
-
-  // Validation de l'ID du patient
-  body("id_employe")
-    .exists()
-    .withMessage("L'ID de l'employe est obligatoire")
-    .isInt({ min: 1 })
-    .withMessage("L'ID de l'employe doit être un entier positif"),
 ];
 
 // 2. Exporter les règles de validation du dossier médical

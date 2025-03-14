@@ -71,13 +71,6 @@ const employeRules = [
     .withMessage("L'ID du rôle est obligatoire")
     .isInt({ min: 1 })
     .withMessage("L'ID du rôle doit être un entier positif"),
-
-  // Validation de l'ID de consultation
-  body("id_consultation")
-    .exists()
-    .withMessage("L'ID de la consultation est obligatoire")
-    .isInt({ min: 1 })
-    .withMessage("L'ID la consultation doit être un entier positif"),
 ];
 
 // 2. Exporter les règles de validation de l'employé

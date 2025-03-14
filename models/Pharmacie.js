@@ -36,14 +36,6 @@ const Pharmacie = database.define(
         isEmail: true,
       },
     },
-    id_ordonnance: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "ordonnances",
-        key: "id",
-      },
-    },
   },
   {
     tableName: "pharmacies",

@@ -43,14 +43,14 @@ const prescriptionRules = [
     .withMessage("Le renouvellement doit être un oui ou non")
     .toBoolean(), // Convertir la valeur en booléen
 
-  // Validation de l'ID du patient
+  // Validation de l'ID de l'ordonnance
   body("id_ordonnance")
     .exists()
     .withMessage("L'ID de l'ordonnance est obligatoire")
     .isInt({ min: 1 })
     .withMessage("L'ID de l'ordonnance doit être un entier positif"),
 
-  // Validation de l'ID du employe
+  // Validation de l'ID de la consultation
   body("id_consultation")
     .exists()
     .withMessage("L'ID de la consultation est obligatoire")

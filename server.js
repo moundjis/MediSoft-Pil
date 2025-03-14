@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // 6. Route racine pour un message de bienvenue
-app.get("/", (req, res) => {
+app.get("/api", (req, res) => {
   res.json({ message: "Bienvenue sur l'API MediSoft-Pil" });
 });
 

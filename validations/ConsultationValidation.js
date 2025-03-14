@@ -34,6 +34,12 @@ const consultationRules = [
     .isInt({ min: 1 })
     .withMessage("L'ID du patient doit être un entier positif"),
 
+  // Validation de l'ID de l'employe
+  body("id_employe")
+    .exists()
+    .withMessage("L'ID du patient est obligatoire")
+    .isInt({ min: 1 })
+    .withMessage("L'ID du patient doit être un entier positif"),
 ];
 
 // 2. Exporter les règles de validation des consultations

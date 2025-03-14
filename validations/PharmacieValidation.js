@@ -34,13 +34,6 @@ const pharmacieRules = [
     .withMessage("L'email est obligatoire")
     .isEmail()
     .withMessage("L'email doit être une adresse email valide"),
-
-  // Validation de l'ID de l'employé
-  body("id_ordonnance")
-    .exists()
-    .withMessage("L'ID de l'ordonance est obligatoire")
-    .isInt({ min: 1 })
-    .withMessage("L'ID de l'ordonnance doit être un entier positif"),
 ];
 
 // 2. Exporter les règles de validation

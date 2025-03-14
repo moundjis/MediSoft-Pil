@@ -11,7 +11,7 @@ import autoriser from "../authentification/autorisation.js";
 
 // 4. Importer les controleurs de l'ordonnance
 import {
-  getAllOrdonnance,
+  getAllOrdonnances,
   displayOrdonnance,
   updateOrdonnance,
   delOrdonnance,
@@ -34,9 +34,9 @@ const validateRequest = (req, res, next) => {
 const OrdonnanceRoute = Router();
 
 // 7. Definir les routes pour les controleurs de "Ordonnance"
-ConsultationRoute.all("*", verifierToken)
+OrdonnanceRoute.all("*", verifierToken)
   .all("*", autoriser(["Administrateur", "sudo"]))
-  .get("/", getAllOrdonnance)
+  .get("/", getAllOrdonnances)
   .post("/", ordonnanceRules, validateRequest, addOrdonnance)
   .delete("/:id", delOrdonnance)
   .put("/:id", ordonnanceRules, validateRequest, updateOrdonnance)

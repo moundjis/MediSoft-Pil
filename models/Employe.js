@@ -80,15 +80,6 @@ const Employe = database.define(
         key: "id",
       },
     },
-
-    id_consultation: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: "consultations",
-        key: "id",
-      },
-    },
   },
   {
     tableName: "employes",

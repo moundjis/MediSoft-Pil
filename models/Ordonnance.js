@@ -14,13 +14,15 @@ const Ordonnance = database.define(
       autoIncrement: true,
     },
 
-    id_prescription: {
-      type: DataTypes.INTEGER,
+    date_ordonnance: {
+      type: DataTypes.DATE,
       allowNull: false,
-      references: {
-        model: "prescriptions",
-        key: "id",
-      },
+      defaultValue: DataTypes.NOW,
+    },
+
+    note: {
+      type: DataTypes.TEXT,
+      allowNull: true,
     },
 
     id_pharmacie: {
@@ -32,7 +34,10 @@ const Ordonnance = database.define(
       },
     },
   },
-  { timestamps: true }
+  {
+    tableName: "ordonnances",
+    timestamps: true,
+  }
 );
 
 // 3. On exporte le model "Ordonnance" pour lui creer un controller
