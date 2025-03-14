@@ -1,6 +1,6 @@
 import { body, param } from "express-validator";
 
-const routeRules = [
+const roleRules = [
   // Validation de l'ID
   param("id").isInt({ min: 1 }).withMessage("L'id doit être un entier positif"),
 
@@ -20,4 +20,4 @@ const routeRules = [
     ),
 ];
 
-export default routeRules;
+export default roleRules;

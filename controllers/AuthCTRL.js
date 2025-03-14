@@ -28,8 +28,8 @@ export const register = async (req, res) => {
     } = req.body;
 
     // Vérifier si l'employé existe déjà
-    const employeExistant = await Employe.findOne({ where: { courriel } });
-    if (employeExistant) {
+    const employeFound = await Employe.findOne({ where: { courriel } });
+    if (employeFound) {
       return res
         .status(400)
         .json({ message: "Cet employé est déjà enregistré." });
@@ -55,7 +55,7 @@ export const register = async (req, res) => {
     res.status(201).json({
       message: "Employé enregistré avec succès",
       employe: nouvelEmploye,
-      data: { id: nouvelEmploye.id_employe, nom: nouvelEmploye.nom },
+      data: { id: nouvelEmploye.id, nom: nouvelEmploye.nom },
     });
   } catch (error) {
     console.error(error);
@@ -77,29 +77,31 @@ export const login = async (req, res) => {
 
   try {
     // Recherche de l'employé par son courriel
-    const employeExistant = await Employe.findOne({ where: { courriel } });
+    const employeFound = await Employe.findOne({ where: { courriel } });
 
-    if (!employeExistant) {
+    if (!employeFound) {
       return res.status(404).json({
         message: "Cet employé n'est pas enregistré.",
       });
     }
 
     // Comparaison du mot de passe envoyé avec le mot de passe crypté
-    const mdpCorrect = await bcrypt.compare(password, employeExistant.password);
+    const mdpCorrect = await bcrypt.compare(password, employeFound.password);
 
     if (!mdpCorrect) {
       return res.status(401).json({ message: "Mot de passe incorrect." });
     }
 
     // Création de la clé d'accès
-    const payload = { id: employeExistant.id_employe }; // id_employe
+    const payload = { id: employeFound.id }; // id_employe
+    console.log("Payload avant génération du token:", payload);
+
     const token = jwt.sign(payload, process.env.JWT_SECRET, {});
 
     res.status(200).json({
-      data: { id: employeExistant.id, nom: employeExistant.nom }, // id_employe
+      data: { id: employeFound.id, nom: employeFound.nom }, // id_employe
       token,
-      message: `${employeExistant.nom} vous vous etes connectes avec success a votre compte`,
+      message: `${employeFound.nom} vous vous etes connectes avec success a votre compte`,
     });
   } catch (error) {
     console.error(error);

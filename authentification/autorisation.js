@@ -19,40 +19,46 @@ const autoriser = (roles) => async (req, res, next) => {
   try {
     // 3. Décoder le token
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    const id = decoded.id_employe;
+    console.log("Token decode:", decoded); // Debug pour afficher le conteny du token
+    const id = decoded.id;
+    console.log("ID de l'employé dans le token:", id); // Debug log pour afficher le ID de l'employe
 
-    // 4. Chercher l'employé dans la base de données
-    const employeFound = await Employe.findByPk(id);
+    // 4. Chercher l'employé dans la base de données avec le rôle
+    const employeFound = await Employe.findByPk(id, {
+      include: [{ model: Role }],
+    });
+
+    console.log("Employé trouvé:", employeFound); // Debug log
+
     if (!employeFound) {
-      return res
-        .status(404)
-        .json({ message: "Cet employé n'est pas enregistré." });
+      return res.status(404).json({
+        message: "Employé non trouvé !",
+      });
     }
 
-    // 5. Récupérer le rôle de l'employé
-    const RoleEmploye = await Role.findByPk(employeFound.id_role);
-    if (!RoleEmploye) {
-      return res
-        .status(404)
-        .json({ message: "Le rôle de cet employé n'est pas enregistré." });
+    // 5. Vérifier si l'employé a un rôle associé
+    if (!employeFound.Role) {
+      return res.status(403).json({
+        message: "L'employé n'a pas de rôle associé. Accès interdit.",
+      });
     }
 
     // 6. Vérifier si l'employé a l'un des rôles autorisés
-    const RoleTitle = RoleEmploye.titre.toLowerCase();
+    const RoleTitle = employeFound.Role.titre.toLowerCase();
     const hasRole = roles.map((role) => role.toLowerCase()).includes(RoleTitle);
 
-    // 7. Si l'employé a le rôle nécessaire, passer au middleware suivant
     if (hasRole) {
       req.user = decoded; // Ajouter le payload à la requête
       next();
     } else {
-      // 8. Si l'employé n'a pas le rôle, retourner une erreur 403
       return res.status(403).json({
-        message: "Vous n'êtes pas autorisé à accéder à cette route.",
+        message: `Accès interdit. Vous devez avoir l'un des rôles suivants : ${roles.join(
+          ", "
+        )}.`,
       });
     }
   } catch (error) {
-    // 9. En cas d'erreur dans la requête, retourner une erreur 403
+    // 7. En cas d'erreur dans la requête, retourner une erreur 403
     let message = "Erreur lors de la vérification des autorisations.";
     if (error.name === "JsonWebTokenError") {
       message = "Token invalide.";
@@ -60,7 +66,7 @@ const autoriser = (roles) => async (req, res, next) => {
       message = "Token expiré.";
     }
 
-    res.status(403).json({ message });
+    res.status(401).json({ message });
   }
 };
 

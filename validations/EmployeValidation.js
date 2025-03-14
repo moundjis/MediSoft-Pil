@@ -2,11 +2,6 @@
 import { body, param } from "express-validator";
 
 const employeRules = [
-  // Validation de l'ID de l'employé (pour les routes qui utilisent un paramètre ID)
-  param("id")
-    .isInt({ min: 1 })
-    .withMessage("L'ID de l'employé doit être un entier positif"),
-
   // Validation du nom
   body("nom")
     .exists()
