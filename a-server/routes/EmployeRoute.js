@@ -34,9 +34,9 @@ const validateRequest = (req, res, next) => {
 const EmployeRoute = Router();
 
 // 7. Definir les routes pour les controleurs de "Employe"
-EmployeRoute.all("*", verifierToken) // Proteger toutes les routes ci-dessous
-  .all("*", autoriser(["Administrateur", "sudo"]))
-  .get("/", getAllEmployes) // Afficher tous les employes
+//EmployeRoute.all("*", verifierToken) // Proteger toutes les routes ci-dessous
+//.all("*", autoriser(["Administrateur", "sudo"]))
+EmployeRoute.get("/", getAllEmployes) // Afficher tous les employes
   .post("/", EmployeRules, validateRequest, addEmploye) // Ajouter un nouvel employe
   .delete("/:id", delEmploye) // Supprimer un employe
   .put("/:id", EmployeRules, validateRequest, updateEmploye) // Mettre a jour un employe

@@ -1,5 +1,5 @@
 // 1. Importer l'entite/model avec ses relations
-import { Employe } from "../models/relations.js";
+import { Employe, Role } from "../models/relations.js";
 
 // 2. Importer le middleware de validation
 import { validationResult } from "express-validator";
@@ -51,15 +51,31 @@ export const displayEmploye = async (req, res) => {
   }
 };
 
-// 5. Lister tous les employes
+// 5. Lister tous les employés avec leur rôle
 export const getAllEmployes = async (req, res) => {
   try {
-    const employeListe = await Employe.findAll();
-    // 5.1 Afficher la liste des employes, sinon -> Message erreur
+    const employeListe = await Employe.findAll({
+      include: [
+        {
+          model: Role,
+          attributes: ["id", "titre", "specialite"], // Attributs spécifiques du modèle associé
+        },
+      ],
+    });
+
+    // Vérifier si la liste est vide
+    if (!employeListe || employeListe.length === 0) {
+      return res.status(404).json({
+        message: "Aucun employé trouvé.",
+      });
+    }
+
+    // Retourner la liste des employés
     return res.status(200).json({ data: employeListe });
   } catch (error) {
+    // Retourner un message d'erreur en cas de problème
     return res.status(500).json({
-      message: `Erreur serveur lors de la recuperation des employes - ${error.message}`,
+      message: `Erreur serveur lors de la récupération des employés - ${error.message}`,
     });
   }
 };
