@@ -1,19 +1,4 @@
-:root {
-  --hue-color: 165;
-  --first-color: hsl(var(--hue-color), 60%, 33%);
-  --big-font-size: 2rem;
-  --font-bold: 800;
-  --mb-1: 1rem;
-  --z-fixed: 1000;
-}
-@media screen and (min-width: 968px) {
-  :root {
-    --big-font-size: 3rem;
-  }
-}
-body.dark {
-  --first-color: #0c0c1e;
-}
+@import "tailwindcss";
 * {
   margin: 0;
   padding: 0;
