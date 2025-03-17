@@ -2,26 +2,31 @@
 import React, { useState } from "react";
 
 export default function AjouterBtn({ onClose }) {
-  const [newConsultation, setNewConsultation] = useState({
-    date: new Date().toISOString().split("T")[0],
-    diagnostic: "",
-    note: "",
-    recommendation: "",
+  // État initial pour un nouveau rendez-vous
+  const [newRendezVous, setNewRendezVous] = useState({
+    date_rdv: new Date().toISOString().split("T")[0], 
+    heure_rdv: "00:00", 
+    note_medecin: "",
+    type_rdv: "consultation", 
+    status_rdv: "en attente", 
+    id_patient: " ", 
   });
 
+  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setNewConsultation((prev) => ({
+
+    setNewRendezVous((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log("Nouvelle consultation:", newConsultation);
-    onClose();
+    console.log("Nouveau rendez-vous:", newRendezVous);
+    onClose(); 
   };
 
   return (
@@ -29,7 +34,7 @@ export default function AjouterBtn({ onClose }) {
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full">
         <div className="flex justify-between items-center p-6 border-b">
           <h2 className="text-xl font-semibold text-gray-800">
-            Nouvelle prescription
+            Nouveau rendez-vous
           </h2>
           <button
             onClick={onClose}
@@ -40,73 +45,128 @@ export default function AjouterBtn({ onClose }) {
         </div>
         <form onSubmit={handleSubmit} className="p-6">
           <div className="space-y-4">
+            {/* Champ Date du rendez-vous */}
             <div>
               <label
-                htmlFor="date"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                htmlFor="date_rdv"
+                className="text-sm font-medium mb-1 text-gray-700"
               >
-                Date
+                Date du rendez-vous
               </label>
               <input
                 type="date"
-                id="date"
-                name="date"
-                value={newConsultation.date}
-                onChange={handleInputChange}
-                className="w-full rounded-md border-gray-500 shadow-sm text-sm text-black focus:outline-none"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="diagnostic"
-                className="text-sm font-medium mb-1 text-gray-700"
-              >
-                Diagnostic
-              </label>
-              <input
-                type="text"
-                id="diagnostic"
-                name="diagnostic"
-                value={newConsultation.diagnostic}
+                id="date_rdv"
+                name="date_rdv"
+                value={newRendezVous.date_rdv}
                 onChange={handleInputChange}
                 className="w-full rounded-md shadow-sm text-sm text-black border-gray-500 focus:outline-none"
                 required
               />
             </div>
+
+            {/* Champ Heure du rendez-vous */}
             <div>
               <label
-                htmlFor="note"
+                htmlFor="heure_rdv"
+                className="text-sm font-medium mb-1 text-gray-700"
+              >
+                Heure du rendez-vous
+              </label>
+              <input
+                type="time"
+                id="heure_rdv"
+                name="heure_rdv"
+                value={newRendezVous.heure_rdv}
+                onChange={handleInputChange}
+                className="w-full rounded-md shadow-sm text-sm text-black border-gray-500 focus:outline-none"
+                required
+              />
+            </div>
+
+            {/* Champ Note du médecin */}
+            <div>
+              <label
+                htmlFor="note_medecin"
                 className="block text-sm font-medium text-gray-700 mb-1"
               >
-                Note
+                Note du médecin
               </label>
               <textarea
-                id="note"
-                name="note"
-                value={newConsultation.note}
+                id="note_medecin"
+                name="note_medecin"
+                value={newRendezVous.note_medecin}
                 onChange={handleInputChange}
                 rows="3"
                 className="w-full rounded-md border-gray-500 text-black text-sm shadow-sm focus:outline-none resize-none"
               />
             </div>
+
+            {/* Champ Type de rendez-vous */}
             <div>
               <label
-                htmlFor="recommendation"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                htmlFor="type_rdv"
+                className="text-sm font-medium mb-1 text-gray-700"
               >
-                Recommendation
+                Type de rendez-vous
               </label>
-              <textarea
-                id="recommendation"
-                name="recommendation"
-                value={newConsultation.recommendation}
+              <select
+                id="type_rdv"
+                name="type_rdv"
+                value={newRendezVous.type_rdv}
                 onChange={handleInputChange}
-                rows="3"
-                className="w-full rounded-md border-gray-500 shadow-sm focus:outline-none text-black text-sm resize-none"
+                className="w-full rounded-md shadow-sm text-sm text-black border-gray-500 focus:outline-none"
+                required
+              >
+                <option value="consultation">Consultation</option>
+                <option value="suivi">Suivi</option>
+                <option value="urgence">Urgence</option>
+              </select>
+            </div>
+
+            {/* Champ Statut du rendez-vous */}
+            <div>
+              <label
+                htmlFor="status_rdv"
+                className="text-sm font-medium mb-1 text-gray-700"
+              >
+                Statut du rendez-vous
+              </label>
+              <select
+                id="status_rdv"
+                name="status_rdv"
+                value={newRendezVous.status_rdv}
+                onChange={handleInputChange}
+                className="w-full rounded-md shadow-sm text-sm text-black border-gray-500 focus:outline-none"
+                required
+              >
+                <option value="en attente">En attente</option>
+                <option value="confirmé">Confirmé</option>
+                <option value="annulé">Annulé</option>
+                <option value="terminé">Terminé</option>
+              </select>
+            </div>
+
+            {/* Champ ID Patient (à remplacer par une liste déroulante dynamique si nécessaire) */}
+            <div>
+              <label
+                htmlFor="id_patient"
+                className="text-sm font-medium mb-1 text-gray-700"
+              >
+                ID Patient
+              </label>
+              <input
+                type="number"
+                id="id_patient"
+                name="id_patient"
+                value={newRendezVous.id_patient}
+                onChange={handleInputChange}
+                className="w-full rounded-md shadow-sm text-sm text-black border-gray-500 focus:outline-none"
+                required
               />
             </div>
           </div>
+
+          {/* Boutons de soumission et d'annulation */}
           <div className="mt-6 flex justify-end space-x-3">
             <button
               type="button"
