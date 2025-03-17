@@ -1,0 +1,27 @@
+[
+    {
+      "id": 1,
+      "name": "id"
+    },
+    {
+      "id": 2,
+      "name": "date_rdv"
+    },
+    {
+      "id": 3,
+      "name": "heure_rdv"
+    },
+    {
+      "id": 4,
+      "name": "type_rdv"
+    },
+    {
+      "id": 5,
+      "name": "status_rdv"
+    },
+    {
+      "id": 6,
+      "name": "id_patient"
+    }
+  ]
+  

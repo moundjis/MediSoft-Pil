@@ -39,6 +39,10 @@
     "id": 7,
     "name": "Pharmacie",
     "icon": "LuShoppingCart",
+<<<<<<< HEAD
     "lien": "/pharmacies"
+=======
+    "lien": "/pharmacie"
+>>>>>>> 9d7cd548092b036a9c7c08a648c14627aad63252
   }
 ]
