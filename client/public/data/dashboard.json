@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Employés",
+    "icon": "LuUsers",
+    "lien": "/employes"
+  },
+  {
+    "id": 2,
+    "name": "Patients",
+    "icon": "LuUsers",
+    "lien": "/patients"
+  },
+  {
+    "id": 3,
+    "name": "Consultations",
+    "icon": "LuCalendar",
+    "lien": "/consultations"
+  },
+  {
+    "id": 4,
+    "name": "Prescriptions",
+    "icon": "LuClipboardList",
+    "lien": "/prescriptions"
+  },
+  {
+    "id": 5,
+    "name": "Ordonnances",
+    "icon": "LuClipboardList",
+    "lien": "/ordonnances"
+  },
+  {
+    "id": 6,
+    "name": "Rendez-vous",
+    "icon": "LuCalendar",
+    "lien": "/rendezVous"
+  },
+  {
+    "id": 7,
+    "name": "Pharmacie",
+    "icon": "LuShoppingCart",
+    "lien": "/pharmacie"
+  }
+]

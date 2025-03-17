@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Dashboard",
+    "icon": "LuHouse",
+    "lien": "/dashboard"
+  },
+  {
+    "id": 2,
+    "name": "Employés",
+    "icon": "LuUsers",
+    "lien": "/employes"
+  },
+  {
+    "id": 3,
+    "name": "Patients",
+    "icon": "LuUsers",
+    "lien": "/patients"
+  },
+  {
+    "id": 4,
+    "name": "Consultations",
+    "icon": "LuCalendar",
+    "lien": "/consultations"
+  },
+  {
+    "id": 5,
+    "name": "Prescriptions",
+    "icon": "LuClipboardList",
+    "lien": "/prescriptions"
+  },
+  {
+    "id": 6,
+    "name": "Ordonnances",
+    "icon": "LuClipboardList",
+    "lien": "/ordonnances"
+  },
+  {
+    "id": 7,
+    "name": "Rendez-vous",
+    "icon": "LuCalendar",
+    "lien": "/rendezVous"
+  },
+  {
+    "id": 8,
+    "name": "Pharmacie",
+    "icon": "LuShoppingCart",
+    "lien": "/pharmacie"
+  },
+  {
+    "id": 9,
+    "name": "Rôles",
+    "icon": "LuUsers",
+    "lien": "/roles"
+  },
+  {
+    "id": 10,
+    "name": "Log out",
+    "icon": "LuLogOut",
+    "lien": "/"
+  }
+]
