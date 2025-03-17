@@ -28,11 +28,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fr">
       <body>
-        <div className="grid grid-cols-4 h-screen bg-gradient-to-r from-blue-400 to-blue-950">
-          <div className="col-span-1">
+        <div className="grid grid-cols-4 h-screen bg-gradient-to-r from-blue-400 to-blue-95">
+          <div className="flex col-span-1 items-center">
             <SideBar />
           </div>
-          <div className="col-span-3">{children}</div>
+          <div className="flex col-span-3 items-center justify-center">
+            {children}
+          </div>
         </div>
       </body>
     </html>

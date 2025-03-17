@@ -27,7 +27,7 @@ const iconComponents = {
 export default function Dashboard() {
   const router = useRouter();
   return (
-    <div className="h-full bg-white grid grid-cols-3 gap-5 rounded-2xl drop-shadow-[5px_5px_3px_rgba(0,0,0,0.5)] p-15 mr-5 mt-10 mb-10">
+    <div className="h-[85vh] w-full bg-white grid grid-cols-3 gap-5 rounded-2xl drop-shadow-[5px_5px_3px_rgba(0,0,0,0.5)] p-15 mr-10">
       {dashboard.map((dashboard) => {
         const IconComponent = iconComponents[dashboard.icon];
         return (

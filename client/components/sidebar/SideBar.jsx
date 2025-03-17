@@ -29,7 +29,7 @@ export default function SideBar() {
   const router = useRouter();
 
   return (
-    <nav className="space-y-2 max-w-[300px] sticky top-40 ml-5">
+    <nav className="space-y-2 min-w-[250px] ml-5">
       {sidebar.map((sidebar) => {
         const IconComponent = iconComponents[sidebar.icon];
 
