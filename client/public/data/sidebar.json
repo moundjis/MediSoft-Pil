@@ -43,11 +43,7 @@
   },
   {
     "id": 8,
-<<<<<<< HEAD
     "name": "Pharmacies",
-=======
-    "name": "Pharmacie",
->>>>>>> 9d7cd548092b036a9c7c08a648c14627aad63252
     "icon": "LuShoppingCart",
     "lien": "/pharmacie"
   },

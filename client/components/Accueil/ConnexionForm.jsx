@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 "use client"; // Indiquer que ce composant est un composant client
 
 import { useState } from "react";
@@ -58,30 +57,19 @@ export default function ConnexionForm() {
         <input
           value={courriel} // Valeur liée à l'état courriel
           onChange={(e) => setCourriel(e.target.value)} // Met à jour l'état courriel
-=======
-export default function ConnexionForm() {
-  return (
-    <main>
-      <form action="" className="flex flex-col  gap-4">
-        <input
->>>>>>> 9d7cd548092b036a9c7c08a648c14627aad63252
           type="text"
           placeholder="E-mail"
           className="border-b-1 border-white/50 text-white p-1 placeholder-white focus:outline-none"
         />
-<<<<<<< HEAD
+
         {/* Champ pour le mot de passe */}
         <input
           value={password} // Valeur liée à l'état password
           onChange={(e) => setPassword(e.target.value)} // Met à jour l'état password
-=======
-        <input
->>>>>>> 9d7cd548092b036a9c7c08a648c14627aad63252
           type="password"
           placeholder="Mot de passe"
           className="border-b-1 border-white/50 text-white p-1 placeholder-white focus:outline-none"
         />
-<<<<<<< HEAD
         {/* Affichage du message d'erreur */}
         {error && <p className="text-red-500">{error}</p>}
         {/* Bouton de soumission */}
@@ -92,10 +80,6 @@ export default function ConnexionForm() {
         >
           {loading ? "Chargement..." : "Se connecter"}{" "}
           {/* Texte du bouton selon l'état de chargement */}
-=======
-        <button className="bg-blue-400 p-2 rounded-md drop-shadow-[5px_6px_6px_rgba(0,0,0,0.5)] self-end hover:cursor-pointer w-[150px]">
-          Se connecter
->>>>>>> 9d7cd548092b036a9c7c08a648c14627aad63252
         </button>
       </form>
     </main>
