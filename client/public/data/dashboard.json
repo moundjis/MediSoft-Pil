@@ -39,6 +39,6 @@
     "id": 7,
     "name": "Pharmacie",
     "icon": "LuShoppingCart",
-    "lien": "/pharmacies"
+    "lien": "/pharmacie"
   }
 ]
