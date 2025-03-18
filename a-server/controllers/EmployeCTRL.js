@@ -58,7 +58,7 @@ export const getAllEmployes = async (req, res) => {
       include: [
         {
           model: Role,
-          attributes: ["id", "titre", "specialite"], // Attributs spécifiques du modèle associé
+          attributes: ["id", "titre"], // Attributs spécifiques du modèle associé
         },
       ],
     });

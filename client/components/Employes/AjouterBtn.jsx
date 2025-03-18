@@ -10,8 +10,7 @@ export default function AjouterEmployeBtn({ onClose }) {
     courriel: "",
     telephone: "",
     adresse: "",
-    titre: "",
-    specialite: "",
+    id_role: "",
   });
 
   const handleInputChange = (e) => {
@@ -22,10 +21,31 @@ export default function AjouterEmployeBtn({ onClose }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Nouvel employé:", newEmploye);
-    onClose();
+
+    try {
+      const response = await fetch("http://localhost:5000/api/employe", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newEmploye), // Envoie les données sous forme JSON
+      });
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de l'ajout de l'employé");
+      }
+
+      const data = await response.json();
+      console.log("Employé ajouté avec succès:", data);
+
+      // Optionnel: Fermer le formulaire ou réinitialiser le formulaire
+      onClose();
+    } catch (error) {
+      console.error("Erreur:", error.message);
+    }
   };
 
   return (
@@ -168,44 +188,26 @@ export default function AjouterEmployeBtn({ onClose }) {
                 htmlFor="titre"
                 className="block text-xs font-medium text-gray-700 mb-1"
               >
-                Titre
+                Role/Titre
               </label>
               <select
-                id="titre"
-                name="titre"
-                value={newEmploye.titre}
+                id="id_role"
+                name="id_role"
+                value={newEmploye.role}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-500 shadow-sm text-xs text-black focus:outline-none"
                 required
               >
                 <option value="" disabled>
-                  Sélectionnez un titre
+                  Sélectionnez un Role
                 </option>
-                <option value="Medecin">Médecin</option>
-                <option value="Administrateur">Administrateur</option>
-                <option value="sudo">sudo</option>
+                <option value="1">sudo</option>
+                <option value="2">Administrateur</option>
+                <option value="3">Ophtalmologue</option>
+                <option value="4">Dermatologue</option>
+                <option value="6">Dentiste</option>
+                <option value="7">Cardiologue</option>
               </select>
-            </div>
-            <div>
-              {/* Affichage du menu déroulant des spécialités uniquement si le titre est "Médecin" */}
-              {newEmploye.titre === "Medecin" && (
-                <select
-                  id="specialite"
-                  name="specialite"
-                  value={newEmploye.specialite}
-                  onChange={handleInputChange}
-                  className="w-full rounded-md border-gray-500 shadow-sm text-xs text-black focus:outline-none"
-                  required
-                >
-                  <option value="" disabled>
-                    Sélectionnez une spécialité
-                  </option>
-                  <option value="Cardiologue">Cardiologue</option>
-                  <option value="Ophtalmologue">Ophtalmologue</option>
-                  <option value="Dermatologue">Dermatologue</option>
-                  <option value="Dentiste">Dentiste</option>
-                </select>
-              )}
             </div>
           </div>
           <div className="mt-6 flex justify-end space-x-3">

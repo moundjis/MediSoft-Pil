@@ -62,6 +62,7 @@ export default function Employes() {
               <EmployeGabarit
                 employe={employe} // Passage des données de l'employé
               />
+              <Action />
             </tr>
           ))}
         </tbody>
