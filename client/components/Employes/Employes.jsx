@@ -2,11 +2,8 @@
 import { useState, useEffect } from "react";
 import colonnes from "@/public/data/employesColonnes";
 import EmployeGabarit from "@/components/Employes/EmployeGabarit";
-<<<<<<< HEAD
 import Action from "@/components/Employes/Action";
-=======
 import AjouterBtn from "@/components/Employes/AjouterBtn";
->>>>>>> b99c04ff3eb58442a980215d3094f2bee230b53b
 
 export default function Employes() {
   const [employes, setEmployes] = useState([]);
@@ -65,7 +62,6 @@ export default function Employes() {
               <EmployeGabarit
                 employe={employe} // Passage des données de l'employé
               />
-              <Action />
             </tr>
           ))}
         </tbody>

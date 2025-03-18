@@ -170,15 +170,21 @@ export default function AjouterEmployeBtn({ onClose }) {
               >
                 Titre
               </label>
-              <input
-                type="text"
+              <select
                 id="titre"
                 name="titre"
                 value={newEmploye.titre}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-500 shadow-sm text-xs text-black focus:outline-none"
                 required
-              />
+              >
+                <option value="" disabled>
+                  Sélectionnez un titre
+                </option>
+                <option value="Medecin">Médecin</option>
+                <option value="Administrateur">Administrateur</option>
+                <option value="sudo">sudo</option>
+              </select>
             </div>
             <div>
               <label
