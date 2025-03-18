@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import colonnes from "@/public/data/employesColonnes";
 import EmployeGabarit from "@/components/Employes/EmployeGabarit";
+import Action from "@/components/Employes/Action";
 
 export default function Employes() {
   const [employes, setEmployes] = useState([]);
@@ -36,7 +37,7 @@ export default function Employes() {
       <button className="text-white text-sm bg-blue-400 px-2 mb-2 hover:cursor-pointer hover:bg-blue-600">
         Ajouter
       </button>
-      <table className="w-full">
+      <table className="w-full ">
         <thead>
           <tr className="bg-yellow-400">
             {colonnes.map((colonne) => (
@@ -53,11 +54,12 @@ export default function Employes() {
           {/* Liste des employés */}
 
           {employes.map((employe) => (
-            <tr key={employe.id}>
+            <tr className="text-gray-400" key={employe.id}>
               {/* Affichage de chaque employé avec le composant Employee */}
               <EmployeGabarit
                 employe={employe} // Passage des données de l'employé
               />
+              <Action />
             </tr>
           ))}
         </tbody>

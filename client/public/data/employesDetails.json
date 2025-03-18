@@ -1,6 +1,6 @@
 [
   {
-    "id": 1,
+    "id": 2,
     "name": "Nom"
   },
   {
@@ -8,10 +8,25 @@
     "name": "Prenom"
   },
   {
+    "id": 4,
+    "name": "Date de naissance"
+  },
+  {
+    "id": 5,
+    "name": "N.A.S"
+  },
+  {
+    "id": 6,
+    "name": "E-mail"
+  },
+  {
     "id": 7,
     "name": "Telephone"
   },
-
+  {
+    "id": 8,
+    "name": "Adresse"
+  },
   {
     "id": 9,
     "name": "Titre"
