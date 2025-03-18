@@ -2,18 +2,17 @@
 export default function EmployeGabarit({ employe }) {
   // Extraction des propriétés de l'objet employee
   const {
-    id,
+    // id,
     nom,
     prenom,
     telephone,
-
     // date_de_naissance,
     // nas,
     // courriel,
     // adresse,
     Role,
   } = employe;
-  const { titre, specialite } = Role;
+  const { titre } = Role;
 
   return (
     <>
@@ -26,9 +25,6 @@ export default function EmployeGabarit({ employe }) {
       <td>{courriel}</td>
       <td>{adresse}</td> */}
       <td>{titre}</td>
-      {/* Si la spécialité est présente, l'afficher */}
-      {specialite && <td>Specialite : {specialite} </td>}
-   
     </>
   );
 }

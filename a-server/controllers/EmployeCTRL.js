@@ -10,7 +10,10 @@ export const addEmploye = async (req, res) => {
   if (!errors.isEmpty()) {
     return res
       .status(400)
-      .json({ message: "Donnees invalides", errors: errors.array() });
+      .json({
+        message: "Erreur serveur - Donnees invalides",
+        errors: errors.array(),
+      });
   }
   try {
     // 1.2 Recuperer et verifier si le courriel existe deja
@@ -58,7 +61,7 @@ export const getAllEmployes = async (req, res) => {
       include: [
         {
           model: Role,
-          attributes: ["id", "titre", "specialite"], // Attributs spécifiques du modèle associé
+          attributes: ["id", "titre"], // Attributs spécifiques du modèle associé
         },
       ],
     });
@@ -89,9 +92,10 @@ export const updateEmploye = async (req, res) => {
   }
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res
-      .status(400)
-      .json({ message: "Donnees invalides", errors: errors.array() });
+    return res.status(400).json({
+      message: "Erreur serveur - Donnees invalides",
+      errors: errors.array(),
+    });
   }
   try {
     // 6.2 Rechercher l'employe par son ID

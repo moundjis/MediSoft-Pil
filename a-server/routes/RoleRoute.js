@@ -34,9 +34,11 @@ const validateRequest = (req, res, next) => {
 const RoleRoute = Router();
 
 // 7. Definir les routes pour les controleurs de "RoleRoute"
-RoleRoute.all("*", verifierToken)
-  .all("*", autoriser(["sudo", "Administrateur"]))
-  .get("/", getAllRoles)
+// RoleRoute.all("*", verifierToken).all(
+//   "*",
+//   autoriser(["sudo", "Administrateur"])
+// );
+RoleRoute.get("/", getAllRoles)
   .post("/", RoleRules, validateRequest, addRole)
   .delete("/:id", delRole)
   .put("/:id", RoleRules, validateRequest, updateRole)
