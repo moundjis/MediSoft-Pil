@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
 import colonnes from "@/public/data/employesColonnes";
-import EmployeGabarit from "@/components/Employes/EmployeGabarit";
-import Action from "@/components/Employes/Action";
+import EmployeColonnes from "@/components/Employes/EmployeColonnes";
+import ActionBtn from "@/components/Employes/ActionBtn";
 import AjouterBtn from "@/components/Employes/AjouterBtn";
 
 export default function Employes() {
@@ -31,6 +31,8 @@ export default function Employes() {
     }
   }
 
+  //============================================================//
+
   return (
     <div className="h-[85vh] w-[90vw] bg-white rounded-2xl drop-shadow-[5px_5px_3px_rgba(0,0,0,0.5)] p-15 mr-10">
       <h1 className="font-bold text-2xl text-black py-2">Liste des employes</h1>
@@ -55,14 +57,16 @@ export default function Employes() {
         </thead>
         <tbody>
           {/* Liste des employés */}
-
-          {employes.map((employe) => (
-            <tr className="text-gray-400" key={employe.id}>
-              {/* Affichage de chaque employé avec le composant Employee */}
-              <EmployeGabarit
-                employe={employe} // Passage des données de l'employé
-              />
-              <Action />
+          {employes.map((employe, id) => (
+            <tr key={id} className="border-b text-gray-300">
+              <EmployeColonnes employe={employe} />
+              <td className="text-center">
+                <ActionBtn
+                  onDetail={() => console.log("Detail de:", employe)}
+                  onModifier={() => console.log("Modifier:", employe)}
+                  onSupprimer={() => console.log("Supprimer:", employe)}
+                />
+              </td>
             </tr>
           ))}
         </tbody>

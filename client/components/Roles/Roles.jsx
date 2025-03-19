@@ -2,7 +2,6 @@
 import colonnes from "@/public/data/rolesColonnes";
 import { useState, useEffect } from "react";
 import RoleGabarit from "./RoleGabarit";
-import Action from "../Employes/Action";
 import AjouterBtn from "../Roles/AjouterBtn";
 
 export default function Roles() {
