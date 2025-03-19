@@ -1,11 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
+import EmployeGabarit from "@/components/Employes/EmployeGabarit";
 import colonnes from "@/public/data/employesColonnes";
-import EmployeColonnes from "@/components/Employes/EmployeColonnes";
-import ActionBtn from "@/components/Employes/ActionBtn";
 import AjouterBtn from "@/components/Employes/AjouterBtn";
 
 export default function Employes() {
+  const [error, setError] = useState(null);
   const [employes, setEmployes] = useState([]);
   const [showAjouterBtn, setAjouterBtn] = useState(false);
 
@@ -30,6 +30,25 @@ export default function Employes() {
       console.error("Error:", error.message); // Affichage d'une erreur si échec
     }
   }
+
+  // Fonction pour supprimer un employé
+  const SupprimerEmploye = async (id) => {
+    try {
+      console.log("le id de l'employe :", id);
+      const response = await fetch(`http://localhost:5000/api/employe/${id}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to delete employee");
+      }
+
+      // Met à jour la liste après suppression
+      setEmployes((prevEmployes) => prevEmployes.filter((e) => e.id !== id));
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   //============================================================//
 
@@ -57,16 +76,14 @@ export default function Employes() {
         </thead>
         <tbody>
           {/* Liste des employés */}
-          {employes.map((employe, id) => (
-            <tr key={id} className="border-b text-gray-300">
-              <EmployeColonnes employe={employe} />
-              <td className="text-center">
-                <ActionBtn
-                  onDetail={() => console.log("Detail de:", employe)}
-                  onModifier={() => console.log("Modifier:", employe)}
-                  onSupprimer={() => console.log("Supprimer:", employe)}
-                />
-              </td>
+          {employes.map((employe) => (
+            <tr key={employe.id} className="border-b text-gray-300">
+              <EmployeGabarit
+                employe={employe}
+                onDetail={() => console.log("Detail de:", employe)}
+                onModifier={() => console.log("Modifier:", employe)}
+                onSupprimer={SupprimerEmploye} // Passe la fonction de suppression
+              />
             </tr>
           ))}
         </tbody>

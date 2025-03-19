@@ -24,3 +24,14 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.button-col {
+  width: 150px; /* Ajuster la largeur de la colonne des boutons */
+  justify-content: space-evenly; /* Espacement égal entre les boutons */
+  align-items: center;
+}
