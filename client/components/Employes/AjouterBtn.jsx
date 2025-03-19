@@ -44,6 +44,8 @@ export default function AjouterEmployeBtn({ onClose }) {
 
       // Optionnel: Fermer le formulaire ou réinitialiser le formulaire
       onClose();
+      // Rafraîchir la page
+      window.location.reload();
     } catch (error) {
       console.error("Erreur:", error.message);
     }

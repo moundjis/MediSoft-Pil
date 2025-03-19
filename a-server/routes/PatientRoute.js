@@ -34,9 +34,9 @@ const validateRequest = (req, res, next) => {
 const PatientRoute = Router();
 
 // 7. Définir les routes pour les contrôleurs de "Patient"
-PatientRoute.all("*", verifierToken) // Protéger toutes les routes ci-dessous
-  .all("*", autoriser(["Administrateur", "sudo"])) // Autoriser uniquement les rôles spécifiés
-  .get("/", getAllPatients) // Afficher tous les patients
+//PatientRoute.all("*", verifierToken) // Protéger toutes les routes ci-dessous
+//.all("*", autoriser(["Administrateur", "sudo"])) // Autoriser uniquement les rôles spécifiés
+PatientRoute.get("/", getAllPatients) // Afficher tous les patients
   .post("/", PatientRules, validateRequest, addPatient) // Ajouter un nouveau patient
   .delete("/:id", delPatient) // Supprimer un patient
   .put("/:id", PatientRules, validateRequest, updatePatient) // Mettre à jour un patient

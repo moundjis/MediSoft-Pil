@@ -19,12 +19,36 @@ export default function AjouterBtn({ onClose }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("Nouvel employé:", newPatient);
 
-    console.log("Nouveau patient:", newPatient);
-    onClose();
+    try {
+      const response = await fetch("http://localhost:5000/api/patient", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPatient), // Envoie les données sous forme JSON
+      });
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de l'ajout du patient");
+      }
+
+      const data = await response.json();
+      console.log("Patient ajouté avec succès:", data);
+
+      // Fermer le formulaire ou réinitialiser le formulaire
+      onClose();
+
+      // Rafraîchir la page
+      window.location.reload();
+    } catch (error) {
+      console.error("Erreur:", error.message);
+    }
   };
+
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">

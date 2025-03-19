@@ -1,0 +1,22 @@
+[
+    
+    {
+      "id": 2,
+      "name": "diagnostic"
+    },
+    
+    {
+      "id": 4,
+      "name": "Note"
+    },
+    {
+      "id": 5,
+      "name": "Recommendation"
+    },
+    {
+        "id": 10,
+        "name": "Action"
+      }
+    
+  ]
+  

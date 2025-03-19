@@ -2,10 +2,7 @@
 import { body, param } from "express-validator";
 
 const patientRules = [
-  // Validation de l'ID du patient (pour les routes qui utilisent un paramètre ID)
-  param("id")
-    .isInt({ min: 1 })
-    .withMessage("L'ID du patient doit être un entier positif"),
+  
 
   // Validation du nom
   body("nom")
@@ -49,26 +46,6 @@ const patientRules = [
     .isString()
     .withMessage("L'adresse doit être une chaîne de caractères"),
 
-  // Validation de l'ID du Dossier medical
-  body("id_dossier_medical")
-    .exists()
-    .withMessage("L'ID du dossier medical est obligatoire")
-    .isInt({ min: 1 })
-    .withMessage("L'ID du dossier medical  doit être un entier positif"),
-
-  // Validation de l'ID de la consultation
-  body("id_consultation")
-    .exists()
-    .withMessage("L'ID de la consultation est obligatoire")
-    .isInt({ min: 1 })
-    .withMessage("L'ID de la consultation doit être un entier positif"),
-
-  // Validation de l'ID du dossier medical
-  body("id_dossier_medical")
-    .exists()
-    .withMessage("L'ID du dossier medical est obligatoire")
-    .isInt({ min: 1 })
-    .withMessage("L'ID du dossier medical doit être un entier positif"),
 ];
 
 // 2. Exporter les règles de validation du patient

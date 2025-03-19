@@ -54,7 +54,7 @@ export const displayConsultation = async (req, res) => {
 // 5. Lister toutes les consultations
 export const getAllConsultations = async (req, res) => {
   try {
-    const consultationListe = await consultation.findAll();
+    const consultationListe = await Consultation.findAll();
     // 5.1 Afficher la liste des employes, sinon -> Message erreur
     return res.status(200).json({ data: consultationListe });
   } catch (error) {

@@ -34,9 +34,9 @@ const validateRequest = (req, res, next) => {
 const ConsultationRoute = Router();
 
 // 7. Definir les routes pour les controleurs de "Consultation"
-ConsultationRoute.all("*", verifierToken) 
-  .all("*", autoriser(["Administrateur", "sudo"]))
-  .get("/", getAllConsultations) 
+//ConsultationRoute.all("*", verifierToken) 
+  //.all("*", autoriser(["Administrateur", "sudo"]))
+  ConsultationRoute.get("/", getAllConsultations) 
   .post("/", ConsultationRules, validateRequest, addConsultation) 
   .delete("/:id", delConsultation) 
   .put("/:id", ConsultationRules, validateRequest, updateConsultation) 

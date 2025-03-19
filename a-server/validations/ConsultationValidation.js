@@ -1,11 +1,8 @@
 // 1. Importer le middleware de validation avec les 2 méthodes body() et param() pour valider les entrées
-import { body, param } from "express-validator";
+import { body } from "express-validator";
 
 const consultationRules = [
-  // Validation de l'ID de la consultation
-  param("id")
-    .isInt({ min: 1 })
-    .withMessage("L'ID de la consultation doit être un entier positif"),
+
 
   // Validation du diagnostic
   body("diagnostic")
@@ -37,9 +34,9 @@ const consultationRules = [
   // Validation de l'ID de l'employe
   body("id_employe")
     .exists()
-    .withMessage("L'ID du patient est obligatoire")
+    .withMessage("L'ID du employe est obligatoire")
     .isInt({ min: 1 })
-    .withMessage("L'ID du patient doit être un entier positif"),
+    .withMessage("L'ID du employe doit être un entier positif"),
 ];
 
 // 2. Exporter les règles de validation des consultations
