@@ -1,46 +1,37 @@
-// 1. Importer le middleware pour creer la route EmployeRoute
 import { Router } from "express";
-
-// 2. Importer les regles de validation
 import EmployeRules from "../validations/EmployeValidation.js";
 import { validationResult } from "express-validator";
-
-// 3. Importer les regles de verification et autorisation
 import { verifierToken } from "../authentification/verifierToken.js";
 import autoriser from "../authentification/autorisation.js";
-
-// 4. Importer les controleurs de l'employe
 import {
   addEmploye,
   displayEmploye,
   getAllEmployes,
   updateEmploye,
   delEmploye,
+  loginEmploye,
 } from "../controllers/EmployeCTRL.js";
 
-// 5. creer une function pour valider la requete
+// Fonction pour valider la requête
 const validateRequest = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({
-      message: "Donnees invalides",
+      message: "Données invalides",
       errors: errors.array(),
     });
   }
-  next(); // Passe au controleur si la validation est OK dans la requete
+  next(); // Passe au contrôleur si la validation est OK dans la requête
 };
 
-// 6. Creer la route EmployeRoute
+// Créer la route EmployeRoute
 const EmployeRoute = Router();
 
-// 7. Definir les routes pour les controleurs de "Employe"
-//EmployeRoute.all("*", verifierToken) // Proteger toutes les routes ci-dessous
-//.all("*", autoriser(["Administrateur", "sudo"]))
-EmployeRoute.get("/", getAllEmployes) // Afficher tous les employes
-  .post("/", EmployeRules, validateRequest, addEmploye) // Ajouter un nouvel employe
-  .delete("/:id", delEmploye) // Supprimer un employe
-  .put("/:id", EmployeRules, validateRequest, updateEmploye) // Mettre a jour un employe
-  .get("/:id", displayEmploye); // Afficher un seul employe
-
-// 8. Exporter la route "EmployeRoute" vers server.js
+// Définir les routes pour les contrôleurs de "Employe"
+EmployeRoute.get("/", getAllEmployes) // Afficher tous les employés
+  .post("/", EmployeRules, validateRequest, addEmploye) // Ajouter un nouvel employé
+  .post("/login", loginEmploye) // Connexion d'un employé
+  .delete("/:id", delEmploye) // Supprimer un employé
+  .put("/:id", EmployeRules, validateRequest, updateEmploye) // Mettre à jour un employé
+  .get("/:id", displayEmploye); // Afficher un seul employé
 export default EmployeRoute;
