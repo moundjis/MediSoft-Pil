@@ -61,7 +61,7 @@ export default function Employes() {
       >
         Ajouter
       </button>
-      <table className="w-full ">
+      <table className="w-full table-fixed">
         <thead>
           <tr className="bg-yellow-400">
             {colonnes.map((colonne) => (

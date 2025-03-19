@@ -13,10 +13,10 @@ export default function EmployeGabarit({
 
   return (
     <>
-      <td>{nom}</td>
-      <td>{prenom}</td>
-      <td>{telephone}</td>
-      <td>{titre}</td>
+      <td className="px-4">{nom}</td>
+      <td className="px-4">{prenom}</td>
+      <td className="px-4">{telephone}</td>
+      <td className="px-4">{titre}</td>
       <td>
         {/* employeId c'est le meme props utilise dans comme props pour la focntion DeleteBtn.jsx */}
         {/* Bouton Détails */}
