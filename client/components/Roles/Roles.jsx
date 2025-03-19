@@ -1,7 +1,7 @@
 "use client";
 import colonnes from "@/public/data/rolesColonnes";
 import { useState, useEffect } from "react";
-import RoleGabarit from "./RoleGabarit";
+import RoleColonnes from "./RoleColonnes";
 import AjouterBtn from "../Roles/AjouterBtn";
 
 export default function Roles() {
@@ -55,7 +55,7 @@ export default function Roles() {
           {roles.map((role) => (
             <tr className="text-gray-400" key={role.id}>
               {/* Affichage de chaque employé avec le composant Employee */}
-              <RoleGabarit
+              <RoleColonnes
                 role={role} // Passage des données du role
               />
             </tr>

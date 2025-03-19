@@ -1,5 +1,5 @@
 // Composant RoleGabarit qui reçoit un objet role
-export default function RoleGabarit({ role }) {
+export default function RoleColonnes({ role }) {
   const { titre, employes } = role; // Utilisation de "employes" pour récupérer la liste des employés
 
   return (
