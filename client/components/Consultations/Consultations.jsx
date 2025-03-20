@@ -4,12 +4,15 @@ import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import ConsultationGabarit from "./ConsultationGabarit";
 import AjouterBtn from "@/components/Consultations/AjouterBtn";
 import colonnes from "@/public/data/consultationColonnes";
+import InfosConsultation from "./InfosConsultation";
 
 export default function Consultations() {
   const [error, setError] = useState(null);
   const [consultations, setConsultations] = useState([]);
   const [showAjouterBtn, setAjouterBtn] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedConsultation, setSelectedConsultation] = useState(null); // État pour stocker les détails du patient sélectionné
+
   const consultationsPerPage = 10; // nombre de consultations par page
 
   useEffect(() => {
@@ -48,6 +51,21 @@ export default function Consultations() {
       );
     } catch (error) {
       setError(error.message);
+    }
+  };
+
+  const handleDetail = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/consultation/${id}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch patient details");
+      }
+      const consultationdetail = await response.json();
+      setSelectedConsultation(consultationdetail.data); // Stocke les détails du patient
+    } catch (error) {
+      console.error("Error:", error.message);
     }
   };
 
@@ -106,7 +124,7 @@ export default function Consultations() {
               <tr key={consultation.id} className="border-b text-gray-500">
                 <ConsultationGabarit
                   consultation={consultation}
-                  onDetail={() => console.log("Detail de:", consultation)}
+                  onDetail={handleDetail}
                   onModifier={() => console.log("Modifier:", consultation)}
                   onSupprimer={SupprimerConsultation}
                 />
@@ -148,6 +166,12 @@ export default function Consultations() {
       </div>
 
       {showAjouterBtn && <AjouterBtn onClose={() => setAjouterBtn(false)} />}
+      {selectedConsultation && (
+        <InfosConsultation
+          consultation={selectedConsultation}
+          onClose={() => setSelectedConsultation(null)}
+        />
+      )}
     </div>
   );
 }

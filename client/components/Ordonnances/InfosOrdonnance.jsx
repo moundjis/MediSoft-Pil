@@ -1,6 +1,8 @@
-import ordonnancesDetails from "@/public/data/ordonnances.json";
+"use client";
+import React from "react";
 
-export default function InfosOrdonnance({ onClose }) {
+export default function InfosOrdonnance({ ordonnance, onClose }) {
+  if (!ordonnance) return null;
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl h-full w-full">
@@ -15,12 +17,11 @@ export default function InfosOrdonnance({ onClose }) {
             X
           </button>
         </div>
-        <div className="h-full flex flex-col justify-around p-6">
-          {ordonnancesDetails.map((details) => (
-            <p key={details.id} className="font-semibold">
-              {details.name}
-            </p>
-          ))}
+        <div className="flex-1 overflow-y-auto p-6">
+          <p className="font-semibold">ID: {ordonnance.id}</p>
+          <p className="font-semibold">Date de l'ordonnance: {ordonnance.date_ordonnance}</p>
+          <p className="font-semibold">Note: {ordonnance.note}</p>
+          <p className="font-semibold">ID de la pharmacie: {ordonnance.id_pharmacie}</p>
         </div>
       </div>
     </div>

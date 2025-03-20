@@ -1,6 +1,6 @@
 import DeleteBtn from "@/components/Patients/DeleteBtn";
-import EditBtn from "@/components/Patients/EditBtn";
 import InfoBtn from "@/components/Patients/InfoBtn";
+import EditBtn from "@/components/Patients/EditBtn";
 
 export default function PatientGabarit({
   patient,
@@ -8,7 +8,6 @@ export default function PatientGabarit({
   onDetail,
   onModifier,
 }) {
-  console.log("Patient reçu :", patient); // Vérifiez les données ici
   const { nom, prenom, courriel, telephone, adresse } = patient;
 
   return (
@@ -20,7 +19,7 @@ export default function PatientGabarit({
       <td className="px-4">{adresse}</td>
       <td>
         <InfoBtn patientId={patient.id} onDetail={onDetail} />
-        <EditBtn patientId={patient.id} onModifier={onModifier} />
+        <EditBtn patientId={patient.id} onModifier={onModifier} patient={patient} />
         <DeleteBtn patientId={patient.id} onSupprimer={onSupprimer} />
       </td>
     </>

@@ -9,7 +9,6 @@ export default function OrdonnanceGabarit({
   onDetail,
   onModifier,
 }) {
-  console.log("Ordonnance reçue :", ordonnance);
   const { date_ordonnance, note, id_pharmacie } = ordonnance;
 
   return (

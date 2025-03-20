@@ -1,81 +1,45 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import DossierMedicalGabarit from "./DossierMedicalGabarit";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
-import OrdonnanceGabarit from "./OrdonnanceGabarit";
-import AjouterBtn from "@/components/Ordonnances/AjouterBtn";
-import ordonnanceColonnes from "@/public/data/ordonnanceColonnes.json";
-import InfosOrdonnance from "./InfosOrdonnance";
+import AjouterBtn from "@/components/DossierMedical/AjouterBtn";
+import colonnes from "@/public/data/dossierMedicalColonnes.json";
 
-export default function Ordonnances() {
+export default function DossierMedical() {
   const [error, setError] = useState(null);
-  const [ordonnances, setOrdonnances] = useState([]);
+  const [dossiersMedicaux, setDossiersMedicaux] = useState([]);
   const [showAjouterBtn, setAjouterBtn] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedOrdonnance, setSelectedOrdonnance] = useState(null);
-
-  const ordonnancesPerPage = 10;
+  const dossiersMedicauxParPage = 10;
 
   useEffect(() => {
-    GetAllOrdonnances();
+    GetAllDossiersMedicaux();
   }, []);
 
-  async function GetAllOrdonnances() {
+  async function GetAllDossiersMedicaux() {
     try {
-      const response = await fetch("http://localhost:5000/api/ordonnance");
+      const response = await fetch("http://localhost:5000/api/dossier-medical");
       if (!response.ok) {
-        throw new Error("Failed to fetch ordonnances");
+        throw new Error("Failed to fetch dossiers médicaux");
       }
-      const ordonnances = await response.json();
-      setOrdonnances(ordonnances.data);
+      const dossiers = await response.json();
+      setDossiersMedicaux(dossiers.data);
     } catch (error) {
       console.error("Error:", error.message);
+      setError(error.message);
     }
   }
 
-  const SupprimerOrdonnance = async (id) => {
-    try {
-      const response = await fetch(
-        `http://localhost:5000/api/ordonnance/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to delete ordonnance");
-      }
-
-      setOrdonnances((prevOrdonnances) =>
-        prevOrdonnances.filter((o) => o.id !== id)
-      );
-    } catch (error) {
-      setError(error.message);
-    }
-  };
-
-  const handleDetail = async (id) => {
-    try {
-      const response = await fetch(
-        `http://localhost:5000/api/ordonnance/${id}`
-      );
-      if (!response.ok) {
-        throw new Error("Failed to fetch ordonnance details");
-      }
-      const ordonnanceDetail = await response.json();
-      setSelectedOrdonnance(ordonnanceDetail.data); // Mettre à jour selectedOrdonnance
-    } catch (error) {
-      console.error("Error:", error.message);
-    }
-  };
-
   // Logique de pagination
-  const indexOfLastOrdonnance = currentPage * ordonnancesPerPage;
-  const indexOfFirstOrdonnance = indexOfLastOrdonnance - ordonnancesPerPage;
-  const currentOrdonnances = ordonnances.slice(
-    indexOfFirstOrdonnance,
-    indexOfLastOrdonnance
+  const indexOfLastDossier = currentPage * dossiersMedicauxParPage;
+  const indexOfFirstDossier = indexOfLastDossier - dossiersMedicauxParPage;
+  const currentDossiers = dossiersMedicaux.slice(
+    indexOfFirstDossier,
+    indexOfLastDossier
   );
-  const totalPages = Math.ceil(ordonnances.length / ordonnancesPerPage);
+  const totalPages = Math.ceil(
+    dossiersMedicaux.length / dossiersMedicauxParPage
+  );
 
   const nextPage = () => {
     if (currentPage < totalPages) {
@@ -93,7 +57,7 @@ export default function Ordonnances() {
     <div className="h-[85vh] w-[90vw] bg-white rounded-2xl drop-shadow-[5px_5px_3px_rgba(0,0,0,0.5)] p-15 mr-10 flex flex-col">
       <div className="flex justify-between items-center mb-4">
         <h1 className="font-bold text-2xl text-black py-2">
-          Liste des ordonnances
+          Dossiers Médicaux
         </h1>
         <button
           className="text-white text-sm bg-blue-400 px-4 py-2 rounded hover:bg-blue-600 transition-colors"
@@ -107,7 +71,7 @@ export default function Ordonnances() {
         <table className="w-full table-fixed">
           <thead className="sticky top-0">
             <tr className="bg-yellow-400">
-              {ordonnanceColonnes.map((colonne) => (
+              {colonnes.map((colonne) => (
                 <th
                   key={colonne.id}
                   className="px-4 py-3 text-left text-sm font-medium text-white border border-3"
@@ -118,14 +82,9 @@ export default function Ordonnances() {
             </tr>
           </thead>
           <tbody>
-            {currentOrdonnances.map((ordonnance) => (
-              <tr key={ordonnance.id} className="border-b text-gray-500">
-                <OrdonnanceGabarit
-                  ordonnance={ordonnance}
-                  onDetail={handleDetail} // Passer handleDetail ici
-                  onModifier={() => console.log("Modifier:", ordonnance)}
-                  onSupprimer={SupprimerOrdonnance}
-                />
+            {currentDossiers.map((dossier) => (
+              <tr key={dossier.id} className="border-b text-gray-500">
+                <DossierMedicalGabarit dossier={dossier} />
               </tr>
             ))}
           </tbody>
@@ -139,7 +98,7 @@ export default function Ordonnances() {
           disabled={currentPage === 1}
           className={`flex items-center px-4 py-2 rounded ${
             currentPage === 1
-              ? "bg-gray-200 text-gray-500"
+              ? "bg-gray-200 text-gray-500 cursor-not-allowed"
               : "bg-blue-500 text-white hover:bg-blue-600"
           }`}
         >
@@ -154,7 +113,7 @@ export default function Ordonnances() {
           disabled={currentPage === totalPages}
           className={`flex items-center px-4 py-2 rounded ${
             currentPage === totalPages
-              ? "bg-gray-200 text-gray-500"
+              ? "bg-gray-200 text-gray-500 cursor-not-allowed"
               : "bg-blue-500 text-white hover:bg-blue-600"
           }`}
         >
@@ -162,14 +121,7 @@ export default function Ordonnances() {
           <LuChevronRight className="w-4 h-4 ml-2" />
         </button>
       </div>
-
       {showAjouterBtn && <AjouterBtn onClose={() => setAjouterBtn(false)} />}
-      {selectedOrdonnance && (
-        <InfosOrdonnance
-          ordonnance={selectedOrdonnance}
-          onClose={() => setSelectedOrdonnance(null)}
-        />
-      )}
     </div>
   );
 }

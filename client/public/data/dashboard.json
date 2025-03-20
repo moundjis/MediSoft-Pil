@@ -40,5 +40,11 @@
     "name": "Pharmacie",
     "icon": "LuShoppingCart",
     "lien": "/pharmacie"
+  },
+  {
+    "id": 8,
+    "name": "Dossiers Médicaux",
+    "icon": "LuFolder",
+    "lien": "/dossierMedical"
   }
 ]

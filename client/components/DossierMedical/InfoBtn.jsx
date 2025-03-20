@@ -1,12 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import InfosPharmacie from "./InfosPharmacie";
+import InfosDossierMedical from "./InfosDossierMedical";
 
-export default function InfoBtn({ id, onDetail }) {
+export default function InfoBtnOrdonnance({ id, onDetail }) {
+  const [showInfoBtn, setInfoBtn] = useState(false);
+
   const handleDetail = () => {
     onDetail(id);
   };
-  const [showInfoBtn, setInfoBtn] = useState(false);
+
   return (
     <div>
       <button
@@ -15,7 +17,7 @@ export default function InfoBtn({ id, onDetail }) {
       >
         Infos
       </button>
-      {showInfoBtn && <InfosPrescription onClose={() => setInfoBtn(false)} />}
+      {showInfoBtn && <InfosDossierMedical onClose={() => setInfoBtn(false)} />}
     </div>
   );
 }

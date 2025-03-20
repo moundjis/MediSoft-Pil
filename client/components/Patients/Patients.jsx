@@ -4,12 +4,14 @@ import PatientGabarit from "./PatientGabarit";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import AjouterBtn from "@/components/Patients/AjouterBtn";
 import patientColonne from "@/public/data/patientColonne";
+import InfosPatient from "./InfosPatient";
 
 export default function Patients() {
   const [error, setError] = useState(null);
   const [patients, setPatients] = useState([]);
   const [showAjouterBtn, setAjouterBtn] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedPatient, setSelectedPatient] = useState(null);
   const patientsPerPage = 10;
 
   useEffect(() => {
@@ -28,29 +30,44 @@ export default function Patients() {
       console.error("Error:", error.message);
     }
   }
+
   const SupprimerPatient = async (id) => {
     try {
       const response = await fetch(`http://localhost:5000/api/patient/${id}`, {
         method: "DELETE",
       });
-  
+
       if (!response.ok) {
         const errorData = await response.json();
         if (errorData.message.includes("consultation")) {
-          setError("use client: Ce patient ne peut pas être supprimé car il a déjà une consultation.");
+          setError(
+            "Ce patient ne peut pas être supprimé car il a déjà une consultation."
+          );
         } else {
           throw new Error("Failed to delete patient");
         }
         return;
       }
-  
+
       setPatients((prevPatients) => prevPatients.filter((e) => e.id !== id));
     } catch (error) {
       setError(error.message);
     }
   };
 
-  // Pagination logic
+  const handleDetail = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/patient/${id}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch patient details");
+      }
+      const patientDetails = await response.json();
+      setSelectedPatient(patientDetails.data);
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  };
+
   const indexOfLastPatient = currentPage * patientsPerPage;
   const indexOfFirstPatient = indexOfLastPatient - patientsPerPage;
   const currentPatients = patients.slice(
@@ -102,15 +119,17 @@ export default function Patients() {
           <tbody>
             {currentPatients.map((patient) => (
               <tr key={patient.id} className="border-b text-gray-500">
-                <PatientGabarit patient={patient}
-                onSupprimer={SupprimerPatient} />
+                <PatientGabarit
+                  patient={patient}
+                  onSupprimer={SupprimerPatient}
+                  onDetail={handleDetail}
+                />
               </tr>
             ))}
           </tbody>
         </table>
       </div>
 
-      {/* cpntrole pagination */}
       <div className="flex justify-between items-center mt-4 px-4 py-2 border-t">
         <button
           onClick={prevPage}
@@ -142,6 +161,12 @@ export default function Patients() {
       </div>
 
       {showAjouterBtn && <AjouterBtn onClose={() => setAjouterBtn(false)} />}
+      {selectedPatient && (
+        <InfosPatient
+          patient={selectedPatient}
+          onClose={() => setSelectedPatient(null)}
+        />
+      )}
     </div>
   );
 }

@@ -20,8 +20,8 @@ export default function ConsultationGabarit({
         {recommendations}
       </td>
       <td>
-        <InfoBtn patientId={consultation.id} onDetail={onDetail} />
-        <EditBtn patientId={consultation.id} onModifier={onModifier} />
+        <InfoBtn consultationId={consultation.id} onDetail={onDetail} />
+        <EditBtn consultationId={consultation.id} onModifier={onModifier} />
         <DeleteBtn consultationId={consultation.id} onSupprimer={onSupprimer} />
       </td>
     </>

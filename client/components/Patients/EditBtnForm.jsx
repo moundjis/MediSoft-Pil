@@ -1,24 +1,21 @@
 "use client";
 import React, { useState } from "react";
 
-export default function EditBtnForm({ onClose }) {
-  const [showEditBtn, SetEditBtn] = useState(false);
-
-  const [updatePatient, setUpdatePatient] = useState({
-    nom: "",
-    prenom: "",
-    date_de_naissance: new Date().toISOString().split("T")[0],
-    courriel: "",
-    telephone: "",
-    adresse: "",
-  });
+export default function EditBtnForm({ patientId, onClose, onModifier, patient }) {
+  const [formData, setFormData] = useState(patient || {});
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUpdatePatient((prev) => ({
-      ...prev,
+    setFormData((prevData) => ({
+      ...prevData,
       [name]: value,
     }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onModifier(formData);
+    onClose();
   };
 
   return (
@@ -35,106 +32,75 @@ export default function EditBtnForm({ onClose }) {
             X
           </button>
         </div>
-        <form className="p-6">
+        <form className="p-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
-              <label
-                htmlFor="nom"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Nom
-              </label>
+              <label htmlFor="nom" className="block text-xs font-medium text-gray-700 mb-1">Nom</label>
               <input
                 type="text"
                 id="nom"
                 name="nom"
+                value={formData.nom || ''}
                 onChange={handleInputChange}
-                value={updatePatient.nom}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
               />
             </div>
             <div>
-              <label
-                htmlFor="prenom"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Prénom
-              </label>
+              <label htmlFor="prenom" className="block text-xs font-medium text-gray-700 mb-1">Prénom</label>
               <input
                 type="text"
                 id="prenom"
                 name="prenom"
-                value={updatePatient.prenom}
+                value={formData.prenom || ''}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
               />
             </div>
             <div>
-              <label
-                htmlFor="date_de_naissance"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Date de naissance
-              </label>
+              <label htmlFor="date_de_naissance" className="block text-xs font-medium text-gray-700 mb-1">Date de naissance</label>
               <input
                 type="date"
                 id="date_de_naissance"
                 name="date_de_naissance"
-                value={updatePatient.date_de_naissance}
+                value={formData.date_de_naissance || ''}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
               />
             </div>
             <div>
-              <label
-                htmlFor="courriel"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Courriel
-              </label>
+              <label htmlFor="courriel" className="block text-xs font-medium text-gray-700 mb-1">Courriel</label>
               <input
                 type="email"
                 id="courriel"
                 name="courriel"
-                value={updatePatient.courriel}
+                value={formData.courriel || ''}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
               />
             </div>
-
             <div>
-              <label
-                htmlFor="telephone"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Téléphone
-              </label>
+              <label htmlFor="telephone" className="block text-xs font-medium text-gray-700 mb-1">Téléphone</label>
               <input
                 type="text"
                 id="telephone"
                 name="telephone"
-                value={updatePatient.telephone}
+                value={formData.telephone || ''}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
               />
             </div>
             <div>
-              <label
-                htmlFor="adresse"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Adresse
-              </label>
+              <label htmlFor="adresse" className="block text-xs font-medium text-gray-700 mb-1">Adresse</label>
               <input
                 type="text"
                 id="adresse"
                 name="adresse"
-                value={updatePatient.adresse}
+                value={formData.adresse || ''}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required

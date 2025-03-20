@@ -20,9 +20,9 @@ export default function PrescriptionGabarit({
       <td className="px-4">{note_medecin}</td>
 
       <td>
-        <InfoBtn employeId={prescription.id} onDetail={onDetail} />
-        <EditBtn employeId={prescription.id} onModifier={onModifier} />
-        <DeleteBtn employeId={prescription.id} onSupprimer={onSupprimer} />
+        <InfoBtn prescriptionId={prescription.id} onDetail={onDetail} />
+        <EditBtn prescriptionId={prescription.id} onModifier={onModifier} />
+        <DeleteBtn prescriptionId={prescription.id} onSupprimer={onSupprimer} />
       </td>
     </>
   );

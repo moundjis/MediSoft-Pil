@@ -55,6 +55,12 @@
   },
   {
     "id": 10,
+    "name": "Dossiers Médicaux",
+    "icon": "LuFolder",
+    "lien": "/dossierMedical"
+  },
+  {
+    "id": 11,
     "name": "Log out",
     "icon": "LuLogOut",
     "lien": "/"

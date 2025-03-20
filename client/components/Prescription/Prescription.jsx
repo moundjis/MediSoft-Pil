@@ -4,12 +4,15 @@ import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
 import PrescriptionGabarit from "./PrescriptionGabarit";
 import AjouterBtn from "@/components/Prescription/AjouterBtn";
 import colonnes from "@/public/data/prescriptionColonnes";
+import InfosPrescription from "./InfosPrescription"; // Importez le composant InfosPrescription
 
 export default function Prescriptions() {
   const [error, setError] = useState(null);
   const [prescriptions, setPrescriptions] = useState([]);
   const [showAjouterBtn, setAjouterBtn] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedPrescription, setSelectedPrescription] = useState(null); // État pour stocker les détails de la prescription sélectionnée
+
   const prescriptionsPerPage = 10; // nombre de prescriptions par page
 
   useEffect(() => {
@@ -48,6 +51,21 @@ export default function Prescriptions() {
       );
     } catch (error) {
       setError(error.message);
+    }
+  };
+
+  const handleDetail = async (id) => {
+    try {
+      const response = await fetch(
+        `http://localhost:5000/api/prescription/${id}`
+      );
+      if (!response.ok) {
+        throw new Error("Failed to fetch prescription details");
+      }
+      const prescriptionDetail = await response.json();
+      setSelectedPrescription(prescriptionDetail.data); // Stocke les détails de la prescription
+    } catch (error) {
+      console.error("Error:", error.message);
     }
   };
 
@@ -106,7 +124,7 @@ export default function Prescriptions() {
               <tr key={prescription.id} className="border-b text-gray-500">
                 <PrescriptionGabarit
                   prescription={prescription}
-                  onDetail={() => console.log("Detail de:", prescription)}
+                  onDetail={() => handleDetail(prescription.id)}
                   onModifier={() => console.log("Modifier:", prescription)}
                   onSupprimer={SupprimerPrescription}
                 />
@@ -148,6 +166,12 @@ export default function Prescriptions() {
       </div>
 
       {showAjouterBtn && <AjouterBtn onClose={() => setAjouterBtn(false)} />}
+      {selectedPrescription && (
+        <InfosPrescription
+          prescription={selectedPrescription}
+          onClose={() => setSelectedPrescription(null)}
+        />
+      )}
     </div>
   );
 }

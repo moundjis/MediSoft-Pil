@@ -28,15 +28,17 @@ export default function RendezVous() {
 
   return (
     <div className="h-[85vh] w-[90vw] bg-white rounded-2xl drop-shadow-[5px_5px_3px_rgba(0,0,0,0.5)] p-15 mr-10">
-      <h1 className="font-bold text-2xl text-black py-2">
-        Liste des rendez vous
-      </h1>
-      <button
-        className="text-white text-sm bg-blue-400 px-2 mb-2 hover:cursor-pointer hover:bg-blue-600"
-        onClick={() => setAjouterBtn(true)}
-      >
-        Ajouter
-      </button>
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="font-bold text-2xl text-black py-2">
+          Liste des rendez-vous
+        </h1>
+        <button
+          className="text-white text-sm bg-blue-400 px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+          onClick={() => setAjouterBtn(true)}
+        >
+          Ajouter
+        </button>
+      </div>
       <table className="w-full">
         <thead>
           <tr className="bg-yellow-400">
@@ -51,10 +53,10 @@ export default function RendezVous() {
           </tr>
         </thead>
         <tbody>
-          {rendezVous.map((rendezVou) => (
+          {rendezVous.map((rdv) => (
             <RendezVousGabarit
-              key={rendezVou.id}
-              rendezVou={rendezVou}
+              key={rdv.id}
+              rendezVou={rdv}
               onDetail={() => {}}
             />
           ))}

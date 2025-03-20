@@ -1,14 +1,12 @@
-"use client";
-import React from "react";
-import rendezvous from "@/public/data/rendezvous.json";
+import ordonnancesDetails from "@/public/data/ordonnances.json";
 
-export default function InfosRDV({ onClose }) {
+export default function InfosOrdonnance({ onClose }) {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-xl h-full w-full max-w-2xl">
+      <div className="bg-white rounded-lg shadow-xl h-full w-full">
         <div className="flex justify-between items-center p-6 border-b">
           <h2 className="text-xl font-semibold text-gray-800">
-            Détails du rendez-vous
+            Détails de l'ordonnance
           </h2>
           <button
             onClick={onClose}
@@ -18,7 +16,7 @@ export default function InfosRDV({ onClose }) {
           </button>
         </div>
         <div className="h-full flex flex-col justify-around p-6">
-          {rendezvous.map((details) => (
+          {ordonnancesDetails.map((details) => (
             <p key={details.id} className="font-semibold">
               {details.name}
             </p>
