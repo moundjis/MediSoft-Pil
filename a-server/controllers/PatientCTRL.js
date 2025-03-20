@@ -1,5 +1,5 @@
 // 1. Importer l'entite/model avec ses relations
-import { Patient } from "../models/relations.js";
+import { Patient, RendezVous } from "../models/relations.js";
 
 // 2. Importer le middleware de validation
 import { validationResult } from "express-validator";
@@ -54,12 +54,39 @@ export const displayPatient = async (req, res) => {
 // 5. Lister tous les patients
 export const getAllPatients = async (req, res) => {
   try {
-    const patientListe = await Patient.findAll();
-    // 5.1 Afficher la liste des patients, sinon -> Message erreur
-    return res.status(200).json({ data: patientListe });
+    const patientsListe = await Patient.findAll({
+      include: [
+        {
+          model: RendezVous,
+          attributes: ["date_rdv", "type_rdv"],
+        },
+      ],
+    });
+
+    // Vérifier si la liste est vide
+    if (!patientsListe || patientsListe.length === 0) {
+      return res.status(404).json({
+        message: "Aucun Patient trouvé.",
+      });
+    }
+
+    // Formatter les patients pour le retour dans le front-end
+    const formattedPatients = patientsListe.map((patient) => ({
+      id: patient.id,
+      nom: patient.nom,
+      prenom: patient.prenom,
+      rdvListe: patient.RendezVous.map((rdv) => ({
+        date_rdv: rdv.date_rdv,
+        type_rdv: rdv.type_rdv,
+      })),
+    }));
+
+    // Retourner la liste formatée
+    res.status(200).json(formattedPatients);
   } catch (error) {
-    return res.status(500).json({
-      message: `Erreur serveur lors de la recuperation des patients - ${error.message}`,
+    console.error("Erreur lors de la récupération des patients :", error);
+    res.status(500).json({
+      message: "Erreur serveur lors de la récupération des patients.",
     });
   }
 };
