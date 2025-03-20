@@ -34,9 +34,9 @@ const validateRequest = (req, res, next) => {
 const PrescriptionRoute = Router();
 
 // 7. Definir les routes pour les controleurs de "Prescription"
-PrescriptionRoute.all("*", verifierToken) // Proteger toutes les routes ci-dessous
-  .all("*", autoriser(["medecin", "admin"])) // Verifier les autorisations pour medecins et admins
-  .get("/", getAllPrescriptions)
+//PrescriptionRoute.all("*", verifierToken) // Proteger toutes les routes ci-dessous
+  //.all("*", autoriser(["medecin", "admin"])) // Verifier les autorisations pour medecins et admins
+  PrescriptionRoute.get("/", getAllPrescriptions)
   .post("/", prescriptionRules, validateRequest, addPrescription)
   .delete("/:id", delPrescription)
   .put("/:id", prescriptionRules, validateRequest, updatePrescription)

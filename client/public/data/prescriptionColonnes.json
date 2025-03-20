@@ -1,0 +1,23 @@
+[
+    {
+
+    "id": 1,
+    "name": "medicament"
+  },
+  {
+    "id": 2,
+    "name": "dosage"
+  },
+  {
+    "id": 3,
+    "name": "quantite"
+  },
+  {
+    "id": 4,
+    "name": "note_medecin"
+  },
+  {
+    "id": 5,
+    "name": "Action"
+  }
+]

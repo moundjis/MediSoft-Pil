@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import PatientGabarit from "./PatientGabarit";
 import AjouterBtn from "@/components/Patients/AjouterBtn";
-import colonnes from "@/public/data/patients";
+import colonnes from "@/public/data/patientColonne";
 
 export default function Patients() {
   const [showAjouterBtn, setAjouterBtn] = useState(false);

@@ -34,9 +34,9 @@ const validateRequest = (req, res, next) => {
 const RendezVousRoute = Router();
 
 // 7. Definir les routes pour les controleurs de "RendezVousRoute"
-RendezVousRoute.all("*", verifierToken) // Proteger toutes les routes ci-dessous
-  .all("*", autoriser())
-  .get("/", getAllRDV)
+//RendezVousRoute.all("*", verifierToken) // Proteger toutes les routes ci-dessous
+  //.all("*", autoriser())
+  RendezVousRoute.get("/", getAllRDV)
   .post("/", RendezVousRules, validateRequest, addRDV)
   .delete("/:id", delRDV)
   .put("/:id", RendezVousRules, validateRequest, updateRDV)

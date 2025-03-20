@@ -1,0 +1,23 @@
+[
+    {
+
+    "id": 1,
+    "name": "Nom"
+  },
+  {
+    "id": 2,
+    "name": "Adresse"
+  },
+  {
+    "id": 3,
+    "name": "Telephone"
+  },
+  {
+    "id": 4,
+    "name": "Email"
+  },
+  {
+    "id": 5,
+    "name": "Action"
+  }
+]

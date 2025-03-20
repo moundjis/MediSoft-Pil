@@ -34,9 +34,9 @@ const validateRequest = (req, res, next) => {
 const PharmacieRoute = Router();
 
 // 7. Définir les routes pour les contrôleurs de "Pharmacie"
-PharmacieRoute.all("*", verifierToken) // Protéger toutes les routes
-  .all("*", autoriser(["Administrateur", "sudo"])) // Autoriser uniquement les rôles spécifiés
-  .get("/", getAllPharmacies) // Afficher toutes les pharmacies
+//PharmacieRoute.all("*", verifierToken) // Protéger toutes les routes
+  //.all("*", autoriser(["Administrateur", "sudo"])) // Autoriser uniquement les rôles spécifiés
+  PharmacieRoute.get("/", getAllPharmacies) // Afficher toutes les pharmacies
   .post("/", PharmacieRules, validateRequest, addPharmacie) // Ajouter une nouvelle pharmacie
   .delete("/:id", delPharmacie) // Supprimer une pharmacie
   .put("/:id", PharmacieRules, validateRequest, updatePharmacie) // Mettre à jour une pharmacie
