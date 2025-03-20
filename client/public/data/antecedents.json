@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "Nom et prénom du patient: "
+  },
+  {
+    "id": 2,
+    "name": "Nom et prénom du père: "
+  },
+  {
+    "id": 3,
+    "name": "Nom et prénom de la mère: "
+  },
+  {
+    "id": 4,
+    "name": "Antécédents familiaux: "
+  },
+  {
+    "id": 5,
+    "name": "Maladies chroniques: "
+  },
+  {
+    "id": 6,
+    "name": "Allergies: "
+  },
+  {
+    "id": 7,
+    "name": "Traitements: "
+  }
+]

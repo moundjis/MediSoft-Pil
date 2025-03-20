@@ -75,7 +75,7 @@ export default function ConnexionForm() {
         {/* Bouton de soumission */}
         <button
           type="submit"
-          className="bg-blue-400 p-2 rounded-md drop-shadow-[5px_6px_6px_rgba(0,0,0,0.5)] self-end hover:cursor-pointer w-[150px]"
+          className="text-white bg-blue-400 p-2 rounded-md drop-shadow-[5px_6px_6px_rgba(0,0,0,0.5)] self-end hover:cursor-pointer w-[150px]"
           disabled={loading} // Désactiver le bouton pendant le chargement
         >
           {loading ? "Chargement..." : "Se connecter"}{" "}
