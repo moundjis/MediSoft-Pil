@@ -1,5 +1,6 @@
+"use client";
 import React, { useState } from "react";
-import InfosRDV from "./InfosRDV";
+import InfosRole from "./InfosRole";
 
 export default function InfoBtn({ id, onDetail }) {
   const handleDetail = () => {
@@ -16,7 +17,7 @@ export default function InfoBtn({ id, onDetail }) {
       >
         Infos
       </button>
-      {showInfoBtn && <InfosRDV onClose={() => setInfoBtn(false)} />}
+      {showInfoBtn && <InfosRole onClose={() => setInfoBtn(false)} />}
     </div>
   );
 }

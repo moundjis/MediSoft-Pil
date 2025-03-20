@@ -1,5 +1,5 @@
 // 1. Importer l'entite/model avec ses relations
-import { RendezVous } from "../models/relations.js";
+import { RendezVous, Patient } from "../models/relations.js";
 
 // 2. Importer le middleware de validation
 import { validationResult } from "express-validator";
@@ -7,13 +7,28 @@ import { validationResult } from "express-validator";
 // 3. Lister tous les RDV
 export const getAllRDV = async (req, res) => {
   try {
-    const rdvListe = await RendezVous.findAll();
+    const rdvListe = await RendezVous.findAll({
+      include: [
+        {
+          model: Patient,
+          attributes: ["id", "nom", "prenom"], // Attributs spécifiques du modèle associé
+        },
+      ],
+    });
+
+    // Vérifier si la liste est vide
+    if (!rdvListe || rdvListe.length === 0) {
+      return res.status(404).json({
+        message: "Aucun RDV trouvé.",
+      });
+    }
+
     return res.status(200).json({
       data: rdvListe,
     });
   } catch (error) {
     return res.status(500).json({
-      message: `Erreur serveur lors de la recuperation des rendez-vous -  ${error.message}`,
+      message: `Erreur serveur : lors de la recuperation des rendez-vous -  ${error.message}`,
     });
   }
 };

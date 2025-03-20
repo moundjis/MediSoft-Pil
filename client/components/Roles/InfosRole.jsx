@@ -1,12 +1,12 @@
-import employesDetails from "@/public/data/employesDetails.json";
+import rolesDetails from "@/public/data/rolesDetails.json";
 
-export default function InfosEmploye({ onClose }) {
+export default function InfosRole({ onClose }) {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-xl h-full w-full">
         <div className="flex justify-between items-center p-6 border-b">
           <h2 className="text-xl font-semibold text-gray-800">
-            Détails de l'employé
+            Détails du role
           </h2>
           <button
             onClick={onClose}
@@ -16,9 +16,9 @@ export default function InfosEmploye({ onClose }) {
           </button>
         </div>
         <div className="h-full flex flex-col justify-around p-6">
-          {employesDetails.map((detail) => (
-            <p key={detail.id} className="font-semibold">
-              {detail.name}
+          {rolesDetails.map((details) => (
+            <p key={details.id} className="font-semibold">
+              {details.name}
             </p>
           ))}
         </div>

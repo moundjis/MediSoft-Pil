@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { LuChevronLeft, LuChevronRight } from "react-icons/lu";
+
 import EmployeGabarit from "./EmployeGabarit";
 import AjouterBtn from "./AjouterBtn";
 import EmployesColonnes from "@/public/data/employesColonnes.json";

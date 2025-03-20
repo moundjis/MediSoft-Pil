@@ -1,9 +1,9 @@
 import React from "react";
 
-export default function DeleteBtn({ rendezVousId, onSupprimer }) {
+export default function DeleteBtn({ roleId, onSupprimer }) {
   const handleDelete = () => {
     if (window.confirm("Are you sure you want to delete this employee?")) {
-      onSupprimer(rendezVousId); // Appelle la fonction de suppression passée en prop
+      onSupprimer(roleId); // Appelle la fonction de suppression passée en prop
     }
   };
 

@@ -4,21 +4,18 @@ import React, { useState } from "react";
 export default function EditBtnForm({ onClose }) {
   const [showEditBtn, SetEditBtn] = useState(false);
 
-  const [updateEmploye, setUpdateEmploye] = useState({
-    nom: "",
-    prenom: "",
-    date_de_naissance: new Date().toISOString().split("T")[0],
-    nas: "",
-    courriel: "",
-    telephone: "",
-    password: "",
-    adresse: "",
-    id_role: "",
+  const [updateRDV, setUpdateRDV] = useState({
+    date_rdv: new Date().toISOString().split("T")[0],
+    heure_rdv: "",
+    note_medecin: "",
+    type_rdv: "",
+    status_rdv: "",
+    id_patient: "",
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUpdateEmploye((prev) => ({
+    setUpdateRDV((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -34,7 +31,9 @@ export default function EditBtnForm({ onClose }) {
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700"
-          ></button>
+          >
+            X
+          </button>
         </div>
         <form className="p-6">
           <div className="space-y-4">
@@ -43,164 +42,122 @@ export default function EditBtnForm({ onClose }) {
                 htmlFor="nom"
                 className="block text-xs font-medium text-gray-700 mb-1"
               >
-                Nom
-              </label>
-              <input
-                type="text"
-                id="nom"
-                name="nom"
-                onChange={handleInputChange}
-                value={updateEmploye.nom}
-                className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="prenom"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Prénom
-              </label>
-              <input
-                type="text"
-                id="prenom"
-                name="prenom"
-                value={updateEmploye.prenom}
-                onChange={handleInputChange}
-                className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="date_de_naissance"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Date de naissance
+                Date du rendez-vous
               </label>
               <input
                 type="date"
-                id="date_de_naissance"
-                name="date_de_naissance"
-                value={updateEmploye.date_de_naissance}
+                id="date_rdv"
+                name="date_rdv"
                 onChange={handleInputChange}
+                value={updateRDV.date_rdv}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
               />
             </div>
+
+            {/* Champ Heure du rendez-vous */}
             <div>
               <label
-                htmlFor="nas"
+                htmlFor="heure_rdv"
                 className="block text-xs font-medium text-gray-700 mb-1"
               >
-                NAS
+                Heure du rendez-vous
               </label>
               <input
-                type="text"
-                id="nas"
-                name="nas"
-                value={updateEmploye.nas}
+                type="time"
+                id="heure_rdv"
+                name="heure_rdv"
+                value={updateRDV.heure_rdv}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
               />
             </div>
+
+            {/* Champ Note du médecin */}
             <div>
+              {/* Champ Note du médecin */}
               <label
-                htmlFor="courriel"
+                htmlFor="note_medecin"
                 className="block text-xs font-medium text-gray-700 mb-1"
               >
-                Courriel
+                Note du médecin
               </label>
-              <input
-                type="email"
-                id="courriel"
-                name="courriel"
-                value={updateEmploye.courriel}
+              <textarea
+                id="note_medecin"
+                name="note_medecin"
+                value={updateRDV.note_medecin}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
-                required
               />
             </div>
+
+            {/* Champ Type de rendez-vous */}
             <div>
               <label
-                htmlFor="password"
+                htmlFor="status_rdv"
                 className="block text-xs font-medium text-gray-700 mb-1"
               >
-                Mot de passe
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={updateEmploye.password}
-                onChange={handleInputChange}
-                className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="telephone"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Téléphone
-              </label>
-              <input
-                type="text"
-                id="telephone"
-                name="telephone"
-                value={updateEmploye.telephone}
-                onChange={handleInputChange}
-                className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="adresse"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Adresse
-              </label>
-              <input
-                type="text"
-                id="adresse"
-                name="adresse"
-                value={updateEmploye.adresse}
-                onChange={handleInputChange}
-                className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="id_role"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Rôle/Titre
+                Type de rendez-vous
               </label>
               <select
-                id="id_role"
-                name="id_role"
-                value={updateEmploye.id_role}
+                id="type_rdv"
+                name="type_rdv"
+                value={updateRDV.type_rdv}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
               >
-                <option value="" disabled>
-                  Sélectionnez un rôle/titre
-                </option>
-                <option value="1">Sudo</option>
-                <option value="2">Administrateur</option>
-                <option value="3">Ophtalmologue</option>
-                <option value="4">Dermatologue</option>
-                <option value="6">Dentiste</option>
-                <option value="7">Cardiologue</option>
+                <option value="consultation">Consultation</option>
+                <option value="suivi">Suivi</option>
+                <option value="urgence">Urgence</option>
               </select>
             </div>
+
+            {/* Champ Statut du rendez-vous */}
+            <div>
+              <label
+                htmlFor="status_rdv"
+                className="block text-xs font-medium text-gray-700 mb-1"
+              >
+                Statut du rendez-vous
+              </label>
+              <select
+                id="status_rdv"
+                name="status_rdv"
+                value={updateRDV.status_rdv}
+                onChange={handleInputChange}
+                className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
+                required
+              >
+                <option value="en attente">En attente</option>
+                <option value="confirmé">Confirmé</option>
+                <option value="annulé">Annulé</option>
+                <option value="terminé">Terminé</option>
+              </select>
+            </div>
+
+            {/* Champ ID Patient (à remplacer par une liste déroulante dynamique si nécessaire) */}
+            <div>
+              <label
+                htmlFor="id_patient"
+                className="block text-xs font-medium text-gray-700 mb-1"
+              >
+                ID Patient
+              </label>
+              <input
+                type="number"
+                id="id_patient"
+                name="id_patient"
+                value={newRendezVous.id_patient}
+                onChange={handleInputChange}
+                className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
+                required
+              />
+            </div>
           </div>
+
+          {/* Boutons de soumission et d'annulation */}
           <div className="mt-6 flex justify-end space-x-3">
             <button
               type="button"
