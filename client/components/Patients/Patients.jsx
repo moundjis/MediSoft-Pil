@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import PatientGabarit from "./PatientGabarit";
-import AjouterBtn from "@/components/Patients/AjouterBtn";
+import AjouterBtn from "./AjouterBtn";
 import colonnes from "@/public/data/patientColonne";
 
 export default function Patients() {

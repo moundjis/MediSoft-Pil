@@ -7,6 +7,8 @@ export default function AjouterBtn({ onClose }) {
     diagnostic: "",
     note: "",
     recommendation: "",
+    patientName: "", 
+    employeName: "", 
   });
 
   const handleInputChange = (e) => {
@@ -17,11 +19,37 @@ export default function AjouterBtn({ onClose }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  // Soumission du formulaire
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
     console.log("Nouvelle consultation:", newConsultation);
-    onClose();
+
+    try {
+      // Envoi des données de la consultation à l'API
+      const response = await fetch("http://localhost:5000/api/consultation", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newConsultation), // Envoie les données sous forme JSON
+      });
+
+      // Vérification de la réponse de l'API
+      if (!response.ok) {
+        throw new Error("Erreur lors de l'ajout de la consultation");
+      }
+
+      const data = await response.json();
+      console.log("Consultation ajoutée avec succès:", data);
+
+      // Fermer le formulaire
+      onClose();
+
+      // Rafraîchir la page pour afficher la nouvelle consultation
+      window.location.reload();
+    } catch (error) {
+      console.error("Erreur:", error.message);
+    }
   };
 
   return (
@@ -40,6 +68,7 @@ export default function AjouterBtn({ onClose }) {
         </div>
         <form onSubmit={handleSubmit} className="p-6">
           <div className="space-y-4">
+            {/* Champ Date */}
             <div>
               <label
                 htmlFor="date"
@@ -57,6 +86,8 @@ export default function AjouterBtn({ onClose }) {
                 required
               />
             </div>
+
+            {/* Champ Diagnostic */}
             <div>
               <label
                 htmlFor="diagnostic"
@@ -74,6 +105,8 @@ export default function AjouterBtn({ onClose }) {
                 required
               />
             </div>
+
+            {/* Champ Note */}
             <div>
               <label
                 htmlFor="note"
@@ -90,6 +123,8 @@ export default function AjouterBtn({ onClose }) {
                 className="w-full rounded-md border-gray-500 text-black text-sm shadow-sm focus:outline-none resize-none"
               />
             </div>
+
+            {/* Champ Recommendation */}
             <div>
               <label
                 htmlFor="recommendation"
@@ -106,7 +141,47 @@ export default function AjouterBtn({ onClose }) {
                 className="w-full rounded-md border-gray-500 shadow-sm focus:outline-none text-black text-sm resize-none"
               />
             </div>
+
+            {/* Champ Nom du patient */}
+            <div>
+              <label
+                htmlFor="patientName"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Nom du patient
+              </label>
+              <input
+                type="text"
+                id="patientName"
+                name="patientName"
+                value={newConsultation.patientName}
+                onChange={handleInputChange}
+                className="w-full rounded-md shadow-sm text-sm text-black border-gray-500 focus:outline-none"
+                required
+              />
+            </div>
+
+            {/* Champ Nom de l'employé */}
+            <div>
+              <label
+                htmlFor="employeName"
+                className="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Nom de l'employé
+              </label>
+              <input
+                type="text"
+                id="employeName"
+                name="employeName"
+                value={newConsultation.employeName}
+                onChange={handleInputChange}
+                className="w-full rounded-md shadow-sm text-sm text-black border-gray-500 focus:outline-none"
+                required
+              />
+            </div>
           </div>
+
+          {/* Boutons Annuler et Ajouter */}
           <div className="mt-6 flex justify-end space-x-3">
             <button
               type="button"

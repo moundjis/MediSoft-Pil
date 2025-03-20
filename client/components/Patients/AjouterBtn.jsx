@@ -1,16 +1,18 @@
 "use client";
 import React, { useState } from "react";
 
-export default function AjouterBtn({ onClose }) {
+export default function AjouterPatientBtn({ onClose }) {
+  // État pour stocker les informations du nouveau patient
   const [newPatient, setNewPatient] = useState({
     nom: "",
     prenom: "",
-    dateNaissance: new Date().toISOString().split("T")[0],
-    numeroTelephone: "",
+    date_de_naissance: new Date().toISOString().split("T")[0],
     courriel: "",
+    telephone: "",
     adresse: "",
   });
 
+  // Gestion des changements dans les champs du formulaire
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setNewPatient((prev) => ({
@@ -19,11 +21,13 @@ export default function AjouterBtn({ onClose }) {
     }));
   };
 
+  // Soumission du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Nouvel employé:", newPatient);
+    console.log("Nouveau patient:", newPatient);
 
     try {
+      // Envoi des données du patient à l'API
       const response = await fetch("http://localhost:5000/api/patient", {
         method: "POST",
         headers: {
@@ -32,6 +36,7 @@ export default function AjouterBtn({ onClose }) {
         body: JSON.stringify(newPatient), // Envoie les données sous forme JSON
       });
 
+      // Vérification de la réponse de l'API
       if (!response.ok) {
         throw new Error("Erreur lors de l'ajout du patient");
       }
@@ -39,16 +44,15 @@ export default function AjouterBtn({ onClose }) {
       const data = await response.json();
       console.log("Patient ajouté avec succès:", data);
 
-      // Fermer le formulaire ou réinitialiser le formulaire
+      // Fermer le formulaire
       onClose();
 
-      // Rafraîchir la page
+      // Rafraîchir la page pour afficher le nouveau patient
       window.location.reload();
     } catch (error) {
       console.error("Erreur:", error.message);
     }
   };
-
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">
@@ -66,9 +70,10 @@ export default function AjouterBtn({ onClose }) {
         </div>
         <form onSubmit={handleSubmit} className="p-6">
           <div className="space-y-4">
+            {/* Champ Nom */}
             <div>
               <label
-                htmlFor="Nom"
+                htmlFor="nom"
                 className="text-sm font-medium mb-1 text-gray-700"
               >
                 Nom
@@ -83,6 +88,8 @@ export default function AjouterBtn({ onClose }) {
                 required
               />
             </div>
+
+            {/* Champ Prénom */}
             <div>
               <label
                 htmlFor="prenom"
@@ -100,6 +107,8 @@ export default function AjouterBtn({ onClose }) {
                 required
               />
             </div>
+
+            {/* Champ Date de naissance */}
             <div>
               <label
                 htmlFor="dateNaissance"
@@ -109,14 +118,16 @@ export default function AjouterBtn({ onClose }) {
               </label>
               <input
                 type="date"
-                id="dateNaissance"
-                name="dateNaissance"
-                value={newPatient.dateNaissance}
+                id="date_de_naissance"
+                name="date_de_naissance"
+                value={newPatient.date_de_naissance}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-500 shadow-sm text-sm text-black focus:outline-none"
                 required
               />
             </div>
+
+            {/* Champ Numéro de téléphone */}
             <div>
               <label
                 htmlFor="numeroTelephone"
@@ -125,16 +136,18 @@ export default function AjouterBtn({ onClose }) {
                 Numéro de téléphone
               </label>
               <input
-                type="tel"
-                id="numeroTelephone"
-                name="numeroTelephone"
+                type="text"
+                id="telephone"
+                name="telephone"
                 pattern="[0-9]{10}"
-                value={newPatient.numeroTelephone}
+                value={newPatient.telephone}
                 onChange={handleInputChange}
                 className="w-full rounded-md shadow-sm text-sm text-black border-gray-500 focus:outline-none"
                 required
               />
             </div>
+
+            {/* Champ Courriel */}
             <div>
               <label
                 htmlFor="courriel"
@@ -152,6 +165,8 @@ export default function AjouterBtn({ onClose }) {
                 required
               />
             </div>
+
+            {/* Champ Adresse */}
             <div>
               <label
                 htmlFor="adresse"
@@ -170,6 +185,8 @@ export default function AjouterBtn({ onClose }) {
               />
             </div>
           </div>
+
+          {/* Boutons Annuler et Ajouter */}
           <div className="mt-6 flex justify-end space-x-3">
             <button
               type="button"
