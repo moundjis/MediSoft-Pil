@@ -1,0 +1,19 @@
+[
+    {
+
+    "id": 1,
+    "name": "Date de l'odonnance"
+  },
+  {
+    "id": 2,
+    "name": "Note"
+  },
+  {
+    "id": 3,
+    "name": "Id de la pharmacie"
+  },
+  {
+    "id": 4,
+    "name": "Action"
+  }
+]

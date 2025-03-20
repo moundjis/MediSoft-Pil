@@ -1,10 +1,31 @@
 "use client";
-import { useState } from "react";
-import ordonnances from "@/public/data/ordonnances";
+import { useState, useEffect } from "react";
+import OrdonnanceGabarit from "./OrdonnanceGabarit";
+import colonnes from "@/public/data/ordonnanceColonnes";
 import AjouterBtn from "@/components/Ordonnances/AjouterBtn";
 
 export default function Ordonnances() {
   const [showAjouterBtn, setAjouterBtn] = useState(false);
+  const [ordonnances, setOrdonnances] = useState([]);
+
+  // Récupère la liste des pharmacies au chargement de la page
+  useEffect(() => {
+    GetAllOrdonnance();
+  }, []);
+
+  async function GetAllOrdonnance() {
+    try {
+      // Envoi de la requête pour obtenir les ordonnances
+      const response = await fetch("http://localhost:5000/api/ordonnance");
+      if (!response.ok) {
+        throw new Error("Failed to fetch ordonnance");
+      }
+      const ordonnances = await response.json();
+      setOrdonnances(ordonnances.data); // Mise à jour de la liste des ordonnances
+    } catch (error) {
+      console.error("Error:", error.message); // Affichage d'une erreur si échec
+    }
+  }
 
   return (
     <div className="h-[85vh] w-[90vw] bg-white rounded-2xl drop-shadow-[5px_5px_3px_rgba(0,0,0,0.5)] p-15 mr-10">
@@ -20,16 +41,25 @@ export default function Ordonnances() {
       <table className="w-full">
         <thead>
           <tr className="bg-yellow-400">
-            {ordonnances.map((ordonnance) => (
+            {colonnes.map((colonne) => (
               <th
-                key={ordonnance.id}
+                key={colonne.id}
                 className="px-4 py-3 text-left text-sm font-medium text-white border border-3"
               >
-                {ordonnance.name}
+                {colonne.name}
               </th>
             ))}
           </tr>
         </thead>
+        <tbody>
+          {ordonnances.map((ordonnance) => (
+            <OrdonnanceGabarit
+              key={ordonnance.id}
+              ordonnance={ordonnance}
+              onDetail={() => {}}
+            />
+          ))}
+        </tbody>
       </table>
       {showAjouterBtn && <AjouterBtn onClose={() => setAjouterBtn(false)} />}
     </div>

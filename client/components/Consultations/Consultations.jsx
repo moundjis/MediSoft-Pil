@@ -21,7 +21,7 @@ export default function Consultations() {
         throw new Error("Failed to fetch consultation");
       }
       const consultations = await response.json();
-      setConsultations(consultations.data); // Mise à jour de la liste des employés
+      setConsultations(consultations.data); // Mise à jour de la liste des consultations
     } catch (error) {
       console.error("Error:", error.message); // Affichage d'une erreur si échec
     }

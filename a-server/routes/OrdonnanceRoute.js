@@ -34,9 +34,9 @@ const validateRequest = (req, res, next) => {
 const OrdonnanceRoute = Router();
 
 // 7. Definir les routes pour les controleurs de "Ordonnance"
-OrdonnanceRoute.all("*", verifierToken)
-  .all("*", autoriser(["Administrateur", "sudo"]))
-  .get("/", getAllOrdonnances)
+//OrdonnanceRoute.all("*", verifierToken)
+  //.all("*", autoriser(["Administrateur", "sudo"]))
+  OrdonnanceRoute.get("/", getAllOrdonnances)
   .post("/", ordonnanceRules, validateRequest, addOrdonnance)
   .delete("/:id", delOrdonnance)
   .put("/:id", ordonnanceRules, validateRequest, updateOrdonnance)
