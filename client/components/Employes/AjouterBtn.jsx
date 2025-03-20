@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-export default function AjouterEmployeBtn({ onClose }) {
+export default function AjouterBtn({ onClose }) {
   const [newEmploye, setNewEmploye] = useState({
     nom: "",
     prenom: "",
@@ -66,6 +66,7 @@ export default function AjouterEmployeBtn({ onClose }) {
           </button>
         </div>
         <form onSubmit={handleSubmit} className="p-6">
+          {/* Champ du nom */}
           <div className="space-y-4">
             <div>
               <label

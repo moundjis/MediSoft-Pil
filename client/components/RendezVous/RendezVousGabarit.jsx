@@ -1,16 +1,16 @@
-import React from "react";
-import InfoBtn from "./InfoBtn";
-import EditBtn from "./EditBtn";
-import DeleteBtn from "./DeleteBtn";
+import DeleteBtn from "@/components/RendezVous/DeleteBtn";
+import EditBtn from "@/components/RendezVous/EditBtn";
+import InfoBtn from "@/components/RendezVous/InfoBtn";
 
 export default function RendezVousGabarit({
-  rendezVou,
+  rendezVous,
+  onSupprimer,
   onDetail,
   onModifier,
-  onSupprimer,
 }) {
-  console.log("Rendez Vous reçue :", rendezVou); // Vérifiez les données ici
-  const { date_rdv, heure_rdv, type_rdv, status_rdv, id_patient } = rendezVou;
+  console.log("Rendez Vous reçue :", rendezVous); // Vérifiez les données ici
+  const { date_rdv, heure_rdv, type_rdv, status_rdv, Patient } = rendezVous;
+  const { nom, prenom } = Patient;
 
   return (
     <>
@@ -18,11 +18,16 @@ export default function RendezVousGabarit({
       <td className="px-4">{heure_rdv}</td>
       <td className="px-4">{type_rdv}</td>
       <td className="px-4">{status_rdv}</td>
-      <td className="px-4">{id_patient}</td>
+      <td className="px-4">{`${nom} ${prenom}`}</td>
+
       <td>
-        <InfoBtn employeId={rendezVou.id} onDetail={onDetail} />
-        <EditBtn employeId={rendezVou.id} onModifier={onModifier} />
-        <DeleteBtn employeId={rendezVou.id} onSupprimer={onSupprimer} />
+        {/* rendezVousId c'est le meme props utilise dans comme props pour la focntion DeleteBtn.jsx */}
+        {/* Bouton Détails */}
+        <InfoBtn rendezVousId={rendezVous.id} onDetail={onDetail} />
+        {/* Bouton Modifier */}
+        <EditBtn rendezVousId={rendezVous.id} onModifier={onModifier} />
+        {/* Bouton Supprimer */}
+        <DeleteBtn rendezVousId={rendezVous.id} onSupprimer={onSupprimer} />
       </td>
     </>
   );

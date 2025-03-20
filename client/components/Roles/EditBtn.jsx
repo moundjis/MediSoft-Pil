@@ -1,6 +1,6 @@
 "use client";
-import React, { useState } from "react";
-import EditBtnForm from "@/components/RendezVous/EditBtnForm";
+import { React, useState } from "react";
+import EditBtnForm from "@/components/Roles/EditBtnForm";
 
 export default function EditBtn() {
   const [showEditBtn, setEditBtn] = useState(false);

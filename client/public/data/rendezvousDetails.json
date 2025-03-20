@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "ID"
+  },
+  {
+    "id": 2,
+    "name": "Date du RDV"
+  },
+  {
+    "id": 3,
+    "name": "Heure du RDV"
+  },
+  {
+    "id": 4,
+    "name": "Type du RDV"
+  },
+  {
+    "id": 5,
+    "name": "Status du RDV"
+  },
+  {
+    "id": 6,
+    "name": "Patient"
+  }
+]
