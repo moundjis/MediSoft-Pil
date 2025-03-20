@@ -4,6 +4,7 @@ import sidebar from "@/public/data/sidebar.json";
 import { useRouter } from "next/navigation";
 
 import {
+  LuFolder,
   LuHouse,
   LuShoppingCart,
   LuClipboardList,
@@ -15,6 +16,7 @@ import {
 } from "react-icons/lu";
 
 const iconComponents = {
+  LuFolder: LuFolder,
   LuHouse: LuHouse,
   LuShoppingCart: LuShoppingCart,
   LuClipboardList: LuClipboardList,
