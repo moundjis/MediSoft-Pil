@@ -3,7 +3,7 @@ import { useState } from "react";
 import React from "react";
 import EditBtnForm from "@/components/patients/EditBtnForm";
 
-export default function EditBtn() {
+export default function EditBtn({ patientId, onModifier }) {
   const [showEditBtn, setEditBtn] = useState(false);
 
   return (
@@ -14,7 +14,13 @@ export default function EditBtn() {
       >
         Modifier
       </button>
-      {showEditBtn && <EditBtnForm onClose={() => setEditBtn(false)} />}
+      {showEditBtn && (
+        <EditBtnForm
+          patientId={patientId} // Passer l'ID du patient
+          onClose={() => setEditBtn(false)} // Fermer le formulaire
+          onModifier={onModifier} // Appeler après la mise à jour
+        />
+      )}
     </div>
   );
 }

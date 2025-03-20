@@ -28,6 +28,27 @@ export default function Patients() {
       console.error("Error:", error.message);
     }
   }
+  const SupprimerPatient = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/patient/${id}`, {
+        method: "DELETE",
+      });
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        if (errorData.message.includes("consultation")) {
+          setError("use client: Ce patient ne peut pas être supprimé car il a déjà une consultation.");
+        } else {
+          throw new Error("Failed to delete patient");
+        }
+        return;
+      }
+  
+      setPatients((prevPatients) => prevPatients.filter((e) => e.id !== id));
+    } catch (error) {
+      setError(error.message);
+    }
+  };
 
   // Pagination logic
   const indexOfLastPatient = currentPage * patientsPerPage;
@@ -81,11 +102,8 @@ export default function Patients() {
           <tbody>
             {currentPatients.map((patient) => (
               <tr key={patient.id} className="border-b text-gray-500">
-                <PatientGabarit
-                  patient={patient}
-                  onDetail={() => console.log("Detail de:", patient)}
-                  onModifier={() => console.log("Modifier:", patient)}
-                />
+                <PatientGabarit patient={patient}
+                onSupprimer={SupprimerPatient} />
               </tr>
             ))}
           </tbody>

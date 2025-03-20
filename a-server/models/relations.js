@@ -18,28 +18,76 @@ Employe.hasMany(Consultation, { foreignKey: "id_employe" }); // Un employé peut
 Consultation.belongsTo(Employe, { foreignKey: "id_employe" }); // Une consultation est effectuée par un seul employé
 
 // 3. Relation Consultation - Patient
-Consultation.belongsTo(Patient, { foreignKey: "id_patient" }); // Une consultation appartient à un patient
-Patient.hasMany(Consultation, { foreignKey: "id_patient" }); // Un patient peut avoir plusieurs consultations
+Consultation.belongsTo(Patient, { 
+  foreignKey: "id_patient", 
+  onDelete: 'CASCADE',  // Si un patient est supprimé, toutes les consultations associées seront supprimées
+  onUpdate: 'CASCADE',  // Si l'id du patient est modifié, il sera mis à jour dans la table Consultation
+});
+Patient.hasMany(Consultation, { 
+  foreignKey: "id_patient",
+  onDelete: 'CASCADE',  // Suppression en cascade pour les consultations liées
+  onUpdate: 'CASCADE',
+});
 
 // 4. Relation Patient - Dossier Médical
-Patient.hasOne(DossierMedical, { foreignKey: "id_patient" }); // Un patient peut avoir un seul dossier médical
-DossierMedical.belongsTo(Patient, { foreignKey: "id_patient" }); // Un dossier médical appartient à un patient
+Patient.hasOne(DossierMedical, { 
+  foreignKey: "id_patient", 
+  onDelete: 'CASCADE',  // Si un patient est supprimé, son dossier médical est aussi supprimé
+  onUpdate: 'CASCADE',
+});
+DossierMedical.belongsTo(Patient, { 
+  foreignKey: "id_patient", 
+  onDelete: 'CASCADE', 
+  onUpdate: 'CASCADE',
+});
 
 // 5. Relation Patient - Rendez-vous
-Patient.hasMany(RendezVous, { foreignKey: "id_patient" }); // Un patient peut avoir plusieurs rendez-vous
-RendezVous.belongsTo(Patient, { foreignKey: "id_patient" }); // Un rendez-vous appartient à un seul patient
+Patient.hasMany(RendezVous, { 
+  foreignKey: "id_patient", 
+  onDelete: 'CASCADE',  // Si un patient est supprimé, tous les rendez-vous associés sont supprimés
+  onUpdate: 'CASCADE',
+});
+RendezVous.belongsTo(Patient, { 
+  foreignKey: "id_patient", 
+  onDelete: 'CASCADE', 
+  onUpdate: 'CASCADE',
+});
 
 // 6. Relation Consultation - Prescription
-Consultation.hasMany(Prescription, { foreignKey: "id_consultation" }); // Une consultation peut avoir plusieurs prescriptions
-Prescription.belongsTo(Consultation, { foreignKey: "id_consultation" }); // Une prescription appartient à une consultation
+Consultation.hasMany(Prescription, { 
+  foreignKey: "id_consultation", 
+  onDelete: 'CASCADE',  // Si une consultation est supprimée, les prescriptions associées sont supprimées
+  onUpdate: 'CASCADE',
+});
+Prescription.belongsTo(Consultation, { 
+  foreignKey: "id_consultation", 
+  onDelete: 'CASCADE', 
+  onUpdate: 'CASCADE',
+});
 
 // 7. Relation Prescription - Ordonnance
-Prescription.belongsTo(Ordonnance, { foreignKey: "id_ordonnance" }); // Une prescription existe dans une ordonnance
-Ordonnance.hasMany(Prescription, { foreignKey: "id_ordonnance" }); // Une ordonnance peut contenir plusieurs prescriptions
+Prescription.belongsTo(Ordonnance, { 
+  foreignKey: "id_ordonnance", 
+  onDelete: 'CASCADE',  // Si une prescription est supprimée, l'ordonnance associée sera aussi affectée
+  onUpdate: 'CASCADE',
+});
+Ordonnance.hasMany(Prescription, { 
+  foreignKey: "id_ordonnance", 
+  onDelete: 'CASCADE', 
+  onUpdate: 'CASCADE',
+});
 
 // 8. Relation Ordonnance - Pharmacie
-Ordonnance.belongsTo(Pharmacie, { foreignKey: "id_pharmacie" }); // Une ordonnance peut être envoyée à une seule pharmacie
-Pharmacie.hasMany(Ordonnance, { foreignKey: "id_pharmacie" }); // Une pharmacie peut recevoir plusieurs ordonnances
+Ordonnance.belongsTo(Pharmacie, { 
+  foreignKey: "id_pharmacie", 
+  onDelete: 'CASCADE',  // Si une ordonnance est supprimée, elle sera supprimée de la pharmacie aussi
+  onUpdate: 'CASCADE',
+});
+Pharmacie.hasMany(Ordonnance, { 
+  foreignKey: "id_pharmacie", 
+  onDelete: 'CASCADE', 
+  onUpdate: 'CASCADE',
+});
 
 // Export des modèles pour leur utilisation dans d'autres fichiers
 export {

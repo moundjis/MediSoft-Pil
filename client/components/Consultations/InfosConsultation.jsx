@@ -1,12 +1,14 @@
-import ordonnancesDetails from "@/public/data/ordonnances.json";
+"use client";
+import React from "react";
+import consultations from "@/public/data/consultations.json";
 
-export default function InfosOrdonnance({ onClose }) {
+export default function InfosConsultation({ onClose }) {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4">
-      <div className="bg-white rounded-lg shadow-xl h-full w-full">
+      <div className="bg-white rounded-lg shadow-xl h-full w-full max-w-2xl">
         <div className="flex justify-between items-center p-6 border-b">
           <h2 className="text-xl font-semibold text-gray-800">
-            Détails de l'ordonnance
+            Détails de la consultation
           </h2>
           <button
             onClick={onClose}
@@ -16,7 +18,7 @@ export default function InfosOrdonnance({ onClose }) {
           </button>
         </div>
         <div className="h-full flex flex-col justify-around p-6">
-          {ordonnancesDetails.map((details) => (
+          {consultations.map((details) => (
             <p key={details.id} className="font-semibold">
               {details.name}
             </p>

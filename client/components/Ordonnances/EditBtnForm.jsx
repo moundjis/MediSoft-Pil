@@ -4,21 +4,18 @@ import React, { useState } from "react";
 export default function EditBtnForm({ onClose }) {
   const [showEditBtn, SetEditBtn] = useState(false);
 
-  const [updateEmploye, setUpdateEmploye] = useState({
-    nom: "",
-    prenom: "",
-    date_de_naissance: new Date().toISOString().split("T")[0],
-    nas: "",
-    courriel: "",
-    telephone: "",
-    password: "",
-    adresse: "",
-    id_role: "",
+  const [updateOrdonnance, setUpdateOrdonnance] = useState({
+    date: new Date().toISOString().split("T")[0],
+    diagnostique: "",
+    note: "",
+    recommendation: "",
+    DateCreation: new Date().toISOString().split("T")[0],
+    DateDerniereModif: new Date().toISOString().split("T")[0],
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUpdateEmploye((prev) => ({
+    setUpdateOrdonnance((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -29,7 +26,7 @@ export default function EditBtnForm({ onClose }) {
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full">
         <div className="flex justify-between items-center p-6 border-b">
           <h2 className="text-xl font-semibold text-gray-800">
-            Modifier les infos de l'employé
+            Modifier les infos de l'ordonnance
           </h2>
           <button
             onClick={onClose}
@@ -40,67 +37,33 @@ export default function EditBtnForm({ onClose }) {
           <div className="space-y-4">
             <div>
               <label
-                htmlFor="nom"
+                htmlFor="Date"
                 className="block text-xs font-medium text-gray-700 mb-1"
               >
-                Nom
-              </label>
-              <input
-                type="text"
-                id="nom"
-                name="nom"
-                onChange={handleInputChange}
-                value={updateEmploye.nom}
-                className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="prenom"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Prénom
-              </label>
-              <input
-                type="text"
-                id="prenom"
-                name="prenom"
-                value={updateEmploye.prenom}
-                onChange={handleInputChange}
-                className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="date_de_naissance"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Date de naissance
+                Date
               </label>
               <input
                 type="date"
-                id="date_de_naissance"
-                name="date_de_naissance"
-                value={updateEmploye.date_de_naissance}
+                id="date"
+                name="date"
                 onChange={handleInputChange}
+                value={updateOrdonnance.date}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
               />
             </div>
             <div>
               <label
-                htmlFor="nas"
+                htmlFor="diagnostique"
                 className="block text-xs font-medium text-gray-700 mb-1"
               >
-                NAS
+                diagnostique
               </label>
               <input
                 type="text"
-                id="nas"
-                name="nas"
-                value={updateEmploye.nas}
+                id="diagnostique"
+                name="diagnostique"
+                value={updateOrdonnance.diagnostique}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
@@ -108,50 +71,16 @@ export default function EditBtnForm({ onClose }) {
             </div>
             <div>
               <label
-                htmlFor="courriel"
+                htmlFor="note"
                 className="block text-xs font-medium text-gray-700 mb-1"
               >
-                Courriel
-              </label>
-              <input
-                type="email"
-                id="courriel"
-                name="courriel"
-                value={updateEmploye.courriel}
-                onChange={handleInputChange}
-                className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Mot de passe
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={updateEmploye.password}
-                onChange={handleInputChange}
-                className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="telephone"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Téléphone
+                Note
               </label>
               <input
                 type="text"
-                id="telephone"
-                name="telephone"
-                value={updateEmploye.telephone}
+                id="note"
+                name="note"
+                value={updateOrdonnance.note}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
@@ -159,16 +88,16 @@ export default function EditBtnForm({ onClose }) {
             </div>
             <div>
               <label
-                htmlFor="adresse"
+                htmlFor="recommendation"
                 className="block text-xs font-medium text-gray-700 mb-1"
               >
-                Adresse
+                Recommendation
               </label>
               <input
                 type="text"
-                id="adresse"
-                name="adresse"
-                value={updateEmploye.adresse}
+                id="recommendation"
+                name="recommendation"
+                value={updateOrdonnance.recommendation}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
@@ -176,29 +105,37 @@ export default function EditBtnForm({ onClose }) {
             </div>
             <div>
               <label
-                htmlFor="id_role"
+                htmlFor="dateCreation"
                 className="block text-xs font-medium text-gray-700 mb-1"
               >
-                Rôle/Titre
+                Date de création
               </label>
-              <select
-                id="id_role"
-                name="id_role"
-                value={updateEmploye.id_role}
+              <input
+                type="date"
+                id="dateCreation"
+                name="dateCreation"
+                value={updateOrdonnance.DateCreation}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="dateDerniereModif"
+                className="block text-xs font-medium text-gray-700 mb-1"
               >
-                <option value="" disabled>
-                  Sélectionnez un rôle/titre
-                </option>
-                <option value="1">Sudo</option>
-                <option value="2">Administrateur</option>
-                <option value="3">Ophtalmologue</option>
-                <option value="4">Dermatologue</option>
-                <option value="6">Dentiste</option>
-                <option value="7">Cardiologue</option>
-              </select>
+                Date de la dernière modification
+              </label>
+              <input
+                type="date"
+                id="dateDerniereModif"
+                name="dateDerniereModif"
+                value={updateOrdonnance.DateDerniereModif}
+                onChange={handleInputChange}
+                className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
+                required
+              />
             </div>
           </div>
           <div className="mt-6 flex justify-end space-x-3">
