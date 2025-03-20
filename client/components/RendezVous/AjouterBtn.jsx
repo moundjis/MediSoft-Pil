@@ -1,18 +1,25 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function AjouterBtn({ onClose }) {
+  const [patients, setPatients] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:5000/api/patient")
+      .then((response) => response.json())
+      .then((data) => setPatients(data))
+      .catch((error) => console.error("Erreur:", error));
+  }, []);
   // État initial pour un nouveau rendez-vous
   const [newRendezVous, setNewRendezVous] = useState({
-    date_rdv: new Date().toISOString().split("T")[0], 
-    heure_rdv: "00:00", 
+    date_rdv: new Date().toISOString().split("T")[0],
+    heure_rdv: "00:00",
     note_medecin: "",
-    type_rdv: "consultation", 
-    status_rdv: "en attente", 
-    id_patient: " ", 
+    type_rdv: "consultation",
+    status_rdv: "en attente",
+    id_patient: null,
   });
 
-  
   const handleInputChange = (e) => {
     const { name, value } = e.target;
 
@@ -22,11 +29,33 @@ export default function AjouterBtn({ onClose }) {
     }));
   };
 
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Nouveau rendez-vous:", newRendezVous);
-    onClose(); 
+    console.log("Nouveau RDV:", newRendezVous);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/rendez-vous", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newRendezVous), // Envoie les données sous forme JSON
+      });
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de l'ajout du RDV");
+      }
+
+      const data = await response.json();
+      console.log("RDV ajouté avec succès:", data);
+
+      // Optionnel: Fermer le formulaire ou réinitialiser le formulaire
+      onClose();
+      // Rafraîchir la page
+      window.location.reload();
+    } catch (error) {
+      console.error("Erreur:", error.message);
+    }
   };
 
   return (
@@ -44,8 +73,8 @@ export default function AjouterBtn({ onClose }) {
           </button>
         </div>
         <form onSubmit={handleSubmit} className="p-6">
+          {/* Champ Date du rendez-vous */}
           <div className="space-y-4">
-            {/* Champ Date du rendez-vous */}
             <div>
               <label
                 htmlFor="date_rdv"
@@ -148,21 +177,23 @@ export default function AjouterBtn({ onClose }) {
 
             {/* Champ ID Patient (à remplacer par une liste déroulante dynamique si nécessaire) */}
             <div>
-              <label
-                htmlFor="id_patient"
-                className="text-sm font-medium mb-1 text-gray-700"
-              >
-                ID Patient
-              </label>
-              <input
-                type="number"
+              <select
                 id="id_patient"
                 name="id_patient"
-                value={newRendezVous.id_patient}
+                value={newRendezVous.id_patient || ""}
                 onChange={handleInputChange}
                 className="w-full rounded-md shadow-sm text-sm text-black border-gray-500 focus:outline-none"
                 required
-              />
+              >
+                <option value="" disabled>
+                  Sélectionnez un patient
+                </option>
+                {patients.map((patient) => (
+                  <option key={patient.id} value={patient.id}>
+                    {patient.nom} {patient.prenom}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 
