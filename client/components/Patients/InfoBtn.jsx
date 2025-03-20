@@ -1,16 +1,22 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import InfosPatient from "./InfosPatient";
 
 export default function InfoBtn({ id, onDetail }) {
   const handleDetail = () => {
     onDetail(id);
   };
 
+  const [showInfoBtn, setInfoBtn] = useState(false);
   return (
-    <button
-      onClick="./infosEmploye.jsx"
-      className="w-full bg-gray-500 text-white p-1 my-1 rounded-md hover:bg-gray-700"
-    >
-      Infos
-    </button>
+    <div>
+      <button
+        onClick={() => setInfoBtn(true)}
+        className="w-full bg-gray-500 text-white p-1 my-1 rounded-md hover:bg-gray-700"
+      >
+        Infos
+      </button>
+      {showInfoBtn && <InfosPatient onClose={() => setInfoBtn(false)} />}
+    </div>
   );
 }
