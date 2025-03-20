@@ -6,9 +6,11 @@ export default function AjouterBtn({ onClose }) {
     date: new Date().toISOString().split("T")[0],
     medicament: "",
     dosage: "",
-    quantite: " ",
+    quantite: 0,
     note_medecin: "",
     renouvellement: false,
+    id_ordonnance: "", // Champ visible pour l'ID de l'ordonnance
+    id_consultation: "", // Champ visible pour l'ID de la consultation
   });
 
   const handleInputChange = (e) => {
@@ -18,7 +20,7 @@ export default function AjouterBtn({ onClose }) {
     const updatedValue =
       name === "renouvellement"
         ? value === "true"
-        : name === "quantite"
+        : name === "quantite" || name === "id_ordonnance" || name === "id_consultation"
         ? parseInt(value, 10)
         : value;
 
@@ -28,10 +30,35 @@ export default function AjouterBtn({ onClose }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Nouvelle prescription:", newPrescription);
-    onClose();
+
+    try {
+      // Envoyer les données à l'API
+      const response = await fetch("http://localhost:5000/api/prescription", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newPrescription),
+      });
+
+      if (!response.ok) {
+        throw new Error("Erreur lors de l'ajout de la prescription");
+      }
+
+      const data = await response.json();
+      console.log("Prescription ajoutée avec succès:", data);
+
+      // Fermer le formulaire
+      onClose();
+
+      // Rafraîchir la page pour afficher la nouvelle prescription
+      window.location.reload();
+    } catch (error) {
+      console.error("Erreur:", error.message);
+    }
   };
 
   return (
@@ -50,6 +77,44 @@ export default function AjouterBtn({ onClose }) {
         </div>
         <form onSubmit={handleSubmit} className="p-6">
           <div className="space-y-4">
+            {/* Champ ID Ordonnance */}
+            <div>
+              <label
+                htmlFor="id_ordonnance"
+                className="text-sm font-medium mb-1 text-gray-700"
+              >
+                ID Ordonnance
+              </label>
+              <input
+                type="number"
+                id="id_ordonnance"
+                name="id_ordonnance"
+                value={newPrescription.id_ordonnance}
+                onChange={handleInputChange}
+                className="w-full rounded-md shadow-sm text-sm text-black border-gray-500 focus:outline-none"
+                required
+              />
+            </div>
+
+            {/* Champ ID Consultation */}
+            <div>
+              <label
+                htmlFor="id_consultation"
+                className="text-sm font-medium mb-1 text-gray-700"
+              >
+                ID Consultation
+              </label>
+              <input
+                type="number"
+                id="id_consultation"
+                name="id_consultation"
+                value={newPrescription.id_consultation}
+                onChange={handleInputChange}
+                className="w-full rounded-md shadow-sm text-sm text-black border-gray-500 focus:outline-none"
+                required
+              />
+            </div>
+
             {/* Champ Médicament */}
             <div>
               <label

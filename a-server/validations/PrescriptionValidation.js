@@ -2,8 +2,7 @@
 import { body, param } from "express-validator";
 
 const prescriptionRules = [
-  // Validation de l'ID
-  param("id").isInt({ min: 1 }).withMessage("L'ID doit être un entier positif"),
+ 
 
   //  Verifie et valide les champs envoyes dans les parametres d'URL (req.params).
   // Validation du medicament
@@ -47,15 +46,7 @@ const prescriptionRules = [
   body("id_ordonnance")
     .exists()
     .withMessage("L'ID de l'ordonnance est obligatoire")
-    .isInt({ min: 1 })
-    .withMessage("L'ID de l'ordonnance doit être un entier positif"),
-
-  // Validation de l'ID de la consultation
-  body("id_consultation")
-    .exists()
-    .withMessage("L'ID de la consultation est obligatoire")
-    .isInt({ min: 1 })
-    .withMessage("L'ID de la consultation doit être un entier positif"),
+    
 ];
 
 // 2. Exporter les roules de validation de la prescription

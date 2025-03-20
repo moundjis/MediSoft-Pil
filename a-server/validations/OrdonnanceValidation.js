@@ -3,11 +3,8 @@
 import { body, param } from "express-validator";
 
 const ordonnanceRules = [
-  // Validation de l'ID de l'ordonnance
-  param("id")
-    .exists()
-    .isInt({ min: 1 })
-    .withMessage("L'ID de l'ordonnance doit être un entier positif"),
+ 
+    
 
   // Validation de la date d'ordonnance (format ISO 8601)
   body("date_ordonnance")
