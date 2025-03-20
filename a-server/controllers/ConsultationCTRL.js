@@ -1,6 +1,6 @@
 // 1. Importer l'entite/model avec ses relations
 import { Consultation } from "../models/relations.js";
-
+import { Patient, Employe } from "../models/relations.js"; // Importez les modèles 
 // 2. Importer le middleware de validation
 import { validationResult } from "express-validator";
 
@@ -12,22 +12,41 @@ export const addConsultation = async (req, res) => {
       .status(400)
       .json({ message: "Donnees invalides", errors: errors.array() });
   }
-  try {
-    // 1.2 Recuperer et verifier si le id existe deja
-    const { id } = req.body;
-    const idExists = await Consultation.findOne({ where: { id } });
 
-    if (idExists) {
-      return res.status(400).json({ message: "Cet id existe deja" });
+  try {
+    // Récupérer les données de la requête
+    const { diagnostic, note, recommendations, patientName, employeName } = req.body;
+
+    // 1. Rechercher l'id du patient par son nom
+    const patient = await Patient.findOne({ where: { nom: patientName } });
+    if (!patient) {
+      return res.status(404).json({ message: "Patient non trouvé." });
     }
-    const newConsultation = await Consultation.create(req.body);
+    const id_patient = patient.id;
+
+    // 2. Rechercher l'id de l'employé par son nom
+    const employe = await Employe.findOne({ where: { nom: employeName } });
+    if (!employe) {
+      return res.status(404).json({ message: "Employé non trouvé." });
+    }
+    const id_employe = employe.id;
+
+    // 3. Créer la consultation avec les id trouvés
+    const newConsultation = await Consultation.create({
+      diagnostic,
+      note,
+      recommendations,
+      id_patient,
+      id_employe,
+    });
+
     return res.status(201).json({
-      message: "Consultation cree avec succes.",
+      message: "Consultation créée avec succès.",
       data: newConsultation,
     });
   } catch (error) {
     return res.status(500).json({
-      message: `Erreur serveur lors de la creation de la consultation - ${error.message}`,
+      message: `Erreur serveur lors de la création de la consultation - ${error.message}`,
     });
   }
 };
