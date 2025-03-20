@@ -1,35 +1,34 @@
 [
-    {
-      "id": 1,
-      "name": "id"
-    },
-    {
-      "id": 2,
-      "name": "Medicament"
-    },
-    {
-      "id": 3,
-      "name": "Dosage"
-    },
-    {
-      "id": 4,
-      "name": "Quantite"
-    },
-    {
-      "id": 5,
-      "name": "Note du medecin"
-    },
-    {
-      "id": 6,
-      "name": "Renouvellement"
-    },
-    {
-      "id": 7,
-      "name": "id_ordonnance"
-    },
-    {
-      "id": 8,
-      "name": "id_consultation"
-    }
-  ]
-  
+  {
+    "id": 1,
+    "name": "id"
+  },
+  {
+    "id": 2,
+    "name": "Medicament"
+  },
+  {
+    "id": 3,
+    "name": "Dosage"
+  },
+  {
+    "id": 4,
+    "name": "Quantite"
+  },
+  {
+    "id": 5,
+    "name": "Note du medecin"
+  },
+  {
+    "id": 6,
+    "name": "Renouvellement"
+  },
+  {
+    "id": 7,
+    "name": "id ordonnance"
+  },
+  {
+    "id": 8,
+    "name": "id consultation"
+  }
+]

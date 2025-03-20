@@ -1,6 +1,6 @@
 import patients from "@/public/data/patients.json";
 
-export default function InfosEmploye() {
+export default function InfosPatient() {
   return (
     <div className="h-[85vh] w-[90vw] bg-white rounded-2xl drop-shadow-[5px_5px_3px_rgba(0,0,0,0.5)] p-15 mr-10 flex flex-col">
       <div className="h-full">

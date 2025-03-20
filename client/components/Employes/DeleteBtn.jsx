@@ -10,9 +10,9 @@ export default function DeleteBtn({ employeId, onSupprimer }) {
   return (
     <button
       onClick={handleDelete}
-      className="bg-red-300 text-white p-1 rounded-md hover:bg-red-700"
+      className="w-full bg-red-500 text-white p-1 my-1 rounded-md hover:bg-red-700"
     >
-      Delete
+      Supprimer
     </button>
   );
 }
