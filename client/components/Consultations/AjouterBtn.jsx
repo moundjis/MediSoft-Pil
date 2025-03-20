@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function AjouterBtn({ onClose }) {
   const [newConsultation, setNewConsultation] = useState({
@@ -7,9 +7,45 @@ export default function AjouterBtn({ onClose }) {
     diagnostic: "",
     note: "",
     recommendation: "",
-    patientName: "", 
-    employeName: "", 
+    patientName: "", // Seul le nom du patient est stocké
+    employeName: "", // Seul le nom de l'employé est stocké
   });
+
+  const [patients, setPatients] = useState([]);
+  const [employes, setEmployes] = useState([]); // État pour stocker la liste des employés
+
+  useEffect(() => {
+    GetAllPatients();
+    GetAllEmployes(); // Récupérer la liste des employés au chargement du composant
+  }, []);
+
+  // Récupérer la liste des patients
+  async function GetAllPatients() {
+    try {
+      const response = await fetch("http://localhost:5000/api/patient");
+      if (!response.ok) {
+        throw new Error("Failed to fetch patients");
+      }
+      const patients = await response.json();
+      setPatients(patients.data);
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  }
+
+  // Récupérer la liste des employés
+  async function GetAllEmployes() {
+    try {
+      const response = await fetch("http://localhost:5000/api/employe"); // Remplacez par votre endpoint API
+      if (!response.ok) {
+        throw new Error("Failed to fetch employes");
+      }
+      const employes = await response.json();
+      setEmployes(employes.data); // Supposons que les données sont dans `employes.data`
+    } catch (error) {
+      console.error("Error:", error.message);
+    }
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -19,22 +55,19 @@ export default function AjouterBtn({ onClose }) {
     }));
   };
 
-  // Soumission du formulaire
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Nouvelle consultation:", newConsultation);
 
     try {
-      // Envoi des données de la consultation à l'API
       const response = await fetch("http://localhost:5000/api/consultation", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(newConsultation), // Envoie les données sous forme JSON
+        body: JSON.stringify(newConsultation),
       });
 
-      // Vérification de la réponse de l'API
       if (!response.ok) {
         throw new Error("Erreur lors de l'ajout de la consultation");
       }
@@ -42,10 +75,7 @@ export default function AjouterBtn({ onClose }) {
       const data = await response.json();
       console.log("Consultation ajoutée avec succès:", data);
 
-      // Fermer le formulaire
       onClose();
-
-      // Rafraîchir la page pour afficher la nouvelle consultation
       window.location.reload();
     } catch (error) {
       console.error("Erreur:", error.message);
@@ -150,15 +180,21 @@ export default function AjouterBtn({ onClose }) {
               >
                 Nom du patient
               </label>
-              <input
-                type="text"
+              <select
                 id="patientName"
                 name="patientName"
                 value={newConsultation.patientName}
                 onChange={handleInputChange}
                 className="w-full rounded-md shadow-sm text-sm text-black border-gray-500 focus:outline-none"
                 required
-              />
+              >
+                <option value="">Sélectionnez un patient</option>
+                {patients.map((patient) => (
+                  <option key={patient.id} value={patient.nom}>
+                    {patient.nom} {patient.prenom}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* Champ Nom de l'employé */}
@@ -169,15 +205,21 @@ export default function AjouterBtn({ onClose }) {
               >
                 Nom de l'employé
               </label>
-              <input
-                type="text"
+              <select
                 id="employeName"
                 name="employeName"
                 value={newConsultation.employeName}
                 onChange={handleInputChange}
                 className="w-full rounded-md shadow-sm text-sm text-black border-gray-500 focus:outline-none"
                 required
-              />
+              >
+                <option value="">Sélectionnez un employé</option>
+                {employes.map((employe) => (
+                  <option key={employe.id} value={employe.nom}> {/* Seul le nom est stocké */}
+                    {employe.nom} {employe.prenom} {/* Affichage du nom et prénom */}
+                  </option>
+                ))}
+              </select>
             </div>
           </div>
 
