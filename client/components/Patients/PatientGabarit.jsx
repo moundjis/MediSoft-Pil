@@ -12,7 +12,7 @@ export default function PatientGabarit({
   const { nom, prenom, courriel, telephone, adresse } = patient;
 
   return (
-    <tr>
+    <>
       <td className="px-4">{nom}</td>
       <td className="px-4">{prenom}</td>
       <td className="px-4">{courriel}</td>
@@ -23,6 +23,6 @@ export default function PatientGabarit({
         <EditBtn patientId={patient.id} onModifier={onModifier} />
         <DeleteBtn patientId={patient.id} onSupprimer={onSupprimer} />
       </td>
-    </tr>
+    </>
   );
 }

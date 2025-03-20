@@ -81,11 +81,7 @@ export default function Patients() {
           <tbody>
             {currentPatients.map((patient) => (
               <tr key={patient.id} className="border-b text-gray-500">
-                <PatientGabarit
-                  patient={patient}
-                  onDetail={() => console.log("Detail de:", patient)}
-                  onModifier={() => console.log("Modifier:", patient)}
-                />
+                <PatientGabarit patient={patient} />
               </tr>
             ))}
           </tbody>

@@ -114,7 +114,7 @@ export default function EditBtnForm({ onClose }) {
                 type="date"
                 id="dateCreation"
                 name="dateCreation"
-                value={updateOrdonnance.dateCreation}
+                value={updateOrdonnance.DateCreation}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
@@ -131,7 +131,7 @@ export default function EditBtnForm({ onClose }) {
                 type="date"
                 id="dateDerniereModif"
                 name="dateDerniereModif"
-                value={updateOrdonnance.dateDerniereModif}
+                value={updateOrdonnance.DateDerniereModif}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required

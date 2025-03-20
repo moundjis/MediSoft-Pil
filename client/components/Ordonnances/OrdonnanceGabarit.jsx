@@ -12,7 +12,7 @@ export default function OrdonnanceGabarit({
   const { date_ordonnance, note, id_pharmacie } = ordonnance;
 
   return (
-    <tr>
+    <>
       <td className="px-4">{date_ordonnance}</td>
       <td className="px-4">{note}</td>
       <td className="px-4">{id_pharmacie}</td>
@@ -22,6 +22,6 @@ export default function OrdonnanceGabarit({
         <EditBtn patientId={ordonnance.id} onModifier={onModifier} />
         <DeleteBtn patientId={ordonnance.id} onSupprimer={onSupprimer} />
       </td>
-    </tr>
+    </>
   );
 }
