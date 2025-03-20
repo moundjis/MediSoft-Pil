@@ -6,6 +6,21 @@ import EmployeGabarit from "./EmployeGabarit";
 import AjouterBtn from "./AjouterBtn";
 import EmployesColonnes from "@/public/data/employesColonnes.json";
 
+// Exportation de la fonction pour récupérer le nombre d'employés
+export async function getEmployeCount() {
+  try {
+    const response = await fetch("http://localhost:5000/api/employe");
+    if (!response.ok) {
+      throw new Error("Failed to fetch employees");
+    }
+    const employes = await response.json();
+    return employes.data.length; // Retourne le nombre d'employés
+  } catch (error) {
+    console.error("Error fetching employee count:", error.message);
+    return 0; // Retourne 0 en cas d'erreur
+  }
+}
+
 export default function Employes() {
   const [error, setError] = useState(null);
   const [employes, setEmployes] = useState([]);

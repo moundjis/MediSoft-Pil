@@ -6,6 +6,21 @@ import RoleGabarit from "./RoleGabarit";
 import AjouterBtn from "./AjouterBtn";
 import RolesColonnes from "@/public/data/rolesColonnes";
 
+// Exportation de la fonction pour récupérer le nombre de role
+export async function getRoleCount() {
+  try {
+    const response = await fetch("http://localhost:5000/api/role");
+    if (!response.ok) {
+      throw new Error("Failed to fetch roles");
+    }
+    const roles = await response.json();
+    return roles.data.length; // Retourne le nombre de roles
+  } catch (error) {
+    console.error("Error fetching roles count:", error.message);
+    return 0; // Retourne 0 en cas d'erreur
+  }
+}
+
 export default function Roles() {
   const [error, setError] = useState(null);
   const [roles, setRoles] = useState([]);

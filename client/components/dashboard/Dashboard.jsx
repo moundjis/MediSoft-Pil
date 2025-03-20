@@ -1,9 +1,19 @@
 "use client";
 import dashboard from "@/public/data/dashboard.json";
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+
+// Importation des nombres d'elements pour chaque Categorie
+import { getEmployeCount } from "@/components/Employes/Employes";
+// import { getPatientCount } from "@/components/Employes/Patients";
+// import { getConsultationCount } from "@/components/Consultations/Consultations";
+// import { getPrescriptionCount } from "@/components/Prescriptions/Prescriptions";
+// import { getOrdonnanceCount } from "@/components/Ordonnances/Ordonnances";
+// import { getRendezVousCount } from "@/components/RendezVous/RendezVous";
+// import { getPharmacieCount } from "@/components/Pharmacies/Pharmacies";
+import { getRoleCount } from "@/components/Roles/Roles";
 
 import {
-  LuFolder,
   LuHouse,
   LuShoppingCart,
   LuClipboardList,
@@ -15,7 +25,6 @@ import {
 } from "react-icons/lu";
 
 const iconComponents = {
-  LuFolder: LuFolder,
   LuHouse: LuHouse,
   LuShoppingCart: LuShoppingCart,
   LuClipboardList: LuClipboardList,
@@ -27,19 +36,53 @@ const iconComponents = {
 };
 
 export default function Dashboard() {
+  const [counts, setCounts] = useState({});
   const router = useRouter();
+
+  useEffect(() => {
+    fetchCounts();
+  }, []);
+
+  async function fetchCounts() {
+    try {
+      const countsData = {
+        1: await getEmployeCount(),
+        // 2: await getPatientCount(),
+        // 3: await getConsultationCount(),
+        // 4: await getPrescriptionCount(),
+        // 5: await getOrdonnanceCount(),
+        // 6: await getRendezVousCount(),
+        // 7: await getPharmacieCount(),
+        8: await getRolesCount(),
+      };
+      setCounts(countsData);
+    } catch (error) {
+      console.error("Error fetching counts:", error.message);
+    }
+  }
+
   return (
-    <div className="h-[85vh] w-full bg-white grid grid-cols-3 gap-5 rounded-2xl drop-shadow-[5px_5px_3px_rgba(0,0,0,0.5)] p-15 mr-10">
-      {dashboard.map((dashboard) => {
-        const IconComponent = iconComponents[dashboard.icon];
+    <div className="h-[85vh] w-full bg-white grid grid-cols-3 gap-5 rounded-2xl drop-shadow-[5px_5px_3px_rgba(0,0,0,0.5)] p-10">
+      {dashboard.map((dashboardItem) => {
+        const IconComponent = iconComponents[dashboardItem.icon];
+        const count = counts[dashboardItem.id] || 0; // Par défaut, 0 si pas encore chargé
+
         return (
           <div
-            key={dashboard.id}
-            className="flex items-center justify-center p-3 bg-white cursor-pointer text-black hover:bg-gray-200 rounded-md drop-shadow-[5px_5px_3px_rgba(0,0,0,0.5)]"
-            onClick={() => router.push(dashboard.lien)}
+            key={dashboardItem.id}
+            className="flex flex-col items-center justify-center p-5 bg-white cursor-pointer text-black hover:bg-gray-200 rounded-md drop-shadow-[5px_5px_3px_rgba(0,0,0,0.5)]"
+            onClick={() => router.push(dashboardItem.lien)}
           >
-            {IconComponent && <IconComponent className="w-5 h-5 mr-2" />}
-            <span>{dashboard.name}</span>
+            {IconComponent && <IconComponent className="w-8 h-8 mb-2" />}{" "}
+            {/* Icone plus grande */}
+            <span className="text-lg font-semibold">
+              {dashboardItem.name}
+            </span>{" "}
+            {/* Titre de la catégorie */}
+            <span className="mt-2 text-3xl font-bold text-blue-500">
+              {count}
+            </span>{" "}
+            {/* Nombre en gros */}
           </div>
         );
       })}
