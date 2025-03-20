@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import InfosEmploye from "./InfosEmploye";
+import InfosPatient from "./InfosPatient";
 
 export default function InfoBtn({ id, onDetail }) {
   const handleDetail = () => {
@@ -8,7 +8,6 @@ export default function InfoBtn({ id, onDetail }) {
   };
 
   const [showInfoBtn, setInfoBtn] = useState(false);
-
   return (
     <div>
       <button
@@ -17,7 +16,7 @@ export default function InfoBtn({ id, onDetail }) {
       >
         Infos
       </button>
-      {showInfoBtn && <InfosEmploye onClose={() => setInfoBtn(false)} />}
+      {showInfoBtn && <InfosPatient onClose={() => setInfoBtn(false)} />}
     </div>
   );
 }

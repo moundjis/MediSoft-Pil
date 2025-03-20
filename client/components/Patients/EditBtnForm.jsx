@@ -4,21 +4,18 @@ import React, { useState } from "react";
 export default function EditBtnForm({ onClose }) {
   const [showEditBtn, SetEditBtn] = useState(false);
 
-  const [updateEmploye, setUpdateEmploye] = useState({
+  const [updatePatient, setUpdatePatient] = useState({
     nom: "",
     prenom: "",
     date_de_naissance: new Date().toISOString().split("T")[0],
-    nas: "",
     courriel: "",
     telephone: "",
-    password: "",
     adresse: "",
-    id_role: "",
   });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUpdateEmploye((prev) => ({
+    setUpdatePatient((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -29,14 +26,12 @@ export default function EditBtnForm({ onClose }) {
       <div className="bg-white rounded-lg shadow-xl max-w-md w-full">
         <div className="flex justify-between items-center p-6 border-b">
           <h2 className="text-xl font-semibold text-gray-800">
-            Modifier les infos de l'employé
+            Modifier les infos du patient
           </h2>
           <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-700"
-          >
-            X
-          </button>
+          ></button>
         </div>
         <form className="p-6">
           <div className="space-y-4">
@@ -52,7 +47,7 @@ export default function EditBtnForm({ onClose }) {
                 id="nom"
                 name="nom"
                 onChange={handleInputChange}
-                value={updateEmploye.nom}
+                value={updatePatient.nom}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
               />
@@ -68,7 +63,7 @@ export default function EditBtnForm({ onClose }) {
                 type="text"
                 id="prenom"
                 name="prenom"
-                value={updateEmploye.prenom}
+                value={updatePatient.prenom}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
@@ -85,24 +80,7 @@ export default function EditBtnForm({ onClose }) {
                 type="date"
                 id="date_de_naissance"
                 name="date_de_naissance"
-                value={updateEmploye.date_de_naissance}
-                onChange={handleInputChange}
-                className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
-                required
-              />
-            </div>
-            <div>
-              <label
-                htmlFor="nas"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                NAS
-              </label>
-              <input
-                type="text"
-                id="nas"
-                name="nas"
-                value={updateEmploye.nas}
+                value={updatePatient.date_de_naissance}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
@@ -119,29 +97,13 @@ export default function EditBtnForm({ onClose }) {
                 type="email"
                 id="courriel"
                 name="courriel"
-                value={updateEmploye.courriel}
+                value={updatePatient.courriel}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
               />
             </div>
-            <div>
-              <label
-                htmlFor="password"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Mot de passe
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={updateEmploye.password}
-                onChange={handleInputChange}
-                className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
-                required
-              />
-            </div>
+
             <div>
               <label
                 htmlFor="telephone"
@@ -153,7 +115,7 @@ export default function EditBtnForm({ onClose }) {
                 type="text"
                 id="telephone"
                 name="telephone"
-                value={updateEmploye.telephone}
+                value={updatePatient.telephone}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
@@ -170,37 +132,11 @@ export default function EditBtnForm({ onClose }) {
                 type="text"
                 id="adresse"
                 name="adresse"
-                value={updateEmploye.adresse}
+                value={updatePatient.adresse}
                 onChange={handleInputChange}
                 className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
                 required
               />
-            </div>
-            <div>
-              <label
-                htmlFor="id_role"
-                className="block text-xs font-medium text-gray-700 mb-1"
-              >
-                Rôle/Titre
-              </label>
-              <select
-                id="id_role"
-                name="id_role"
-                value={updateEmploye.id_role}
-                onChange={handleInputChange}
-                className="w-full rounded-md border-gray-300 shadow-sm text-sm text-black focus:outline-none focus:ring-1 focus:ring-blue-500"
-                required
-              >
-                <option value="" disabled>
-                  Sélectionnez un rôle/titre
-                </option>
-                <option value="1">Sudo</option>
-                <option value="2">Administrateur</option>
-                <option value="3">Ophtalmologue</option>
-                <option value="4">Dermatologue</option>
-                <option value="6">Dentiste</option>
-                <option value="7">Cardiologue</option>
-              </select>
             </div>
           </div>
           <div className="mt-6 flex justify-end space-x-3">

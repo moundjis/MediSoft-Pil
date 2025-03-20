@@ -116,7 +116,7 @@ export default function Employes() {
           disabled={currentPage === 1}
           className={`flex items-center px-4 py-2 rounded ${
             currentPage === 1
-              ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+              ? "bg-gray-200 text-gray-500"
               : "bg-blue-500 text-white hover:bg-blue-600"
           }`}
         >
@@ -131,7 +131,7 @@ export default function Employes() {
           disabled={currentPage === totalPages}
           className={`flex items-center px-4 py-2 rounded ${
             currentPage === totalPages
-              ? "bg-gray-200 text-gray-500 cursor-not-allowed"
+              ? "bg-gray-200 text-gray-500"
               : "bg-blue-500 text-white hover:bg-blue-600"
           }`}
         >
